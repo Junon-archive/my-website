@@ -12,7 +12,7 @@ function getUrlLang() {
     }
 }
 
-const preferredLang = getUrlLang() || localStorage.getItem("lang") || "en";
+const preferredLang = getUrlLang() || "en";
 let currentLang = preferredLang;
 let dict = translations[currentLang] || translations.en || {};
 
