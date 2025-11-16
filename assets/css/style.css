@@ -82,25 +82,33 @@ body {
 
 .header {
     background: var(--header-bg);
-    text-align: center;
     padding: 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
 }
 
-.header img {
-    width: 150px;
-    height: 150px;
+.header-profile img {
+    width: 190px;
+    height: 190px;
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid var(--card);
+    display: block;
 }
 
-.header h1 {
-    margin: 18px 0 4px;
-    font-size: 32px;
+.header-text {
+    text-align: left;
+}
+
+.header-text h1 {
+    margin: 0 0 6px;
+    font-size: 36px;
     letter-spacing: 1px;
 }
 
-.header h3 {
+.header-text h3 {
     margin: 0;
     font-size: 18px;
     color: var(--muted);
