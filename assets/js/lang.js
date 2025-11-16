@@ -4,8 +4,17 @@ const translations = window.TRANSLATION_DATA || {
     jp: {}
 };
 
-let currentLang = "en";
-let dict = translations.en || {};
+function getUrlLang() {
+    try {
+        return new URLSearchParams(window.location.search).get("lang");
+    } catch (err) {
+        return null;
+    }
+}
+
+const preferredLang = getUrlLang() || localStorage.getItem("lang") || "en";
+let currentLang = preferredLang;
+let dict = translations[currentLang] || translations.en || {};
 
 async function loadLangFile(lang) {
     try {
@@ -21,6 +30,7 @@ async function loadLangFile(lang) {
 function setLang(lang) {
     currentLang = lang;
     dict = translations[lang] || translations.en || {};
+    localStorage.setItem("lang", lang);
     applyLang();
     loadLangFile(lang);
 }
@@ -36,6 +46,8 @@ function applyLang() {
         const key = el.getAttribute("data-placeholder");
         if (dict && dict[key]) el.setAttribute("placeholder", dict[key]);
     });
+
+    updateNavLinks();
 }
 
 function initFilters() {
@@ -62,3 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setLang(currentLang);
     initFilters();
 });
+
+function updateNavLinks() {
+    const targets = document.querySelectorAll(".nav-shell nav a, .topnav nav a");
+    targets.forEach(link => {
+        const base = link.getAttribute("data-base-href") || link.href.split("?")[0];
+        link.setAttribute("data-base-href", base);
+        link.href = `${base}?lang=${currentLang}`;
+    });
+}
