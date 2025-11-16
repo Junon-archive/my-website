@@ -7,7 +7,7 @@
   "nav_portfolio": "Portfolio",
   "nav_contact": "Contact",
 
-  "profile_name": "Jun-heon Lee",
+  "profile_name": "JUN-HEON LEE",
   "profile_title": "On-device AI / GPU Virtualization",
   "profile_summary": "I engineer hardware-conscious ML systems that stay lean yet scale to production workloads.",
 
@@ -83,6 +83,9 @@
   "resume_exp3_role": "Teaching assistant · Systems programming",
   "resume_exp3_period": "2024",
   "resume_exp3_desc": "Led labs covering Verilog, GPU simulation, and OS instrumentation for 40+ students.",
+  "resume_exp4_role": "Airforce, Republic of Korea",
+  "resume_exp4_period": "Aug 2019 - May 2021",
+  "resume_exp4_desc": "Staff sergeant/ honorable discharge",
   "resume_research_title": "Research highlights",
   "resume_pub1_title": "ES-MoE: Expert scaling for edge inference",
   "resume_pub1_meta": "Under review · First author",
