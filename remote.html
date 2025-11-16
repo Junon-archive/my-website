@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio | Resume</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: #f4f4f4;
+    }
+
+    .container {
+        width: 850px;
+        max-width: 95%;
+        margin: 40px auto;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Header */
+    .header {
+        background: #d6e5ec;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .header img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid white;
+    }
+
+    .header h1 {
+        margin: 20px 0 5px;
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+
+    .header h3 {
+        margin: 0;
+        font-weight: 400;
+        color: #555;
+        font-size: 18px;
+    }
+
+    /* Layout */
+    .content {
+        display: flex;
+        padding: 30px;
+        gap: 30px;
+    }
+
+    .left {
+        width: 35%;
+    }
+
+    .right {
+        width: 65%;
+    }
+
+    /* Sections */
+    h2 {
+        font-size: 20px;
+        margin: 20px 0 10px;
+        letter-spacing: 1px;
+        color: #444;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 6px;
+    }
+
+    p, li {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .contact-item {
+        margin-bottom: 10px;
+    }
+
+    ul {
+        margin-top: 5px;
+        padding-left: 20px;
+    }
+
+    .footer {
+        text-align: center;
+        font-size: 12px;
+        padding: 20px;
+        color: #777;
+    }
+
+    @media (max-width: 768px) {
+        .content {
+            flex-direction: column;
+        }
+        .left, .right {
+            width: 100%;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header Section -->
+    <div class="header">
+        <img src="https://i.imgur.com/4ZQZ4bC.png" alt="profile">
+        <h1>YOUR NAME</h1>
+        <h3>YOUR TITLE / POSITION</h3>
+    </div>
+
+    <!-- Body Content -->
+    <div class="content">
+
+        <!-- LEFT SIDE -->
+        <div class="left">
+
+            <h2>PERSONAL PROFILE</h2>
+            <p>
+                Write a short personal introduction here.  
+                Example: "Highly motivated researcher focused on on-device AI system optimization,
+                GPU architecture, and memory-efficient LLM inference. Passionate about building fast and scalable AI systems."
+            </p>
+
+            <h2>CONTACT</h2>
+            <p class="contact-item">📍 Your Address</p>
+            <p class="contact-item">📞 010-0000-0000</p>
+            <p class="contact-item">✉️ your_email@example.com</p>
+            <p class="contact-item">🔗 github.com/yourname</p>
+            <p class="contact-item">🔗 linkedin.com/in/yourname</p>
+
+            <h2>EDUCATION</h2>
+            <p><strong>Your University</strong><br>
+            Bachelor / Master / Major<br>
+            YYYY – YYYY</p>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right">
+
+            <h2>SKILLS</h2>
+            <ul>
+                <li>On-device AI acceleration</li>
+                <li>GPU memory optimization (KV cache, offloading, compression)</li>
+                <li>CUDA, PyTorch, FlexGen, vLLM</li>
+                <li>System-level profiling & benchmarking</li>
+                <li>Hardware–software co-design</li>
+            </ul>
+
+            <h2>WORK EXPERIENCE</h2>
+            <p><strong>ACAS Lab – Graduate Researcher</strong> (2025–Present)</p>
+            <ul>
+                <li>Researching GPU memory virtualization & on-device AI optimization</li>
+                <li>Implemented CAST/CAVA memory translation module on MGPUSim</li>
+                <li>Working on FlexGen-based LLM offloading improvements</li>
+                <li>Exploring ViT/3DGS/PIM hybrid accelerator architectures</li>
+            </ul>
+
+            <p><strong>Teaching Assistant – System Programming / Network</strong> (2025)</p>
+            <ul>
+                <li>Prepared weekly laboratory materials and Verilog practice codes</li>
+                <li>Guided students through embedded and OS-level experiments</li>
+            </ul>
+
+            <h2>PROJECTS</h2>
+            <ul>
+                <li><strong>ES-MoE inference optimization</strong> – Efficient expert routing</li>
+                <li><strong>FlexGen Offloading Engine</strong> – Blackwell L40 benchmarks</li>
+                <li><strong>CXL-aware KV Tiering</strong> – Memory disaggregation research</li>
+                <li><strong>3DGS-based On-device SLAM Accelerator</strong></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2025 Your Name. All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>

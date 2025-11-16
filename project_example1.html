@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Project Preview</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/project.css">
+<script src="assets/js/lang.js" defer></script>
+</head>
+<body>
+<header class="topnav">
+    <div class="brand">
+        <span data-lang="brand_name"></span>
+        <span data-lang="brand_title"></span>
+    </div>
+    <nav>
+        <a href="index.html" data-lang="nav_home"></a>
+        <a href="resume.html" data-lang="nav_resume"></a>
+        <a href="portfolio.html" data-lang="nav_portfolio"></a>
+        <a href="contact.html" data-lang="nav_contact"></a>
+    </nav>
+    <div class="lang-switch">
+        <button onclick="setLang('kr')">KR</button>
+        <button onclick="setLang('en')">EN</button>
+    </div>
+</header>
+<div class="layout">
+    <main class="content project-detail">
+        <h1 data-lang="detail_orion_title"></h1>
+        <p class="project-subtitle" data-lang="detail_orion_subtitle"></p>
+        <img class="hero-img" src="assets/img/project01_hero.jpg" alt="Project example">
+        <section>
+            <h2 data-lang="detail_overview_heading"></h2>
+            <p data-lang="detail_orion_overview"></p>
+        </section>
+        <section>
+            <h2 data-lang="detail_contribution_heading"></h2>
+            <ul class="key-points">
+                <li data-lang="detail_orion_point1"></li>
+                <li data-lang="detail_orion_point2"></li>
+                <li data-lang="detail_orion_point3"></li>
+            </ul>
+        </section>
+    </main>
+</div>
+</body>
+</html>

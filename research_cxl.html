@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Research — CXL Tiering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/project.css">
+    <script src="assets/js/lang-data.js"></script>
+    <script src="assets/js/lang.js" defer></script>
+</head>
+<body>
+<div class="nav-shell">
+    <div class="nav-logo" data-lang="brand_name">Your Name</div>
+    <nav>
+        <a href="index.html" data-lang="nav_home">Home</a>
+        <a href="resume.html" data-lang="nav_resume">Resume</a>
+        <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
+        <a href="contact.html" data-lang="nav_contact">Contact</a>
+    </nav>
+    <div class="lang-switch">
+        <button onclick="setLang('kr')">KR</button>
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('jp')">JP</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header detail-header">
+        <h1 data-lang="detail_cxl_title">CXL-aware tiered memory</h1>
+        <p class="subtitle" data-lang="detail_cxl_subtitle">Dynamic placement for HBM + CXL clusters</p>
+    </div>
+
+    <div class="detail-body">
+        <article class="project-detail">
+            <ul class="project-meta">
+                <li>
+                    <span data-lang="detail_label_role">Role</span>
+                    <div data-lang="detail_cxl_role">Co-author</div>
+                </li>
+                <li>
+                    <span data-lang="detail_label_timeline">Timeline</span>
+                    <div data-lang="detail_cxl_timeline">2023</div>
+                </li>
+                <li>
+                    <span data-lang="detail_label_stack">Stack</span>
+                    <div data-lang="detail_cxl_stack">CXL simulator, Python, NVProf</div>
+                </li>
+            </ul>
+
+            <img class="hero-img" src="assets/img/paper02_hero.jpg" alt="CXL hero">
+
+            <section class="page-section">
+                <h2 data-lang="detail_overview_heading">Overview</h2>
+                <p data-lang="detail_cxl_overview"></p>
+            </section>
+
+            <section class="page-section">
+                <h2 data-lang="detail_findings_heading">Research findings</h2>
+                <ul class="key-points">
+                    <li data-lang="detail_cxl_point1"></li>
+                    <li data-lang="detail_cxl_point2"></li>
+                    <li data-lang="detail_cxl_point3"></li>
+                </ul>
+            </section>
+
+            <section class="page-section">
+                <h2 data-lang="detail_outcome_heading">Impact</h2>
+                <p data-lang="detail_cxl_outcome"></p>
+                <div class="cta-row">
+                    <a class="btn btn-primary" href="#" data-lang="detail_btn_paper">Read paper</a>
+                    <a class="btn btn-ghost" href="#" data-lang="detail_btn_slides">View slides</a>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <div class="footer" data-lang="footer_text">(C) 2025 Your Name. All Rights Reserved.</div>
+</div>
+</body>
+</html>

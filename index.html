@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio | Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/lang-data.js"></script>
+    <script src="assets/js/lang.js" defer></script>
+</head>
+<body>
+<div class="nav-shell">
+    <div class="nav-logo" data-lang="brand_name">Junon Lee</div>
+    <nav>
+        <a href="index.html" data-lang="nav_home">Home</a>
+        <a href="resume.html" data-lang="nav_resume">Resume</a>
+        <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
+        <a href="contact.html" data-lang="nav_contact">Contact</a>
+    </nav>
+    <div class="lang-switch">
+        <button onclick="setLang('kr')">KR</button>
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('jp')">JP</button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header">
+        <img src="assets/img/profile.jpg" alt="profile">
+        <h1 data-lang="profile_name">Your Name</h1>
+        <h3 data-lang="profile_title">Your Title / Position</h3>
+    </div>
+
+    <div class="content">
+        <div class="left">
+            <h2 data-lang="sidebar_profile_heading">Personal profile</h2>
+            <p data-lang="sidebar_profile_body"></p>
+
+            <h2 data-lang="sidebar_contact_heading">Contact</h2>
+            <p class="contact-item">
+                <span data-lang="sidebar_contact_email_label">Email</span>
+                <strong data-lang="sidebar_contact_email_value">wnsgjs34@gmail.com</strong>
+            </p>
+            <p class="contact-item">
+                <span data-lang="sidebar_contact_phone_label">Phone</span>
+                <strong data-lang="sidebar_contact_phone_value">+82-10-7182-9744</strong>
+            </p>
+            <p class="contact-item">
+                <span data-lang="sidebar_contact_location_label">Location</span>
+                <strong data-lang="sidebar_contact_location_value">Seoul</strong>
+            </p>
+            <p class="contact-item">
+                <span data-lang="sidebar_contact_site_label">Website</span>
+                <strong data-lang="sidebar_contact_site_value">example.com</strong>
+            </p>
+
+            <h2 data-lang="sidebar_education_heading">Education</h2>
+            <p>
+                <strong data-lang="sidebar_education_one">University of Seoul · M.S.</strong><br>
+                <span data-lang="sidebar_education_one_sub">2025 - present</span>
+            </p>
+            <p>
+                <strong data-lang="sidebar_education_two">University of Seoul · B.S.</strong><br>
+                <span data-lang="sidebar_education_two_sub">2019 - 2025</span>
+            </p>
+        </div>
+
+        <div class="right">
+            <section class="page-section">
+                <h2 data-lang="home_featured">Featured work</h2>
+                <p data-lang="home_intro_desc"></p>
+
+                <div class="filter-controls">
+                    <button class="active" data-filter="all" data-lang="filter_all">All</button>
+                    <button data-filter="project" data-lang="filter_projects">Projects</button>
+                    <button data-filter="research" data-lang="filter_research">Research</button>
+                </div>
+
+                <div class="work-grid">
+                    <a class="work-card" data-category="project" href="project_esmoe.html">
+                        <img src="assets/img/project01_thumb.jpg" alt="Project thumbnail">
+                        <div class="work-card-body">
+                            <h4 data-lang="work_esmoe_title">ES-MoE inference optimizer</h4>
+                            <p class="work-secondary" data-lang="work_esmoe_sub">Sparse expert routing runtime</p>
+                            <p class="work-date" data-lang="work_esmoe_date">2025.05</p>
+                        </div>
+                    </a>
+                    <a class="work-card" data-category="project" href="project_orion.html">
+                        <img src="assets/img/project02_thumb.jpg" alt="Project thumbnail">
+                        <div class="work-card-body">
+                            <h4 data-lang="work_orion_title">Project Orion edge stack</h4>
+                            <p class="work-secondary" data-lang="work_orion_sub">Telemetry + remediation pipeline</p>
+                            <p class="work-date" data-lang="work_orion_date">2025.03</p>
+                        </div>
+                    </a>
+                    <a class="work-card" data-category="research" href="research_offloading.html">
+                        <img src="assets/img/paper01_thumb.jpg" alt="Research thumbnail">
+                        <div class="work-card-body">
+                            <h4 data-lang="work_llm_title">Efficient LLM offloading</h4>
+                            <p class="work-secondary" data-lang="work_llm_sub">Journal-style findings</p>
+                            <p class="work-date" data-lang="work_llm_date">2024.11</p>
+                        </div>
+                    </a>
+                    <a class="work-card" data-category="research" href="research_cxl.html">
+                        <img src="assets/img/paper02_thumb.jpg" alt="Research thumbnail">
+                        <div class="work-card-body">
+                            <h4 data-lang="work_cxl_title">CXL-aware tiered memory</h4>
+                            <p class="work-secondary" data-lang="work_cxl_sub">Multi-tier placement policy</p>
+                            <p class="work-date" data-lang="work_cxl_date">2024.08</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="footer" data-lang="footer_text">© 2025 Your Name. All Rights Reserved.</div>
+</div>
+</body>
+</html>
