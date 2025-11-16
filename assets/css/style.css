@@ -1,11 +1,11 @@
 :root {
-    --primary: #d7e5ff;
-    --header-bg: #d7e5ff;
+    --primary: #f0f7f1;
+    --header-bg: #f0f7f1;
     --bg: #f4f4f4;
     --card: #ffffff;
     --text: #222;
     --muted: #555;
-    --accent: #3366cc;
+    --accent: #59a37b;
     --border: rgba(0, 0, 0, 0.08);
 }
 
@@ -64,7 +64,7 @@ body {
     padding: 6px 14px;
     border: none;
     border-radius: 18px;
-    background: var(--accent);
+    background: #4d8f68;
     color: white;
     font-weight: 600;
     cursor: pointer;
@@ -206,8 +206,8 @@ body {
 }
 
 .filter-controls button.active {
-    background: var(--accent);
-    border-color: var(--accent);
+    background: #4d8f68;
+    border-color: #4d8f68;
     color: #fff;
 }
 
