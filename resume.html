@@ -1,82 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio | Resume</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="UTF-8">
+<title>Portfolio | Resume</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/lang.js" defer></script>
 </head>
 <body>
 <div class="nav-shell">
-    <div class="nav-logo" data-lang="brand_name">Your Name</div>
-    <nav>
-        <a href="index.html" data-lang="nav_home">Home</a>
-        <a href="resume.html" data-lang="nav_resume">Resume</a>
-        <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-        <a href="contact.html" data-lang="nav_contact">Contact</a>
-    </nav>
-    <div class="lang-switch">
-        <button onclick="setLang('kr')">KR</button>
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('jp')">JP</button>
+    <div class="nav-inner">
+        <div class="nav-logo" data-lang="brand_name">Your Name</div>
+        <nav>
+            <a href="index.html" data-lang="nav_home">Home</a>
+            <a class="active" href="resume.html" data-lang="nav_resume">Resume</a>
+            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
+            <a href="contact.html" data-lang="nav_contact">Contact</a>
+        </nav>
+        <div class="lang-switch">
+            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
+            <button data-lang-code="en" onclick="setLang('en')">EN</button>
+            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="header">
-        <div class="header-profile">
-            <img src="assets/img/profile.jpg" alt="profile">
+<main class="container">
+    <div class="hero">
+        <div class="avatar">
+            <img src="assets/img/laiming.png" alt="profile">
         </div>
-        <div class="header-text">
+        <div class="identity">
             <h1 data-lang="profile_name">Your Name</h1>
             <h3 data-lang="profile_title">Your Title / Position</h3>
         </div>
     </div>
 
-    <div class="content">
-        <div class="left">
-            <h2 data-lang="sidebar_profile_heading">Personal profile</h2>
-            <p data-lang="sidebar_profile_body"></p>
+    <div class="main-grid stack-bottom-identity">
+        <section class="identity-area">
+            <div class="section-block hide-mobile">
+                <div class="section-label" data-lang="sidebar_profile_heading">Personal profile</div>
+                <p data-lang="sidebar_profile_body"></p>
+            </div>
 
-            <h2 data-lang="sidebar_contact_heading">Contact</h2>
-            <p class="contact-item">
-                <span data-lang="sidebar_contact_email_label">Email</span>
-                <strong data-lang="sidebar_contact_email_value">hello@example.com</strong>
-            </p>
-            <p class="contact-item">
-                <span data-lang="sidebar_contact_phone_label">Phone</span>
-                <strong data-lang="sidebar_contact_phone_value">+82-10-0000-0000</strong>
-            </p>
-            <p class="contact-item">
-                <span data-lang="sidebar_contact_location_label">Location</span>
-                <strong data-lang="sidebar_contact_location_value">Seoul</strong>
-            </p>
-            <p class="contact-item">
-                <span data-lang="sidebar_contact_site_label">Website</span>
-                <strong data-lang="sidebar_contact_site_value">example.com</strong>
-            </p>
+            <div class="section-block">
+                <div class="section-label" data-lang="sidebar_education_heading">Education</div>
+                <div class="section-stack">
+                    <div>
+                        <strong data-lang="sidebar_education_one">KAIST · M.S.</strong><br>
+                        <span data-lang="sidebar_education_one_sub">2023 - 2025</span>
+                    </div>
+                    <div>
+                        <strong data-lang="sidebar_education_two">KAIST · B.S.</strong><br>
+                        <span data-lang="sidebar_education_two_sub">2019 - 2023</span>
+                    </div>
+                </div>
+            </div>
 
-            <h2 data-lang="sidebar_education_heading">Education</h2>
-            <p>
-                <strong data-lang="sidebar_education_one">KAIST · M.S.</strong><br>
-                <span data-lang="sidebar_education_one_sub">2023 - 2025</span>
-            </p>
-            <p>
-                <strong data-lang="sidebar_education_two">KAIST · B.S.</strong><br>
-                <span data-lang="sidebar_education_two_sub">2019 - 2023</span>
-            </p>
-        </div>
+            <div class="section-block">
+                <div class="section-label" data-lang="sidebar_contact_heading">Contact</div>
+                <ul class="meta-list">
+                    <li class="meta-item">
+                        <span data-lang="sidebar_contact_email_label">Email</span>
+                        <strong data-lang="sidebar_contact_email_value">hello@example.com</strong>
+                    </li>
+                    <li class="meta-item">
+                        <span data-lang="sidebar_contact_phone_label">Phone</span>
+                        <strong data-lang="sidebar_contact_phone_value">+82-10-0000-0000</strong>
+                    </li>
+                    <li class="meta-item">
+                        <span data-lang="sidebar_contact_location_label">Location</span>
+                        <strong data-lang="sidebar_contact_location_value">Seoul</strong>
+                    </li>
+                    <li class="meta-item">
+                        <span data-lang="sidebar_contact_site_label">Website</span>
+                        <strong data-lang="sidebar_contact_site_value">example.com</strong>
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-        <div class="right">
-            <section class="page-section">
-                <h2 data-lang="resume_intro_title">Resume snapshot</h2>
+        <section class="career-area resume-group">
+            <div class="section-block">
+                <div class="section-label" data-lang="resume_intro_title">Resume snapshot</div>
                 <p data-lang="resume_intro_desc"></p>
-            </section>
+            </div>
 
-            <section class="page-section">
-                <h2 data-lang="resume_experience_title">Experience</h2>
+            <div class="section-block">
+                <div class="section-label" data-lang="resume_experience_title">Experience</div>
                 <div class="resume-timeline">
                     <article class="resume-entry">
                         <strong data-lang="resume_exp1_role"></strong>
@@ -99,10 +111,10 @@
                         <p data-lang="resume_exp4_desc"></p>
                     </article>
                 </div>
-            </section>
+            </div>
 
-            <section class="page-section">
-                <h2 data-lang="resume_research_title">Research highlights</h2>
+            <div class="section-block">
+                <div class="section-label" data-lang="resume_research_title">Research highlights</div>
                 <div class="resume-timeline">
                     <article class="resume-entry">
                         <strong data-lang="resume_pub1_title"></strong>
@@ -117,24 +129,10 @@
                         <span data-lang="resume_pub3_meta"></span>
                     </article>
                 </div>
-            </section>
+            </div>
 
-            <section class="page-section">
-                <h2 data-lang="resume_projects_title">Projects</h2>
-                <div class="resume-timeline">
-                    <article class="resume-entry">
-                        <strong data-lang="resume_proj1_title"></strong>
-                        <p data-lang="resume_proj1_desc"></p>
-                    </article>
-                    <article class="resume-entry">
-                        <strong data-lang="resume_proj2_title"></strong>
-                        <p data-lang="resume_proj2_desc"></p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="page-section">
-                <h2 data-lang="resume_awards_title">Awards & service</h2>
+            <div class="section-block">
+                <div class="section-label" data-lang="resume_awards_title">Awards & recognition</div>
                 <div class="resume-timeline">
                     <article class="resume-entry">
                         <strong data-lang="resume_award1_title"></strong>
@@ -145,11 +143,27 @@
                         <span data-lang="resume_award2_desc"></span>
                     </article>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+
+        <section class="projects-area resume-group">
+            <div class="section-block">
+                <div class="section-label" data-lang="resume_projects_title">Selected builds</div>
+                <div class="resume-timeline">
+                    <article class="resume-entry">
+                        <strong data-lang="resume_proj1_title"></strong>
+                        <p data-lang="resume_proj1_desc"></p>
+                    </article>
+                    <article class="resume-entry">
+                        <strong data-lang="resume_proj2_title"></strong>
+                        <p data-lang="resume_proj2_desc"></p>
+                    </article>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="footer" data-lang="footer_text">© 2025 Your Name. All Rights Reserved.</div>
-</div>
+    <div class="footer" data-lang="footer_text">© 2025 Junon Lee. All Rights Reserved.</div>
+</main>
 </body>
 </html>
