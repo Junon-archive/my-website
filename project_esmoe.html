@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Project ES-MoE</title>
+    <title>Project: 5G O-RAN Simulation (srsRAN)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/project.css">
@@ -11,24 +11,26 @@
 </head>
 <body>
 <div class="nav-shell">
-    <div class="nav-logo" data-lang="brand_name">Your Name</div>
-    <nav>
-        <a href="index.html" data-lang="nav_home">Home</a>
-        <a href="resume.html" data-lang="nav_resume">Resume</a>
-        <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-        <a href="contact.html" data-lang="nav_contact">Contact</a>
-    </nav>
-    <div class="lang-switch">
-        <button onclick="setLang('kr')">KR</button>
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('jp')">JP</button>
+    <div class="nav-inner">
+        <div class="nav-logo" data-lang="brand_name">Junon Lee</div>
+        <nav>
+            <a href="index.html" data-lang="nav_home">Home</a>
+            <a href="resume.html" data-lang="nav_resume">Resume</a>
+            <a class="active" href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
+            <a href="contact.html" data-lang="nav_contact">Contact</a>
+        </nav>
+        <div class="lang-switch">
+            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
+            <button data-lang-code="en" onclick="setLang('en')">EN</button>
+            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+        </div>
     </div>
 </div>
 
 <div class="container">
     <div class="header detail-header">
-        <h1 data-lang="detail_esmoe_title">ES-MoE inference optimizer</h1>
-        <p class="subtitle" data-lang="detail_esmoe_subtitle">Expert-scaling toolkit for edge GPUs</p>
+        <h1 data-lang="detail_esmoe_title">5G O-RAN End-to-End Network Simulation</h1>
+        <p class="subtitle" data-lang="detail_esmoe_subtitle">Built and debugged a full 5GC ↔ gNB ↔ UE pipeline with RIC (E2)</p>
     </div>
 
     <div class="detail-body">
@@ -36,37 +38,59 @@
             <ul class="project-meta">
                 <li>
                     <span data-lang="detail_label_role">Role</span>
-                    <div data-lang="detail_esmoe_role">Lead researcher</div>
+                    <div data-lang="detail_esmoe_role">Individual contributor (setup + troubleshooting + report)</div>
                 </li>
                 <li>
                     <span data-lang="detail_label_timeline">Timeline</span>
-                    <div data-lang="detail_esmoe_timeline">2024 - 2025</div>
+                    <div data-lang="detail_esmoe_timeline">Dec 2024</div>
                 </li>
                 <li>
                     <span data-lang="detail_label_stack">Stack</span>
-                    <div data-lang="detail_esmoe_stack">PyTorch, CUDA Graphs, Triton</div>
+                    <div data-lang="detail_esmoe_stack">Linux, Docker Compose, srsRAN, Open5GS (5GC), O-RAN SC RIC, ZMQ, SSH</div>
                 </li>
             </ul>
 
-            <img class="hero-img" src="assets/img/project01_hero.jpg" alt="ES-MoE hero">
+            <img class="hero-img" src="assets/img/project01_hero.jpg" alt="5G O-RAN Simulation hero">
 
             <section class="page-section">
                 <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_esmoe_overview"></p>
+                <p data-lang="detail_esmoe_overview">
+                    This project set up an end-to-end 5G network simulation using open-source components.
+                    I deployed a containerized 5G Core (Open5GS) and integrated it with srsRAN-based gNB/UE,
+                    while also bringing up an O-RAN SC RIC and enabling the E2 interface.
+                    The goal was not only to “make it run”, but to understand how Core Network, gNB, RIC, and UE
+                    interact in practice—and to document a reproducible workflow and debugging checklist.
+                </p>
             </section>
 
             <section class="page-section">
                 <h2 data-lang="detail_contribution_heading">Key contributions</h2>
                 <ul class="key-points">
-                    <li data-lang="detail_esmoe_point1"></li>
-                    <li data-lang="detail_esmoe_point2"></li>
-                    <li data-lang="detail_esmoe_point3"></li>
+                    <li data-lang="detail_esmoe_point1">
+                        Built a full 5G pipeline (5GC → gNB → UE) and verified successful attachment/connection,
+                        using dedicated configs (ZMQ-based gNB/UE configs) and isolated UE networking via Linux network namespaces.
+                    </li>
+                    <li data-lang="detail_esmoe_point2">
+                        Deployed an O-RAN SC RIC alongside the RAN stack and validated the service readiness path
+                        (RIC containers + E2-enabled gNB execution), connecting the control-plane integration points.
+                    </li>
+                    <li data-lang="detail_esmoe_point3">
+                        Performed root-cause oriented debugging on a gNB startup failure (INI/AMF session-related error):
+                        checked AMF addressing inside the 5GC container, validated E2AP PCAP file existence/permissions/path,
+                        and concluded the primary issue was version/instruction drift—then resolved it by updating to the latest known-good method.
+                    </li>
                 </ul>
             </section>
 
             <section class="page-section">
                 <h2 data-lang="detail_outcome_heading">Impact</h2>
-                <p data-lang="detail_esmoe_outcome"></p>
+                <p data-lang="detail_esmoe_outcome">
+                    Delivered a working, end-to-end 5G/O-RAN simulation environment and a concise troubleshooting playbook.
+                    The most valuable outcome was developing practical intuition about how configuration, container networking,
+                    and component versions affect system bring-up—especially when error messages are non-specific.
+                    This experience strengthened my ability to debug distributed systems by isolating variables
+                    (Core, gNB, RIC, files, permissions, and paths) and validating assumptions step-by-step.
+                </p>
                 <div class="cta-row">
                     <a class="btn btn-primary" href="#" data-lang="detail_btn_visit">Visit site</a>
                     <a class="btn btn-ghost" href="#" data-lang="detail_btn_deck">Download deck</a>
@@ -75,7 +99,7 @@
         </article>
     </div>
 
-    <div class="footer" data-lang="footer_text">(C) 2025 Your Name. All Rights Reserved.</div>
+    <div class="footer" data-lang="footer_text">(C) 2025 Junon Lee. All Rights Reserved.</div>
 </div>
 </body>
 </html>

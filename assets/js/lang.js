@@ -48,6 +48,7 @@ function applyLang() {
     });
 
     updateNavLinks();
+    updateLangButtons();
 }
 
 function initFilters() {
@@ -81,5 +82,15 @@ function updateNavLinks() {
         const base = link.getAttribute("data-base-href") || link.href.split("?")[0];
         link.setAttribute("data-base-href", base);
         link.href = `${base}?lang=${currentLang}`;
+    });
+}
+
+function updateLangButtons() {
+    const buttons = document.querySelectorAll(".lang-switch button");
+    buttons.forEach(btn => {
+        const target = btn.getAttribute("data-lang-code");
+        const isActive = target === currentLang;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-pressed", isActive);
     });
 }
