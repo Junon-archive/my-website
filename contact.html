@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/lang-data.js"></script>
     <script src="assets/js/lang.js" defer></script>
+    <script src="assets/js/sidebar.js" defer></script>
 </head>
-<body>
+<body class="page-contact">
 <div class="nav-shell">
     <div class="nav-inner">
         <div class="nav-logo" data-lang="brand_name">Your Name</div>
@@ -29,7 +30,7 @@
 <main class="container">
     <div class="hero">
         <div class="avatar">
-            <img src="assets/img/laiming.png" alt="profile">
+            <img src="assets/img/alien.png" alt="profile">
         </div>
         <div class="identity">
             <h1 data-lang="profile_name">Your Name</h1>
@@ -37,86 +38,47 @@
         </div>
     </div>
 
-    <div class="main-grid contact-layout">
-        <section class="identity-area">
-            <div class="section-block hide-mobile">
-                <div class="section-label" data-lang="sidebar_profile_heading">Personal profile</div>
-                <p data-lang="sidebar_profile_body"></p>
-            </div>
-
-            <div class="section-block">
-                <div class="section-label" data-lang="sidebar_contact_heading">Contact</div>
-                <ul class="meta-list">
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_email_label">Email</span>
-                        <strong data-lang="sidebar_contact_email_value">hello@example.com</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_phone_label">Phone</span>
-                        <strong data-lang="sidebar_contact_phone_value">+82-10-0000-0000</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_location_label">Location</span>
-                        <strong data-lang="sidebar_contact_location_value">Seoul</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_site_label">Website</span>
-                        <strong data-lang="sidebar_contact_site_value">example.com</strong>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="section-block hide-mobile">
-                <div class="section-label" data-lang="sidebar_education_heading">Education</div>
-                <div class="section-stack">
-                    <div>
-                        <strong data-lang="sidebar_education_one">KAIST · M.S.</strong><br>
-                        <span data-lang="sidebar_education_one_sub">2023 - 2025</span>
-                    </div>
-                    <div>
-                        <strong data-lang="sidebar_education_two">KAIST · B.S.</strong><br>
-                        <span data-lang="sidebar_education_two_sub">2019 - 2023</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="main-grid">
+        <aside class="sidebar" data-sidebar></aside>
 
         <section class="content-area">
-            <div class="section-block">
-                <div class="section-label" data-lang="contact_intro_title">Contact guide</div>
-                <p data-lang="contact_intro_desc"></p>
-            </div>
+            <div class="content-stack">
+                <div class="section-block">
+                    <div class="section-label" data-lang="contact_intro_title">Contact guide</div>
+                    <p data-lang="contact_intro_desc"></p>
+                </div>
 
-            <div class="section-block">
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <strong data-lang="contact_card_lab_title"></strong>
-                        <p data-lang="contact_card_lab_desc"></p>
-                    </div>
-                    <div class="contact-card">
-                        <strong data-lang="contact_card_talks_title"></strong>
-                        <p data-lang="contact_card_talks_desc"></p>
-                    </div>
-                    <div class="contact-card">
-                        <strong data-lang="contact_card_collab_title"></strong>
-                        <p data-lang="contact_card_collab_desc"></p>
-                    </div>
-                    <div class="contact-card">
-                        <strong data-lang="contact_card_career_title"></strong>
-                        <p data-lang="contact_card_career_desc"></p>
+                <div class="section-block">
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <strong data-lang="contact_card_lab_title"></strong>
+                            <p data-lang="contact_card_lab_desc"></p>
+                        </div>
+                        <div class="contact-card">
+                            <strong data-lang="contact_card_talks_title"></strong>
+                            <p data-lang="contact_card_talks_desc"></p>
+                        </div>
+                        <div class="contact-card">
+                            <strong data-lang="contact_card_collab_title"></strong>
+                            <p data-lang="contact_card_collab_desc"></p>
+                        </div>
+                        <div class="contact-card">
+                            <strong data-lang="contact_card_career_title"></strong>
+                            <p data-lang="contact_card_career_desc"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section-block">
-                <div class="section-label" data-lang="contact_form_title">Quick message</div>
-                <p data-lang="contact_form_desc"></p>
-                <form class="contact-form">
-                    <input type="text" data-placeholder="contact_form_name" placeholder="Your name" required>
-                    <input type="email" data-placeholder="contact_form_email" placeholder="Email" required>
-                    <textarea rows="5" data-placeholder="contact_form_message" placeholder="Message" required></textarea>
-                    <button type="submit" class="btn btn-primary" data-lang="contact_form_cta">Send message</button>
-                </form>
+                <div class="section-block">
+                    <div class="section-label" data-lang="contact_form_title">Quick message</div>
+                    <p data-lang="contact_form_desc"></p>
+                    <form class="contact-form">
+                        <input type="text" data-placeholder="contact_form_name" placeholder="Your name" required>
+                        <input type="email" data-placeholder="contact_form_email" placeholder="Email" required>
+                        <textarea rows="5" data-placeholder="contact_form_message" placeholder="Message" required></textarea>
+                        <button type="submit" class="btn btn-primary" data-lang="contact_form_cta">Send message</button>
+                    </form>
+                </div>
             </div>
         </section>
     </div>

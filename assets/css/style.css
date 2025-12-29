@@ -6,6 +6,11 @@
     --max-width: 1180px;
     --pad-desktop: 32px;
     --pad-mobile: 20px;
+    --layout-gap: 36px;
+    --layout-gap-tablet: 28px;
+    --layout-gap-mobile: 20px;
+    --section-gap: 24px;
+    --sidebar-gap: 18px;
 }
 
 * {
@@ -206,6 +211,18 @@ main {
     margin: 0 0 10px;
 }
 
+.page-resume .content-area .section-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    background: var(--bg);
+    font-size: 13px;
+    font-weight: 600;
+}
+
 .section-heading {
     margin: 0 0 10px;
     font-size: 18px;
@@ -244,99 +261,46 @@ main {
 
 .main-grid {
     display: grid;
-    grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.05fr) minmax(320px, 1.1fr);
-    grid-template-areas: "identity career projects";
-    gap: 32px;
-    padding: 30px 0 0;
-}
-
-.home-grid {
-    grid-template-areas:
-        "identity projects projects"
-        "contact projects projects";
-}
-
-.portfolio-grid {
     grid-template-columns: minmax(260px, 1fr) minmax(520px, 2fr);
-    grid-template-areas:
-        "identity content";
+    grid-template-areas: "sidebar content";
+    gap: var(--layout-gap);
+    padding: 32px 0 0;
+    align-items: start;
 }
 
-.contact-layout {
-    grid-template-areas: "identity content content";
-}
-
-.identity-area {
-    grid-area: identity;
+.sidebar {
+    grid-area: sidebar;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding-bottom: 18px;
+    gap: var(--sidebar-gap);
 }
 
-.career-area {
-    grid-area: career;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+.sidebar .section-block {
+    margin: 0;
 }
 
-.projects-area {
-    grid-area: projects;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding-top: 18px;
-    border-top: 1px solid var(--divider);
+.sidebar .section-block:first-child {
+    border-top: none;
+    padding-top: 0;
 }
 
-.contact-area {
-    grid-area: contact;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    border-top: 1px solid var(--divider);
-    padding-top: 18px;
+.sidebar__profile,
+.sidebar__education,
+.sidebar__contact {
+    width: 100%;
 }
 
 .content-area {
     grid-area: content;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--section-gap);
 }
 
-.portfolio-content {
-    grid-area: content;
+.content-stack {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-}
-
-.resume-group .section-block {
-    padding-top: 14px;
-    border-top: 1px solid var(--divider);
-    margin-top: 12px;
-}
-
-.resume-group .section-block:first-child {
-    padding-top: 0;
-    border-top: none;
-    margin-top: 0;
-}
-
-.overview-area {
-    grid-area: overview;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.research-area {
-    grid-area: research;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    gap: var(--section-gap);
 }
 
 .section-block {
@@ -578,32 +542,8 @@ main {
     }
 
     .main-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-areas:
-            "identity career"
-            "projects projects";
-        gap: 28px;
-    }
-
-    .home-grid {
-        grid-template-areas:
-            "identity projects"
-            "projects projects"
-            "contact contact";
-    }
-
-    .portfolio-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-areas:
-            "identity content"
-            "content content";
-    }
-
-    .contact-layout {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-areas:
-            "identity content"
-            "content content";
+        grid-template-columns: minmax(240px, 1fr) minmax(420px, 1.6fr);
+        gap: var(--layout-gap-tablet);
     }
 }
 
@@ -632,55 +572,34 @@ main {
     .main-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "identity"
-            "career"
-            "projects";
-        gap: 24px;
+            "sidebar"
+            "content";
+        gap: var(--layout-gap-mobile);
         padding-top: 20px;
     }
 
-    .home-grid {
-        grid-template-areas:
-            "identity"
-            "projects"
-            "contact";
-    }
-
-    .projects-area {
-        border-top: 1px solid var(--divider);
-        margin-top: 12px;
-    }
-
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "content"
-            "identity";
-    }
-
-    .contact-layout {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "identity"
-            "content";
-    }
-
-    .stack-bottom-identity {
-        grid-template-areas:
-            "career"
-            "projects"
-            "identity";
+    .sidebar {
+        gap: 14px;
+        border-bottom: 1px solid var(--divider);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
     }
 
     .hide-mobile {
         display: none !important;
     }
 
-    .career-area.resume-group .section-block:last-child {
-        margin-bottom: 26px;
+    .page-index .sidebar__contact,
+    .page-resume .sidebar__contact {
+        display: none !important;
     }
 
-    .projects-area.resume-group .section-block:first-child {
-        margin-top: 14px;
+    .page-portfolio .sidebar {
+        display: none;
+    }
+
+    .page-contact .sidebar__profile,
+    .page-contact .sidebar__education {
+        display: none !important;
     }
 }

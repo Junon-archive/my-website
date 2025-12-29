@@ -7,8 +7,9 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="assets/js/lang-data.js"></script>
 <script src="assets/js/lang.js" defer></script>
+<script src="assets/js/sidebar.js" defer></script>
 </head>
-<body>
+<body class="page-index">
 <div class="nav-shell">
     <div class="nav-inner">
         <div class="nav-logo" data-lang="brand_name">Junon Lee</div>
@@ -29,7 +30,7 @@
 <main class="container">
     <div class="hero">
         <div class="avatar">
-            <img src="assets/img/laiming.png" alt="profile">
+            <img src="assets/img/alien.png" alt="profile">
         </div>
         <div class="identity">
             <h1 data-lang="profile_name">Your Name</h1>
@@ -37,97 +38,56 @@
         </div>
     </div>
 
-    <div class="main-grid home-grid">
-        <section class="identity-area">
-            <div class="section-block">
-                <div class="section-label" data-lang="sidebar_profile_heading">Personal profile</div>
-                <p data-lang="sidebar_profile_body"></p>
-            </div>
+    <div class="main-grid">
+        <aside class="sidebar" data-sidebar></aside>
 
-            <div class="section-block">
-                <div class="section-label" data-lang="sidebar_education_heading">Education</div>
-                <div class="section-stack">
-                    <div>
-                        <strong data-lang="sidebar_education_one">University of Seoul · M.S.</strong><br>
-                        <span data-lang="sidebar_education_one_sub">2025 - present</span>
+        <section class="content-area">
+            <div class="content-stack">
+                <div class="section-block">
+                    <div class="section-label" data-lang="home_featured">Featured work</div>
+                    <p data-lang="home_intro_desc"></p>
+
+                    <div class="filter-controls">
+                        <button class="active" data-filter="all" data-lang="filter_all">All</button>
+                        <button data-filter="project" data-lang="filter_projects">Projects</button>
+                        <button data-filter="research" data-lang="filter_research">Research</button>
                     </div>
-                    <div>
-                        <strong data-lang="sidebar_education_two">University of Seoul · B.S.</strong><br>
-                        <span data-lang="sidebar_education_two_sub">2019 - 2025</span>
+
+                    <div class="work-grid">
+                        <a class="work-card" data-category="project" href="project_5g_oran.html">
+                            <img src="assets/img/oran_5g_system.png" alt="Project thumbnail">
+                            <div class="work-card-body">
+                                <h4 data-lang="work_5g_title">5G O-RAN network simulation</h4>
+                                <p class="work-secondary" data-lang="work_5g_sub">Core↔RIC↔gNB bring-up</p>
+                                <p class="work-date" data-lang="work_5g_date">2025.06</p>
+                            </div>
+                        </a>
+                        <a class="work-card" data-category="project" href="project_orion.html">
+                            <img src="assets/img/project02_thumb.jpg" alt="Project thumbnail">
+                            <div class="work-card-body">
+                                <h4 data-lang="work_orion_title">Project Orion edge stack</h4>
+                                <p class="work-secondary" data-lang="work_orion_sub">Telemetry + remediation pipeline</p>
+                                <p class="work-date" data-lang="work_orion_date">2025.03</p>
+                            </div>
+                        </a>
+                        <a class="work-card" data-category="research" href="research_offloading.html">
+                            <img src="assets/img/paper01_thumb.jpg" alt="Research thumbnail">
+                            <div class="work-card-body">
+                                <h4 data-lang="work_llm_title">Efficient LLM offloading</h4>
+                                <p class="work-secondary" data-lang="work_llm_sub">Journal-style findings</p>
+                                <p class="work-date" data-lang="work_llm_date">2024.11</p>
+                            </div>
+                        </a>
+                        <a class="work-card" data-category="research" href="research_cxl.html">
+                            <img src="assets/img/paper02_thumb.jpg" alt="Research thumbnail">
+                            <div class="work-card-body">
+                                <h4 data-lang="work_cxl_title">CXL-aware tiered memory</h4>
+                                <p class="work-secondary" data-lang="work_cxl_sub">Multi-tier placement policy</p>
+                                <p class="work-date" data-lang="work_cxl_date">2024.08</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="projects-area">
-            <div class="section-block">
-                <div class="section-label" data-lang="home_featured">Featured work</div>
-                <p data-lang="home_intro_desc"></p>
-
-                <div class="filter-controls">
-                    <button class="active" data-filter="all" data-lang="filter_all">All</button>
-                    <button data-filter="project" data-lang="filter_projects">Projects</button>
-                    <button data-filter="research" data-lang="filter_research">Research</button>
-                </div>
-
-                <div class="work-grid">
-                    <a class="work-card" data-category="project" href="project_5g_oran.html">
-                        <img src="assets/img/oran_5g_system.png" alt="Project thumbnail">
-                        <div class="work-card-body">
-                            <h4 data-lang="work_5g_title">5G O-RAN network simulation</h4>
-                            <p class="work-secondary" data-lang="work_5g_sub">Core↔RIC↔gNB bring-up</p>
-                            <p class="work-date" data-lang="work_5g_date">2025.06</p>
-                        </div>
-                    </a>
-                    <a class="work-card" data-category="project" href="project_orion.html">
-                        <img src="assets/img/project02_thumb.jpg" alt="Project thumbnail">
-                        <div class="work-card-body">
-                            <h4 data-lang="work_orion_title">Project Orion edge stack</h4>
-                            <p class="work-secondary" data-lang="work_orion_sub">Telemetry + remediation pipeline</p>
-                            <p class="work-date" data-lang="work_orion_date">2025.03</p>
-                        </div>
-                    </a>
-                    <a class="work-card" data-category="research" href="research_offloading.html">
-                        <img src="assets/img/paper01_thumb.jpg" alt="Research thumbnail">
-                        <div class="work-card-body">
-                            <h4 data-lang="work_llm_title">Efficient LLM offloading</h4>
-                            <p class="work-secondary" data-lang="work_llm_sub">Journal-style findings</p>
-                            <p class="work-date" data-lang="work_llm_date">2024.11</p>
-                        </div>
-                    </a>
-                    <a class="work-card" data-category="research" href="research_cxl.html">
-                        <img src="assets/img/paper02_thumb.jpg" alt="Research thumbnail">
-                        <div class="work-card-body">
-                            <h4 data-lang="work_cxl_title">CXL-aware tiered memory</h4>
-                            <p class="work-secondary" data-lang="work_cxl_sub">Multi-tier placement policy</p>
-                            <p class="work-date" data-lang="work_cxl_date">2024.08</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-area">
-            <div class="section-block">
-                <div class="section-label" data-lang="sidebar_contact_heading">Contact</div>
-                <ul class="meta-list">
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_email_label">Email</span>
-                        <strong data-lang="sidebar_contact_email_value">wnsgjs34@gmail.com</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_phone_label">Phone</span>
-                        <strong data-lang="sidebar_contact_phone_value">+82-10-7182-9744</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_location_label">Location</span>
-                        <strong data-lang="sidebar_contact_location_value">Seoul</strong>
-                    </li>
-                    <li class="meta-item">
-                        <span data-lang="sidebar_contact_site_label">Website</span>
-                        <strong data-lang="sidebar_contact_site_value">example.com</strong>
-                    </li>
-                </ul>
             </div>
         </section>
     </div>
