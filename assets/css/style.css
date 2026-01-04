@@ -170,8 +170,8 @@ main {
 }
 
 .hero .avatar {
-    width: 165px;
-    height: 165px;
+    width: 200px;
+    height: 300px;
     border-radius: 12px;
     overflow: hidden;
     flex-shrink: 0;
