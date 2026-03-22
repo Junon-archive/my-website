@@ -59,7 +59,7 @@
   "work_cxl_date": "2024.08",
   "work_5g_title": "5G O-RAN network simulation",
   "work_5g_sub": "Core↔RIC↔gNB bring-up",
-  "work_5g_date": "2025.06",
+  "work_5g_date": "2024.12",
   "work_ebpf_title": "Practical Latency Observability with eBPF",
   "work_ebpf_sub": "CPU, memory, and I/O latency measurements",
   "work_ebpf_date": "2026.02",
