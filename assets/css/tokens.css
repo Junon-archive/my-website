@@ -1,0 +1,101 @@
+/* ==========================================================================
+   tokens.css — design tokens (01-design-system.md §1–§3)
+   The ONLY file allowed to contain colour literals. Every other stylesheet
+   must reference var(--token).
+   Dark theme is declared three times on purpose:
+     1. :root                                       light (default)
+     2. @media (prefers-color-scheme: dark) :root:not([data-theme="light"])
+     3. :root[data-theme="dark"]                    explicit override
+   There is no dark-mode toggle UI; (3) exists for QA screenshots only.
+   ========================================================================== */
+
+:root{
+  /* --- colour ------------------------------------------------------------ */
+  --navy:#12395f;
+  --blue:#1f67a7;
+  --blue-soft:#eaf3fb;
+  --ink:#14283d;
+  --slate:#5c7084;
+  --line:#dbe4ec;
+  --tint:#f2f7fb;
+  --paper:#ffffff;
+  --canvas:#f5f8fb;
+  --ok:#1f7a4d;
+  --ok-soft:#e6f4ec;
+  --warn:#a1620b;
+  --warn-soft:#fbf1e0;
+  --shadow:0 10px 30px rgba(18,57,95,.08);
+  /* text colour of a filled (primary) button: light theme = the canvas tone */
+  --on-navy:#f5f8fb;
+
+  /* --- type -------------------------------------------------------------- */
+  --display:"Manrope","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR","Manrope",-apple-system,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --hand:"Caveat",cursive;
+
+  /* --- layout ------------------------------------------------------------ */
+  --shell-max:1200px;
+  --pad-x:44px;
+  --header-h:70px;
+  --anchor-offset:84px;   /* scroll-margin-top for detail anchors */
+  --toc-top:90px;
+
+  /* --- radius ------------------------------------------------------------ */
+  --r:14px;        /* cards */
+  --r-box:12px;    /* meta strip, callouts, chart boxes */
+  --r-btn:10px;    /* buttons, small boxes */
+  --r-badge:6px;   /* badges, tags */
+
+  /* --- rhythm ------------------------------------------------------------ */
+  --gap-sm:8px;
+  --gap:14px;
+  --gap-md:18px;
+  --gap-lg:34px;
+  --section-top:36px;
+
+  /* --- motion ------------------------------------------------------------ */
+  --t:.16s;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#dbe8f5;
+    --blue:#78b6ea;
+    --blue-soft:#182c44;
+    --ink:#e4ecf4;
+    --slate:#98adc2;
+    --line:#26384f;
+    --tint:#15233a;
+    --paper:#111c2d;
+    --canvas:#0b1421;
+    --ok:#6dd39a;
+    --ok-soft:#14301f;
+    --warn:#f0b85a;
+    --warn-soft:#3a2a10;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+    --on-navy:#0b1421;
+  }
+}
+
+:root[data-theme="dark"]{
+  --navy:#dbe8f5;
+  --blue:#78b6ea;
+  --blue-soft:#182c44;
+  --ink:#e4ecf4;
+  --slate:#98adc2;
+  --line:#26384f;
+  --tint:#15233a;
+  --paper:#111c2d;
+  --canvas:#0b1421;
+  --ok:#6dd39a;
+  --ok-soft:#14301f;
+  --warn:#f0b85a;
+  --warn-soft:#3a2a10;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --on-navy:#0b1421;
+}
+
+@media (max-width:960px){
+  :root{ --pad-x:20px; }
+}

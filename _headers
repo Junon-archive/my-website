@@ -1,0 +1,17 @@
+/docs/*
+  X-Robots-Tag: noindex
+
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/pdf/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=3600
+
+/assets/js/*
+  Cache-Control: public, max-age=3600
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

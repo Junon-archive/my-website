@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Illustration gallery (dev) · Junon Lee</title>
+<script>
+  /* ?theme=dark / ?theme=light forces a theme before first paint */
+  (function () {
+    var m = /[?&]theme=(dark|light)/.exec(location.search);
+    if (m) document.documentElement.setAttribute('data-theme', m[1]);
+  })();
+</script>
+<style>
+/* TEMPORARY: copy of the token block from docs/spec/01-design-system.md section 1.
+   Replaced by assets/css/tokens.css once that file exists (owned by another agent). */
+:root{
+  --navy:#12395F; --blue:#1F67A7; --blue-soft:#EAF3FB; --ink:#14283D;
+  --slate:#5C7084; --line:#DBE4EC; --tint:#F2F7FB; --paper:#FFFFFF; --canvas:#F5F8FB;
+  --ok:#1F7A4D; --ok-soft:#E6F4EC; --warn:#A1620B; --warn-soft:#FBF1E0;
+  --display:"Manrope","Noto Sans KR",system-ui,sans-serif;
+  --body:"Noto Sans KR","Manrope",-apple-system,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#DBE8F5; --blue:#78B6EA; --blue-soft:#182C44; --ink:#E4ECF4;
+    --slate:#98ADC2; --line:#26384F; --tint:#15233A; --paper:#111C2D; --canvas:#0B1421;
+    --ok:#6DD39A; --ok-soft:#14301F; --warn:#F0B85A; --warn-soft:#3A2A10;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#DBE8F5; --blue:#78B6EA; --blue-soft:#182C44; --ink:#E4ECF4;
+  --slate:#98ADC2; --line:#26384F; --tint:#15233A; --paper:#111C2D; --canvas:#0B1421;
+  --ok:#6DD39A; --ok-soft:#14301F; --warn:#F0B85A; --warn-soft:#3A2A10;
+}
+/* --- gallery chrome (dev only) --- */
+*{box-sizing:border-box}
+body{margin:0;padding:24px 28px 60px;background:var(--canvas);color:var(--ink);font-family:var(--body)}
+h1{font-family:var(--display);font-size:24px;margin:0 0 4px;color:var(--navy)}
+.top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.top p{margin:0;font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+button{font-family:var(--mono);font-size:11.5px;padding:7px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+h2{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue);margin:34px 0 10px;border-top:1px solid var(--line);padding-top:12px}
+.row{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+figure .frame{background:var(--tint);border-radius:10px;overflow:hidden}
+figure[data-kind="diagram"] .frame{background:var(--paper)}
+figcaption{margin-top:8px;font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.6}
+figcaption b{color:var(--navy);font-size:11.5px}
+.ok{color:var(--ok)}
+.bad{color:var(--warn);font-weight:600}
+</style>
+<script src="../assets/js/illustrations.js"></script>
+<script src="../assets/js/scenes/home.js"></script>
+<script src="../assets/js/scenes/rowscope.js"></script>
+<script src="../assets/js/scenes/dynamic_moh.js"></script>
+<script src="../assets/js/scenes/ebpf.js"></script>
+<script src="../assets/js/scenes/can.js"></script>
+<script src="../assets/js/scenes/5g_oran.js"></script>
+<script src="../assets/js/scenes/opencl.js"></script>
+<script src="../assets/js/scenes/pim_accel.js"></script>
+</head>
+<body>
+<div class="top">
+  <h1>Illustration gallery</h1>
+  <p>dev only · not deployed · spec docs/spec/08-illustration-system.md</p>
+  <button id="theme">toggle dark</button>
+</div>
+<main id="out"></main>
+
+<script>
+(function () {
+  var out = document.getElementById('out');
+  var WIDTH = { thumb: 400, hero: 900, diagram: 780 };
+  var LIMIT = { thumb: 4, hero: 8, diagram: 99 };
+
+  function order(names) {
+    var head = ['thumb', 'hero'];
+    return names.slice().sort(function (a, b) {
+      var ia = head.indexOf(a), ib = head.indexOf(b);
+      return (ia < 0 ? 9 : ia) - (ib < 0 ? 9 : ib) || a.localeCompare(b);
+    });
+  }
+
+  Object.keys(window.Illus.scenes).sort().forEach(function (setId) {
+    var set = window.Illus.scenes[setId];
+    var h2 = document.createElement('h2');
+    h2.textContent = setId;
+    out.appendChild(h2);
+    var row = document.createElement('div');
+    row.className = 'row';
+    out.appendChild(row);
+
+    order(Object.keys(set)).forEach(function (name) {
+      var fn = set[name];
+      if (typeof fn !== 'function') return;
+      var kind = fn.kind || (name === 'thumb' ? 'thumb' : name === 'hero' ? 'hero' : 'diagram');
+      var fig = document.createElement('figure');
+      fig.setAttribute('data-kind', kind);
+      var frame = document.createElement('div');
+      frame.className = 'frame';
+      frame.setAttribute('data-illus', setId + '.' + name);
+      frame.style.width = WIDTH[kind] + 'px';
+      fig.appendChild(frame);
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = '<b>' + setId + '.' + name + '</b> · ' + kind;
+      fig.appendChild(cap);
+      row.appendChild(fig);
+    });
+  });
+
+  function audit() {
+    var css = getComputedStyle(document.documentElement);
+    var blue = css.getPropertyValue('--blue').trim();
+    var warn = css.getPropertyValue('--warn').trim();
+    var soft = css.getPropertyValue('--blue-soft').trim();
+    document.querySelectorAll('figure').forEach(function (fig) {
+      var svg = fig.querySelector('svg');
+      var cap = fig.querySelector('figcaption');
+      var kind = fig.getAttribute('data-kind');
+      var id = fig.querySelector('[data-illus]').getAttribute('data-illus');
+      if (!svg) { cap.innerHTML = '<b>' + id + '</b> · <span class="bad">not registered</span>'; return; }
+      var texts = svg.querySelectorAll('text').length;
+      var accent = 0, warned = 0;
+      svg.querySelectorAll('*').forEach(function (n) {
+        var f = n.getAttribute('fill') || '', st = n.getAttribute('stroke') || '';
+        if (f === blue || st === blue || f === soft) accent++;
+        if (f === warn || st === warn) warned++;
+      });
+      var lim = LIMIT[kind];
+      var okLabels = texts <= lim;
+      cap.innerHTML =
+        '<b>' + id + '</b> · ' + kind + ' ' + svg.getAttribute('viewBox').split(' ').slice(2).join('×') + '<br>' +
+        'labels ' + '<span class="' + (okLabels ? 'ok' : 'bad') + '">' + texts + '/' + (lim === 99 ? '∞' : lim) + '</span>' +
+        ' · accent elems ' + accent + ' · warn elems ' + warned + '<br>' +
+        'light: top --tint / left --blue-soft / right --paper · aria ' +
+        (svg.getAttribute('aria-label') ? '<span class="ok">set</span>' : '<span class="bad">missing</span>');
+    });
+  }
+
+  window.Illus.renderAll(document);
+  audit();
+
+  document.getElementById('theme').addEventListener('click', function () {
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    setTimeout(audit, 30);
+  });
+})();
+</script>
+</body>
+</html>

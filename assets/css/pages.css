@@ -1,0 +1,185 @@
+/* ==========================================================================
+   pages.css — Home, Portfolio, Resume, Contact, 404
+   (hero, pill row, section heads, card grids, filters, resume, contact)
+   No colour literals: tokens.css only.
+   ========================================================================== */
+
+/* --- hero ----------------------------------------------------------------- */
+.hero{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:44px;
+  padding:58px 0 40px;border-bottom:1px solid var(--line);align-items:center;
+}
+.hero h1{font-size:52px;line-height:1.05;letter-spacing:-.04em;margin-bottom:14px}
+.hero h1 .en{font-weight:600;font-size:.7em;color:var(--slate);letter-spacing:-.02em}
+.hero h1 .bar{color:var(--line);font-weight:400;margin:0 .15em}
+.subtitle{font-size:17px;font-weight:700;color:var(--ink);margin:0 0 4px}
+.areas{font-family:var(--mono);font-size:13px;color:var(--slate);margin:0 0 24px}
+.lead{font-size:17px;line-height:1.8;max-width:34em;margin:0 0 26px;color:var(--ink)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* the blueprint grid background, shared by .visual and figure.hero-illus */
+.visual{
+  position:relative;min-height:300px;border-radius:22px;
+  background:linear-gradient(150deg,var(--tint),var(--blue-soft));
+  border:1px solid var(--line);overflow:hidden;
+}
+.visual::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.45;
+}
+.visual svg{position:relative;width:100%;height:100%;display:block}
+.visual .hand{
+  position:absolute;left:22px;bottom:14px;font-family:var(--hand);font-size:24px;
+  color:var(--slate);transform:rotate(-6deg);line-height:1.05;
+}
+
+/* --- pill row ------------------------------------------------------------- */
+.pillrow{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  padding:22px 0;border-bottom:1px solid var(--line);
+}
+.pill{display:flex;gap:12px;align-items:center}
+.pill .ico{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--blue-soft);color:var(--blue);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.pill .ico svg{width:20px;height:20px}
+.pill b{display:block;font-family:var(--display);color:var(--navy);font-size:15px}
+.pill small{color:var(--slate);font-size:13px}
+
+/* --- sections ------------------------------------------------------------- */
+.section{padding:var(--section-top) 0 4px}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px;margin-bottom:18px;
+}
+.section h2{font-size:28px;letter-spacing:-.035em}
+.section .sub{margin:4px 0 0;color:var(--slate);font-size:14px}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* --- card ----------------------------------------------------------------- */
+.card{
+  display:flex;flex-direction:column;
+  border:1px solid var(--line);border-radius:var(--r);padding:20px;
+  background:var(--paper);position:relative;
+  transition:transform var(--t),border-color var(--t),box-shadow var(--t);
+}
+a.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--blue)}
+
+/* isometric scene thumbnail, 16:9, always the first child (01 §4.5) */
+.card .thumb{
+  display:block;width:100%;aspect-ratio:16/9;
+  background:var(--tint);border:1px solid var(--line);border-radius:var(--r-btn);
+  overflow:hidden;margin-bottom:14px;
+}
+.card .thumb svg{display:block;width:100%;height:100%}
+
+.card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+.card h3{font-size:19px;line-height:1.28;letter-spacing:-.02em;margin:12px 0 6px}
+.card .desc{margin:0;color:var(--slate);font-size:14px;line-height:1.6}
+.card .keyfact{
+  margin-top:auto;padding-top:14px;
+  font-family:var(--mono);font-size:11.5px;color:var(--blue);
+  font-variant-numeric:tabular-nums;
+}
+.card .tagrow{margin-top:14px}
+.card .keyfact + .tagrow{margin-top:10px}
+
+/* wide card (Home · Featured Research): text + 200px scene column */
+.card.wide{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.card.wide .thumb{margin-bottom:0;align-self:center;order:2}
+.card.wide > div{min-width:0}
+
+/* --- filters -------------------------------------------------------------- */
+.filters{display:flex;gap:6px;margin:6px 0 20px;flex-wrap:wrap}
+.filters button{
+  border:1px solid var(--line);background:var(--paper);color:var(--slate);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;
+  font-family:var(--display);
+  transition:background-color var(--t),color var(--t),border-color var(--t);
+}
+.filters button:hover{border-color:var(--blue)}
+.filters button[aria-pressed="true"]{background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.filters .count{font-family:var(--mono);font-weight:400}
+
+.empty-note{color:var(--slate);font-size:14px;padding:20px 0}
+noscript .noscript-note{
+  display:block;margin:14px 0;padding:14px 16px;
+  border:1px solid var(--line);border-radius:var(--r-btn);
+  background:var(--tint);color:var(--slate);font-size:14px;
+}
+
+/* --- resume --------------------------------------------------------------- */
+.resume-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+  padding:36px 0 22px;border-bottom:1px solid var(--line);
+}
+.resume-head h1{font-size:34px;line-height:1.15;letter-spacing:-.035em;margin:0 0 6px}
+.resume-head h1 .en{font-size:.62em;color:var(--slate);font-weight:600}
+.resume-head .detail-desc{margin:0;color:var(--slate)}
+.resume-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;padding-top:8px}
+.rblock{padding:22px 0;border-top:1px solid var(--line)}
+.rblock:first-child{border-top:0}
+.rblock h2{font-size:19px;letter-spacing:-.02em;margin-bottom:14px}
+.item{display:grid;grid-template-columns:120px 1fr;gap:4px 16px;margin-bottom:14px}
+.item .when{font-family:var(--mono);font-size:12px;color:var(--slate);padding-top:3px;font-variant-numeric:tabular-nums}
+.item b{display:block;color:var(--navy);font-family:var(--display)}
+.item a b:hover{color:var(--blue)}
+.item small{display:block;color:var(--slate);font-size:13px;line-height:1.55}
+.item.single{grid-template-columns:1fr}
+.skillgroup{margin-bottom:12px}
+.skillgroup span{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);margin-bottom:6px;
+}
+.skillgroup .tagrow{margin-top:0}
+
+/* --- contact -------------------------------------------------------------- */
+.contact-wrap{max-width:760px;margin:0 auto;padding-top:60px}
+.contact-wrap h1{font-size:30px;letter-spacing:-.035em;line-height:1.25}
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.contact-cards .card h2{
+  font-size:14px;margin:0 0 6px;color:var(--slate);
+  font-family:var(--mono);font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+}
+.contact-cards .card b{font-family:var(--display);color:var(--navy);font-size:16px;word-break:break-word}
+.contact-cards .card p{margin:4px 0 0;font-size:13px;color:var(--slate)}
+.open{
+  margin-top:22px;padding:16px 18px;border:1px solid var(--line);
+  border-radius:var(--r-box);background:var(--tint);font-size:14px;
+}
+.open b{color:var(--navy)}
+
+/* --- 404 ------------------------------------------------------------------ */
+.notfound{max-width:640px;margin:0 auto;padding:90px 0 70px;text-align:center}
+.notfound .code{font-family:var(--mono);font-size:64px;font-weight:600;color:var(--blue);line-height:1}
+.notfound h1{font-size:30px;letter-spacing:-.03em;margin:14px 0 10px}
+.notfound p{color:var(--slate);margin-bottom:24px}
+.notfound .actions{justify-content:center}
+
+/* --- breakpoints ---------------------------------------------------------- */
+@media (max-width:960px){
+  .hero,.grid2,.resume-grid{grid-template-columns:1fr}
+  .hero{gap:26px;padding-top:36px}
+  .visual{order:-1;min-height:220px}
+  .pillrow,.grid4,.grid3,.contact-cards{grid-template-columns:repeat(2,1fr)}
+  .card.wide{grid-template-columns:1fr}
+  .card.wide .thumb{order:-1;margin-bottom:14px}
+  .hero h1{font-size:42px}
+  .contact-wrap{padding-top:36px}
+}
+@media (max-width:600px){
+  .grid2,.grid3,.grid4,.pillrow,.contact-cards{grid-template-columns:1fr}
+  .hero{padding-top:30px}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .btn{justify-content:center}
+  .item{grid-template-columns:1fr}
+  .resume-head{flex-direction:column;align-items:flex-start}
+  .section-head{flex-direction:column;align-items:flex-start;gap:8px}
+}

@@ -1,0 +1,196 @@
+<!doctype html>
+<!-- =========================================================================
+     RESEARCH DETAIL TEMPLATE  (docs/spec/05-detail-templates.md §3)
+
+     How to use
+       1. cp docs/templates/research.html research_<id>.html
+       2. Replace every {id} with the works-data id (search for "{id}").
+       3. Replace the {…} prose in <head> and in the fallback text of each
+          element. Fallback text is what a visitor sees if JS never runs, so
+          write real English, never a placeholder.
+       4. Delete the sections you do not have, then RENUMBER the remaining
+          .num spans and ids so they run s1, s2, s3 … with no gaps.
+       5. Add one <figure class="diagram"> per entry in works-data.diagrams.
+       6. node scripts/check.mjs
+
+     Lines marked "TEMPLATE:" in the comments below need a decision.
+     Research pages carry no "(In Progress)" in the title: the badge says it.
+     Empty containers (data-work-*, data-results, data-evidence) are filled by
+     works.js from works-data.js; leave them empty here.
+     ========================================================================= -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- TEMPLATE: title = detail_{id}_title, description = one English sentence under 155 characters -->
+<title>{Detail title} · Junheon Lee</title>
+<meta name="description" content="{One English sentence describing the research question.}">
+<meta property="og:title" content="{Detail title} · Junheon Lee">
+<meta property="og:description" content="{One English sentence describing the research question.}">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/research_{id}.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/{id}.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
+</head>
+
+<body class="page-detail" data-work-id="{id}" data-work-type="research">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">›</span>
+      <a href="portfolio.html?filter=research" data-lang="filter_research">Research</a><span class="sep">›</span>
+      <span data-lang="detail_{id}_short">{Short title}</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_{id}_title">{Detail title}</h1>
+      <p class="detail-desc" data-lang="detail_{id}_subtitle">{One or two sentences: the system problem and the angle taken on it.}</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <!-- TEMPLATE: aria-label = works-data illus.alt, one sentence describing the scene -->
+    <figure class="hero-illus" data-illus="{id}.hero" role="img" aria-label="{What the isometric scene shows.}"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_r_s1">Motivation</span></h2>
+      <p data-lang="detail_{id}_overview">{Why this matters at the system level, and what the cost is today.}</p>
+      <div class="question">
+        <small>Key question</small>
+        <b data-lang="detail_{id}_question">{The question this research is trying to answer.}</b>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_r_s2">System problem</span></h2>
+      <p data-lang="detail_{id}_arch_body">{One paragraph: where the bottleneck sits and which resource it consumes.}</p>
+
+      <!-- TEMPLATE: the s2 diagram from works-data.diagrams. Delete if there is none. -->
+      <figure class="diagram" data-illus="{id}.{diagram}" role="img" aria-label="{What the diagram shows.}">
+        <figcaption data-lang="detail_{id}_fig_{diagram}">{The one-sentence conclusion the diagram makes.}</figcaption>
+      </figure>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_r_s3">Approach</span></h2>
+
+      <!-- TEMPLATE: the s3 diagram from works-data.diagrams. Delete if there is none. -->
+      <figure class="diagram" data-illus="{id}.{diagram}" role="img" aria-label="{What the diagram shows.}">
+        <figcaption data-lang="detail_{id}_fig_{diagram}">{The one-sentence conclusion the diagram makes.}</figcaption>
+      </figure>
+
+      <!-- TEMPLATE: 3 to 5 steps. Delete unused steps and renumber the <i> markers. -->
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_{id}_pipeline_step1_title">{Step 1}</b><span data-lang="detail_{id}_pipeline_step1">{What happens in step 1.}</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_{id}_pipeline_step2_title">{Step 2}</b><span data-lang="detail_{id}_pipeline_step2">{What happens in step 2.}</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_{id}_pipeline_step3_title">{Step 3}</b><span data-lang="detail_{id}_pipeline_step3">{What happens in step 3.}</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_{id}_pipeline_step4_title">{Step 4}</b><span data-lang="detail_{id}_pipeline_step4">{What happens in step 4.}</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_{id}_pipeline_step5_title">{Step 5}</b><span data-lang="detail_{id}_pipeline_step5">{What happens in step 5.}</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_r_s4">Current findings</span></h2>
+      <div class="findings">
+        <div class="finding">
+          <div class="k" data-lang="detail_{id}_finding1_label">{Label}</div>
+          <p data-lang="detail_{id}_finding1_body">{What the data shows so far.}</p>
+        </div>
+        <div class="finding">
+          <div class="k" data-lang="detail_{id}_finding2_label">{Label}</div>
+          <p data-lang="detail_{id}_finding2_body">{What the data shows so far.}</p>
+        </div>
+        <div class="finding">
+          <div class="k" data-lang="detail_{id}_finding3_label">{Label}</div>
+          <p data-lang="detail_{id}_finding3_body">{What the data shows so far.}</p>
+        </div>
+      </div>
+
+      <!-- optional: remove if the work has no s4 diagram. -->
+      <figure class="diagram" data-illus="{id}.{diagram}" role="img" aria-label="{What the diagram shows.}">
+        <figcaption data-lang="detail_{id}_fig_{diagram}">{The one-sentence conclusion the diagram makes.}</figcaption>
+      </figure>
+
+      <!-- optional: remove unless works-data.results holds a chart spec.
+           works.js deletes this block when there is no chart. -->
+      <div class="results">
+        <div class="chartbox" data-results></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="v" data-lang="detail_{id}_stat1_value">{value}</div>
+            <div class="l" data-lang="detail_{id}_stat1_label">{What the number means and under which conditions.}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <b>Portfolio note</b>
+        <span data-lang="detail_common_r_note">This page is not a paper. It shows the question, the method, and the judgement calls as they stand today, and it is rewritten as results arrive.</span>
+      </div>
+    </section>
+
+    <!-- optional: remove if no content. All five rows must be filled or the section goes. -->
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_r_s5">What went wrong</span></h2>
+      <div class="case">
+        <span>Symptom</span><div data-lang="detail_{id}_debug_symptom">{What was observed.}</div>
+        <span>Hypotheses</span><div data-lang="detail_{id}_debug_hypothesis">{What might have caused it.}</div>
+        <span>Tests</span><div data-lang="detail_{id}_debug_tests">{How each hypothesis was tested.}</div>
+        <span>Fix</span><div data-lang="detail_{id}_debug_fix">{What actually fixed it.}</div>
+        <span>Takeaway</span><div data-lang="detail_{id}_debug_takeaway">{What this says about the system.}</div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_r_s6">Next steps</span></h2>
+      <ul>
+        <li data-lang="detail_{id}_next1">{The next measurement or experiment.}</li>
+        <li data-lang="detail_{id}_next2">{The next measurement or experiment.}</li>
+        <li data-lang="detail_{id}_next3">{The next measurement or experiment.}</li>
+      </ul>
+    </section>
+
+    <!-- optional: remove the whole section when there are no references. -->
+    <section class="detail-section" id="s7">
+      <h2><span class="num">07</span><span data-lang="detail_common_r_s7">References</span></h2>
+      <ul class="refs">
+        <li data-lang="detail_{id}_ref1">{Authors, title, venue, year.}</li>
+        <li data-lang="detail_{id}_ref2">{Authors, title, venue, year.}</li>
+      </ul>
+    </section>
+
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
+
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+</body>
+</html>

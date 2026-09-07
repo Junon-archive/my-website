@@ -1,0 +1,2 @@
+- [Evidence sources](evidence-sources.md) — where each portfolio number really lives, incl. numbers readable only as PDF images, and the extraction commands
+- [Unverified claims](content-unverified-claims.md) — claims the old site made that the source documents contradict; do not restore them

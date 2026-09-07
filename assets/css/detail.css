@@ -1,0 +1,219 @@
+/* ==========================================================================
+   detail.css — project_*.html / research_*.html
+   (TOC, breadcrumb, head, meta strip, numbered sections, callouts,
+    diagrams, charts, evidence, artifacts, pager)
+   Loaded INSTEAD of pages.css on detail pages.
+   No colour literals: tokens.css only.
+   ========================================================================== */
+
+.detail-wrap{
+  display:grid;grid-template-columns:220px 1fr;gap:var(--gap-lg);
+  padding:26px var(--pad-x) 40px;
+}
+.detail-body{min-width:0}
+
+/* --- table of contents ---------------------------------------------------- */
+.toc{position:sticky;top:var(--toc-top);align-self:start;border-right:1px solid var(--line);padding-right:16px}
+.toc .toc-label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);padding:0 10px 8px;
+}
+.toc a{
+  display:block;padding:8px 10px 8px 23px;color:var(--slate);font-size:13px;
+  border-left:3px solid transparent;margin-left:-16px;
+  transition:color var(--t),border-color var(--t),background-color var(--t);
+}
+.toc a:hover{color:var(--navy);border-color:var(--blue);background:var(--tint)}
+.toc a.is-active{color:var(--navy);border-color:var(--blue);background:var(--tint);font-weight:600}
+.toc a .n{font-family:var(--mono);font-size:11px;margin-right:8px;color:var(--blue)}
+.toc .back{
+  margin:18px 0 0;padding:14px 10px 0;border-top:1px solid var(--line);
+  border-left:0;font-weight:700;color:var(--blue);
+}
+.toc .back:hover{background:none}
+
+/* --- breadcrumb ----------------------------------------------------------- */
+.crumb{font-family:var(--mono);font-size:12px;color:var(--slate);margin-bottom:12px}
+.crumb a{transition:color var(--t)}
+.crumb a:hover{color:var(--blue)}
+.crumb .sep{padding:0 4px}
+
+/* --- head ----------------------------------------------------------------- */
+.detail-head .badges{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;color:var(--slate);
+}
+.detail-title{font-size:34px;line-height:1.15;letter-spacing:-.035em;margin:12px 0 8px}
+.detail-desc{color:var(--slate);max-width:44em;margin:0 0 14px;font-size:15.5px}
+
+/* --- meta strip ----------------------------------------------------------- */
+.meta{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;
+  margin:22px 0 6px;padding:16px 18px;
+  border:1px solid var(--line);border-radius:var(--r-box);background:var(--tint);
+}
+.meta div span{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);margin-bottom:4px;
+}
+.meta div b{font-size:14px;color:var(--navy);font-weight:700;font-family:var(--display)}
+.meta .links a{
+  display:inline-flex;align-items:center;gap:5px;color:var(--blue);
+  font-weight:700;font-size:13px;margin:0 12px 4px 0;
+}
+.meta .links a:hover{text-decoration:underline}
+.meta .links svg{width:14px;height:14px;flex:none}
+
+/* --- sections ------------------------------------------------------------- */
+.detail-section{
+  scroll-margin-top:var(--anchor-offset);
+  padding:28px 0;border-top:1px solid var(--line);max-width:780px;
+}
+.detail-section:first-of-type{border-top:0}
+.detail-section h2{
+  font-size:21px;letter-spacing:-.02em;margin-bottom:10px;
+  display:flex;align-items:baseline;gap:12px;
+}
+.detail-section h2 .num{font-family:var(--mono);font-size:12px;color:var(--blue);font-weight:600}
+.detail-section p{margin:0 0 10px;max-width:65em}
+.detail-section li{margin-bottom:8px}
+.detail-section li b{color:var(--navy)}
+
+/* --- callouts ------------------------------------------------------------- */
+.question{
+  margin:16px 0 0;background:var(--blue-soft);border-left:4px solid var(--blue);
+  border-radius:var(--r-btn);padding:14px 18px;
+}
+.question small{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:4px;
+}
+.question b{font-family:var(--display);font-size:17px;color:var(--navy)}
+.takeaway{
+  margin-top:14px;background:var(--tint);border:1px solid var(--line);
+  border-radius:var(--r-box);padding:16px 18px;
+}
+.takeaway b{display:block;color:var(--navy);font-family:var(--display);margin-bottom:4px}
+.case{display:grid;grid-template-columns:110px 1fr;gap:8px 14px;margin-top:12px;font-size:14px}
+.case > span{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--blue);padding-top:3px;
+}
+
+/* --- flow / findings ------------------------------------------------------ */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.flow .step{
+  border:1px solid var(--line);border-radius:var(--r-btn);padding:12px 10px;
+  background:var(--tint);font-size:12.5px;color:var(--slate);position:relative;
+}
+.flow .step b{display:block;color:var(--navy);font-family:var(--display);font-size:13px;margin-bottom:4px}
+.flow .step i{
+  position:absolute;top:8px;right:9px;font-style:normal;
+  font-family:var(--mono);font-size:10px;color:var(--blue);
+}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.finding{border:1px solid var(--line);border-radius:var(--r-btn);padding:14px;background:var(--paper)}
+.finding .k{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:6px;
+}
+.finding p{margin:0;font-size:13.5px}
+
+/* --- results / charts ----------------------------------------------------- */
+.results{display:grid;grid-template-columns:1.3fr .7fr;gap:14px;margin-top:14px}
+.chartbox{border:1px solid var(--line);border-radius:var(--r-box);padding:14px 14px 8px;background:var(--paper)}
+.chartbox h4{font-size:13px;color:var(--slate);font-weight:600;margin-bottom:8px;font-family:var(--display)}
+.chartbox svg{width:100%;height:auto;display:block}
+.chartbox .metric-value{
+  font-family:var(--mono);font-size:40px;font-weight:600;color:var(--blue);
+  letter-spacing:-.02em;line-height:1;padding:10px 0 4px;
+}
+.chartbox .metric-caption{font-size:13px;color:var(--slate)}
+.stats{display:flex;flex-direction:column;gap:10px}
+.stat{border:1px solid var(--line);border-radius:var(--r-btn);padding:12px 14px;background:var(--tint)}
+.stat .v{
+  font-family:var(--mono);font-size:24px;font-weight:600;color:var(--navy);
+  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.stat .l{font-size:12px;color:var(--slate);margin-top:5px}
+
+/* --- figures -------------------------------------------------------------- */
+figure{margin:0}
+figure.hero-illus{
+  position:relative;margin:22px 0 0;aspect-ratio:3/1;overflow:hidden;
+  border:1px solid var(--line);border-radius:var(--r-box);
+  background:linear-gradient(150deg,var(--tint),var(--blue-soft));
+}
+figure.hero-illus::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:28px 28px;opacity:.45;
+}
+figure.hero-illus svg{position:relative;display:block;width:100%;height:100%}
+
+figure.diagram{
+  margin:16px 0 0;border:1px solid var(--line);border-radius:var(--r-box);
+  padding:14px;background:var(--paper);
+}
+/* No forced aspect-ratio here: the scene's own viewBox gives the <svg> an
+   intrinsic ratio (08 §4 allows 240–360px tall diagrams). min-height reserves
+   space for the moment before Illus.render() runs. */
+figure.diagram{min-height:120px}
+figure.diagram svg{display:block;width:100%;height:auto}
+figure.diagram figcaption,figure.evidence figcaption{
+  font-size:13px;color:var(--slate);margin-top:10px;line-height:1.55;
+}
+figure.evidence{
+  margin:16px 0 0;border:1px solid var(--line);border-radius:var(--r-box);
+  padding:14px;background:var(--paper);
+}
+figure.evidence img{display:block;width:100%;height:auto;border-radius:var(--r-btn);background:var(--tint)}
+
+/* --- artifacts / pager ---------------------------------------------------- */
+.artifacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.artifacts .btn svg{width:15px;height:15px}
+.refs{margin:0;padding-left:20px;font-size:13.5px;color:var(--slate)}
+.refs li{margin-bottom:8px}
+
+.pager{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  margin-top:30px;padding-top:22px;border-top:1px solid var(--line);max-width:780px;
+}
+.pager a{
+  border:1px solid var(--line);border-radius:var(--r-box);padding:14px 16px;
+  display:flex;flex-direction:column;gap:4px;
+  transition:border-color var(--t),transform var(--t);
+}
+.pager a:hover{border-color:var(--blue);transform:translateY(-1px)}
+.pager a span{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--slate);
+}
+.pager a b{color:var(--navy);font-family:var(--display);font-size:14px}
+.pager a.next{text-align:right;align-items:flex-end}
+
+/* --- breakpoints ---------------------------------------------------------- */
+@media (max-width:960px){
+  .detail-wrap{grid-template-columns:1fr;gap:0}
+  .toc{
+    position:static;border-right:0;border-bottom:1px solid var(--line);
+    padding:0 0 10px;display:flex;gap:4px;overflow:auto;margin-bottom:6px;
+    scrollbar-width:none;
+  }
+  .toc::-webkit-scrollbar{display:none}
+  .toc .toc-label,.toc .back{display:none}
+  .toc a{white-space:nowrap;margin:0;padding:8px 10px;border-left:0;border-bottom:2px solid transparent}
+  .toc a.is-active{border-bottom-color:var(--blue)}
+  .results,.findings{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .detail-title{font-size:28px}
+  figure.hero-illus{aspect-ratio:2.4/1}
+}
+@media (max-width:600px){
+  .meta,.findings,.pager,.flow{grid-template-columns:1fr}
+  .case{grid-template-columns:1fr;gap:2px 0}
+  .case > span{padding-top:8px}
+  .pager a.next{text-align:left;align-items:flex-start}
+  figure.hero-illus{aspect-ratio:2/1}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "junon-lee-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Static portfolio for junon-lee.pages.dev. No build framework, no runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-lang-data.mjs",
+    "check": "node scripts/check.mjs",
+    "images": "python3 scripts/optimize-images.py"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

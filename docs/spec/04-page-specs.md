@@ -36,7 +36,7 @@
 </html>
 ```
 
-헤더와 푸터는 `layout.js`가 주입한다. 주입 템플릿 안의 텍스트도 `data-lang`을 가지며, 주입 직후 `applyLang()`을 호출한다. 주입 전 빈 header의 높이 점프를 막기 위해 `.site-header{min-height:70px}`.
+헤더와 푸터는 `layout.js`가 주입한다. 주입 템플릿 안의 텍스트도 `data-lang`을 가지며, 주입 직후 `applyLang()`을 호출한다. 주입 전 빈 header의 높이 점프를 막기 위해 `.site-header{min-height:70px}`. 페이지에 이미 `.nav` / `.footer-inner` 마크업이 있으면 주입을 건너뛴다(JS 없이도 읽히는 페이지를 원할 때 정적 마크업을 넣을 수 있음. 기본 페이지는 빈 컨테이너만 둔다). 모든 모듈은 `DOMContentLoaded`에서 부팅한다(`readyState === "loading"` 가드는 defer 스크립트에서 오동작함, 구현 중 발견).
 
 페이지 제목 규칙:
 | 파일 | `<title>` |
