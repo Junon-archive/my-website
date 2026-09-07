@@ -96,7 +96,7 @@
     var vb = opts.viewBox || '0 0 400 225';
     var p = vb.split(/[\s,]+/).map(Number);
     var s = mk(null, 'svg', {
-      viewBox: vb, width: '100%', height: 'auto',
+      viewBox: vb, width: '100%', style: 'height:auto;display:block',
       preserveAspectRatio: opts.preserveAspectRatio || 'xMidYMid meet',
       xmlns: NS
     });

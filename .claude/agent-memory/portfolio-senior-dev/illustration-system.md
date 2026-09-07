@@ -61,6 +61,21 @@ blueprint schematics so figures follow the design tokens and work in dark mode.
     (y = top.y + 3.5 - (n-1)*lineHeight/2); `label()`'s `above` shifts a full line, not half.
   - Labels for links in the narrow gap between two iso containers always land on a face. Seat
     them on the floor slab's front strip (b ~ 0) instead — clear of every box, still on the slab.
+- Thumbs and heroes are **auto-fitted**: after the scene runs, the engine wraps the drawn content
+  in `<g data-illus-content>`, measures its bbox, pads 6%, expands to 16:9 / 3:1 and rewrites the
+  viewBox (the grid is a pattern-filled rect that is resized to match). Text is rescaled by the same
+  factor so rendered px stay constant. Diagrams and any scene that sets `fn.width`/`fn.height`
+  (home.hero) keep their declared box and the 10.5-unit label size; everything else gets
+  12 units (thumb) / 15 units (hero) so labels read at ~10-11 CSS px. Consequence for scene
+  authors: multi-line labels placed **on** an isometric top face overflow it at hero size — put
+  hero labels beside the object with `leader()`.
+  - The engine auto-fits thumb/hero viewBoxes to drawn content and picks the base label size by
+    kind (`ctx.font`: thumb 12, hero 15, diagram 10.5 scene units). Two consequences for a scene:
+    never hardcode `lineHeight` — derive it from `ctx.font` (a hardcoded 12.5 under a 15-unit font
+    makes multi-line labels overlap themselves); and do not hand-tune the origin to centre a scene,
+    the fit does that. Shrinking a label with `{size}` to make it fit is usually the wrong fix:
+    a hero at body width (~780px) renders `ctx.font` at ~9.5px, so 0.8x is already illegible —
+    shorten the string instead and move the detail to a leader in free space.
 - Thumb and hero share one parametric `stage(svg, ctx)` with a scale factor `k` and an origin per
   variant; every dimension is `n * k`, so labels derived from projected points work at both sizes.
 

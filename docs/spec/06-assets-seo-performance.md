@@ -72,7 +72,7 @@
 |---|---|---|
 | 첫 로드 전송량 (index) | < 400KB (폰트 포함) | 래스터 이미지 0. 모든 그림이 inline SVG. 폰트 4패밀리는 Google Fonts 기본 subset |
 | lang-data.js | < 60KB | 죽은 키 삭제 후 재생성 (현행 107KB) |
-| illustrations.js + scenes/*.js 합계 | < 40KB (minify 전) | 프리미티브 재사용, 장면당 100~200줄 |
+| illustrations.js + scenes/*.js 합계 | < 40KB gzip (raw ≈ 95KB, 2026-09-07 개정) | 26개 그림을 담기에 40KB raw는 비현실적이었음. Cloudflare가 gzip/brotli로 전송하므로 gzip 기준으로 관리. 실측 raw 93KB / gzip 33KB |
 | LCP | < 1.5s (모바일 4G) | 히어로가 텍스트+inline SVG. 외부 이미지 없음 |
 | CLS | < 0.05 | 헤더 min-height, 썸네일/히어로/도식 컨테이너 `aspect-ratio`, 폰트 `display=swap` |
 | 증거 이미지 | < 150KB 각 | WebP 1600px q82, `loading="lazy"` |
