@@ -1,5 +1,7 @@
 # 07. 구현 계획 (Implementation Plan)
 
+> **상태 (2026-09-07):** Phase 0~5 완료, 브랜치 `redesign-2026-09`. `npm run check` 10/10 통과. QA 보고 `docs/content/qa-report-phase5.md`. 남은 것: 사용자 확인 사항(00 §5, `docs/content/gaps.md`), main 머지, Cloudflare 배포, 실기기 확인.
+
 단계마다 별도 브랜치와 커밋. 각 단계는 `npm run check`가 통과하고 로컬에서 6개 화면(Home, Portfolio, Resume, Contact, 프로젝트 상세, 연구 상세)이 KR/EN/JP로 열리는 것을 완료 기준으로 한다. 배포는 Phase 4 이후 한 번에.
 
 ## Phase 0. 확정 (사용자 결정)
