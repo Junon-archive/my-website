@@ -11,8 +11,8 @@
      document event "langchange" fired after every applyLang()
 
    Markup hooks
-     data-lang="key"                     -> element.textContent
-     data-lang="key" data-lang-attr="placeholder|aria-label|title|alt|content"
+     data-lang=KEY                     -> element.textContent
+     data-lang=KEY data-lang-attr="placeholder|aria-label|title|alt|content"
                                          -> element.setAttribute(attr, value)
                                             (comma separated list allowed)
      data-placeholder="key"              -> legacy alias for the above

@@ -1,91 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>RowScope: DRAM Row Buffer Locality Analyzer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/project.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RowScope: DRAM Row Buffer Locality Analyzer · Junheon Lee</title>
+<meta name="description" content="Quantifying how memory access patterns drive DRAM row buffer hit rates">
+<meta property="og:title" content="RowScope: DRAM Row Buffer Locality Analyzer · Junheon Lee">
+<meta property="og:description" content="Quantifying how memory access patterns drive DRAM row buffer hit rates">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/project_rowscope.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/rowscope.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
 </head>
-<body>
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Junon Lee</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+
+<body class="page-detail" data-work-id="rowscope" data-work-type="project">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=project" data-lang="filter_projects">Projects</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_rowscope_short">RowScope</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_rowscope_title">RowScope: DRAM Row Buffer Locality Analyzer</h1>
+      <p class="detail-desc" data-lang="detail_rowscope_subtitle">Quantifying how memory access patterns drive DRAM row buffer hit rates</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="rowscope.hero" role="img" aria-label="A DRAM bank array with one open row struck by stride-spaced accesses until they cross into the next row"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_p_s1">Problem</span></h2>
+      <p data-lang="detail_rowscope_overview">DRAM performance is shaped by how an access pattern lands on banks and rows, not only by how much bandwidth a program asks for. An access to the row already open in a bank is cheap; an access to a different row in the same bank forces a precharge and an activate first. Profilers report cache misses and bandwidth, but not that distinction, and the hardware counters that would report it need elevated privilege and differ between CPU generations. RowScope answers one question for a known access pattern: what fraction of its accesses find the row already open?</p>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_p_s2">What I built</span></h2>
+      <ul>
+        <li data-lang="detail_rowscope_point1">A five-stage pipeline — C benchmarks, address traces, DRAM address mapper, per-bank row buffer state machine, results aggregator — that labels every access as a row hit, a row miss, or a row conflict.</li>
+        <li data-lang="detail_rowscope_point2">A closed-form model, hit rate = 1 − stride × 4 / 8192, checked against the simulated result at 11 stride values from 1 to 1024 elements.</li>
+        <li data-lang="detail_rowscope_point3">A 250x locality gap between sequential access (99.95% hit rate) and random access on a 16 MB array (0.4%), and nine log-spaced working sets from 512 KB to 128 MB showing that sequential locality does not depend on array size.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_p_s3">How it works</span></h2>
+      <p data-lang="detail_rowscope_arch_body">RowScope never touches a real memory controller. A C benchmark writes the virtual addresses it touches into a trace file with a metadata header. A Python mapper decomposes each address into a bank, a row, and a column offset under a configurable geometry — 8 KB rows and 8 banks by default — using a bit-interleaved scheme. The trace is then replayed through one row buffer state machine per bank, which is what turns an address sequence into hit, miss, and conflict counts.</p>
+      <figure class="diagram" data-illus="rowscope.address" role="img" aria-label="A virtual address bit field split into column offset, bank id and row id under an 8 KB row, 8 bank geometry">
+        <figcaption data-lang="detail_rowscope_fig_address">Address decomposition. With an 8 KB row and 4-byte elements, the low 13 bits of an address are the column offset, the next bits select the bank, and the rest is the row id — which is why a stride below 2048 elements keeps landing in the same open row.</figcaption>
+      </figure>
+      <figure class="diagram" data-illus="rowscope.state" role="img" aria-label="A row buffer state machine per bank moving between EMPTY, OPEN with a hit on the same row, and a conflict on a different row">
+        <figcaption data-lang="detail_rowscope_fig_state">Row buffer state per bank. From EMPTY the first access is a miss; while row r is OPEN an access to r is a hit and an access to any other row is a conflict, paying a precharge and an activate before it can be served.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_rowscope_pipeline_step1_title">Generate traces</b><span data-lang="detail_rowscope_pipeline_step1">Four C benchmarks (sequential_access.c, random_access.c, stride_access.c, working_set_sweep.c) execute a controlled access pattern and write the virtual addresses they touch, with a metadata header, to a .trace file.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_rowscope_pipeline_step2_title">Map addresses</b><span data-lang="detail_rowscope_pipeline_step2">dram_mapping.py decomposes each address into (bank_id, row_id, col_offset) for a configurable row size and bank count, defaulting to 8 KB and 8 banks.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_rowscope_pipeline_step3_title">Model the row buffer</b><span data-lang="detail_rowscope_pipeline_step3">row_buffer_model.py keeps an OPEN or EMPTY state per bank and classifies each access as a row hit, a row miss, or a row conflict in constant time.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_rowscope_pipeline_step4_title">Aggregate</b><span data-lang="detail_rowscope_pipeline_step4">Per-benchmark hit, miss, and conflict rates plus a locality score are written to summary.csv, and six figures are generated from it with Matplotlib.</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_rowscope_pipeline_step5_title">Report</b><span data-lang="detail_rowscope_pipeline_step5">report/final_report.md is filled from a template with those tables and figures, so the whole experiment reruns from one shell script.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_p_s4">Results</span></h2>
+      <div class="results">
+        <div class="chartbox" data-results></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="v" data-lang="detail_rowscope_stat1_value">99.95%</div>
+            <div class="l" data-lang="detail_rowscope_stat1_label">Row hit rate, sequential access</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-lang="detail_rowscope_stat2_value">0.4%</div>
+            <div class="l" data-lang="detail_rowscope_stat2_label">Row hit rate, random access on 16 MB</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-lang="detail_rowscope_stat3_value">250x</div>
+            <div class="l" data-lang="detail_rowscope_stat3_label">Locality gap between the two</div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+      <figure class="evidence" data-evidence="0">
+        <figcaption data-lang="detail_rowscope_evidence1">rowscope-plot.png — simulated row hit rate (left axis) and row conflict rate (right axis) against stride, for strides of 1 to 1024 elements with an 8 KB row and 4-byte elements. Hit rate stays above 87% up to stride 256 and collapses beyond it.</figcaption>
+      </figure>
+      <div class="takeaway">
+        <b data-lang="detail_common_takeaway">Key takeaway</b>
+        <span data-lang="detail_rowscope_takeaway">The access pattern decides row buffer locality, and the working set size barely matters: sequential access holds 99.95% from 512 KB to 128 MB, while random access on 16 MB drops to 0.4% with a 99.6% conflict rate. The stride sweep follows 1 − stride × 4 / 8192 closely enough that the row size can be read back off the curve.</span>
+      </div>
+    </section>
 
-<main class="container">
-    <div class="detail-body">
-        <article class="project-detail">
-            <h1 data-lang="detail_rowscope_title">RowScope: DRAM Row Buffer Locality Analyzer</h1>
-            <p class="project-subtitle" data-lang="detail_rowscope_subtitle">Quantifying how memory access patterns drive DRAM row buffer hit rates</p>
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_p_s6">Engineering decisions</span></h2>
+      <ul>
+        <li data-lang="detail_rowscope_design_item1">Simulate in user space instead of reading hardware counters. Counters such as UNC_M_CAS_COUNT need elevated privilege and change between CPU generations, and simulation makes the DRAM geometry a parameter rather than a property of the test machine.</li>
+        <li data-lang="detail_rowscope_design_item2">Treat malloc virtual addresses as if they were physical. Page allocation for large arrays is not deterministic, but every workload is analysed under the same mapping, so the systematic error cancels in a comparison between patterns — it would not cancel in an absolute prediction.</li>
+        <li data-lang="detail_rowscope_design_item3">Model the open-page policy only. It is the common DDR4 policy and the only one that produces the three-way hit, miss, and conflict split this project is about; closed-page and adaptive policies are left out rather than approximated.</li>
+      </ul>
+    </section>
 
-            <img class="hero-img" src="assets/img/rowscope.png" alt="RowScope stride vs hit rate analysis">
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_p_s7">Stack &amp; artifacts</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_rowscope_overview"></p>
-            </section>
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
 
-            <section class="section-block">
-                <h2 data-lang="detail_contribution_heading">Key contributions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_rowscope_point1"></li>
-                    <li data-lang="detail_rowscope_point2"></li>
-                    <li data-lang="detail_rowscope_point3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_rowscope_pipeline_heading">Five-Stage Analysis Pipeline</h2>
-                <ol class="key-points">
-                    <li data-lang="detail_rowscope_pipeline_step1"></li>
-                    <li data-lang="detail_rowscope_pipeline_step2"></li>
-                    <li data-lang="detail_rowscope_pipeline_step3"></li>
-                    <li data-lang="detail_rowscope_pipeline_step4"></li>
-                    <li data-lang="detail_rowscope_pipeline_step5"></li>
-                </ol>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_rowscope_results_heading">Key Experimental Results</h2>
-                <p data-lang="detail_rowscope_results_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_rowscope_design_heading">Design Decisions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_rowscope_design_item1"></li>
-                    <li data-lang="detail_rowscope_design_item2"></li>
-                    <li data-lang="detail_rowscope_design_item3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_rowscope_skills_heading">Skills Demonstrated</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_rowscope_skills_item1"></li>
-                    <li data-lang="detail_rowscope_skills_item2"></li>
-                    <li data-lang="detail_rowscope_skills_item3"></li>
-                    <li data-lang="detail_rowscope_skills_item4"></li>
-                </ul>
-            </section>
-
-        </article>
-    </div>
+  </div>
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
 </body>
 </html>

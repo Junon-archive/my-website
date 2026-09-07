@@ -1,99 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>PIM-Accelerated Gradient Accumulation for 3DGS-SLAM</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/project.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIM-Accelerated Gradient Accumulation for 3DGS-SLAM · Junheon Lee</title>
+<meta name="description" content="Removing atomic contention from the rendering backward pass with bank-local reduction">
+<meta property="og:title" content="PIM-Accelerated Gradient Accumulation for 3DGS-SLAM · Junheon Lee">
+<meta property="og:description" content="Removing atomic contention from the rendering backward pass with bank-local reduction">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/research_pim_accel.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/pim_accel.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
 </head>
-<body>
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+
+<body class="page-detail" data-work-id="pim_accel" data-work-type="research">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=research" data-lang="filter_research">Research</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_pim_accel_short">PIM Gradient Accumulation</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_pim_accel_title">PIM-Accelerated Gradient Accumulation for 3DGS-SLAM</h1>
+      <p class="detail-desc" data-lang="detail_pim_accel_subtitle">Removing atomic contention from the rendering backward pass with bank-local reduction</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="pim_accel.hero" role="img" aria-label="A PIM module with four banks, each holding a local accumulator, fed by fragments binned on the host"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_r_s1">Motivation</span></h2>
+      <p data-lang="detail_pim_accel_overview">In a 3D Gaussian Splatting SLAM pipeline the time goes into tracking and mapping, and inside those the rendering backward pass dominates. That pass is not short of arithmetic — it is short of independent writes. Many fragments contribute gradients to the same gaussian, so the accumulation becomes a pile of atomic adds onto the same address, and the hardware serialises them. The reformulation here is to stop treating it as a compute problem: bin fragments by memory bank on the host and reduce them inside the bank, so there are no global atomics left to contend for.</p>
+      <div class="question">
+        <small>Key question</small>
+        <b data-lang="detail_pim_accel_question">Can bank-local reduction inside PIM remove the atomic contention that dominates 3DGS-SLAM's rendering backward pass?</b>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_r_s2">System problem</span></h2>
+      <p data-lang="detail_pim_accel_arch_body">The workload takes P fragments, each carrying a gaussian_id and a gradient vector of length D, and produces an accumulator array acc[G][D]. On the GPU each fragment does an atomicAdd into acc[gaussian_id]; when many fragments share a gaussian those adds serialise, and the cost grows with the skew of the distribution rather than with the number of fragments. The PIM path bins fragments by bank on the host (gaussian_id modulo the bank count), accumulates locally inside each bank, and writes back only what is needed.</p>
+      <figure class="diagram" data-illus="pim_accel.contention" role="img" aria-label="A side by side comparison of GPU atomic adds converging on one accumulator versus the same fragments spread across four PIM banks">
+        <figcaption data-lang="detail_pim_accel_fig_contention">The same fragments on two paths. On the GPU many updates converge on one accumulator element through atomicAdd and serialise there; binned by bank, the same updates are spread across banks and each bank sums its own share in parallel.</figcaption>
+      </figure>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_r_s3">Approach</span></h2>
+      <figure class="diagram" data-illus="pim_accel.stages" role="img" aria-label="Four pipeline stages, bin on the host, transfer, accumulate in PIM, and write back, each with its measured quantity below it">
+        <figcaption data-lang="detail_pim_accel_fig_stages">The four stages that all have to be counted: bin on the host, transfer, accumulate in PIM, write back. A comparison that times only the accumulate stage is not a fair comparison.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_pim_accel_pipeline_step1_title">Isolate the workload</b><span data-lang="detail_pim_accel_pipeline_step1">Extract the rendering backward pass into a standalone gradient-accumulation benchmark driven by synthetic or trace-derived fragments, so contention can be varied on purpose.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_pim_accel_pipeline_step2_title">Build the GPU baselines</b><span data-lang="detail_pim_accel_pipeline_step2">Two baselines, not one: a global atomicAdd version and a block-level reduction version that already removes most of the atomics. The second is what the PIM path actually has to beat.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_pim_accel_pipeline_step3_title">Implement the PIM path</b><span data-lang="detail_pim_accel_pipeline_step3">Bank-local reduction in the SAIT PIMSimulator with host-side binning, keeping the split of responsibilities explicit: the host bins, PIM generates addresses and accumulates.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_pim_accel_pipeline_step4_title">Sweep contention</b><span data-lang="detail_pim_accel_pipeline_step4">Vary P, G, D, and the skew of the fragment-to-gaussian distribution, and report speedup, scaling, and a per-stage breakdown rather than a single number.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_r_s4">Current findings</span></h2>
+      <div class="findings">
+        <div class="finding">
+          <div class="k" data-lang="detail_pim_accel_finding1_label">Correctness first</div>
+          <p data-lang="detail_pim_accel_finding1_body">GPU and PIM accumulators are compared element-wise under a fixed seed, with maximum absolute error and relative error reported, before any timing number is taken seriously.</p>
         </div>
-    </div>
-</div>
+        <div class="finding">
+          <div class="k" data-lang="detail_pim_accel_finding2_label">What gets measured</div>
+          <p data-lang="detail_pim_accel_finding2_body">GPU kernel latency and atomic pressure on one side; PIM cycles plus host-side data movement on the other, with binning, transfer, accumulation, and write-back timed separately.</p>
+        </div>
+        <div class="finding">
+          <div class="k" data-lang="detail_pim_accel_finding3_label">Evidence target</div>
+          <p data-lang="detail_pim_accel_finding3_body">The claim to prove is a crossover: as the distribution becomes more skewed, GPU atomics should degrade sharply while bank-local reduction stays flat or degrades slowly. The sweep that would show it has not been run yet.</p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <b>Portfolio note</b>
+        <span data-lang="detail_common_r_note">Portfolio note: this page is not a paper. It shows the question, the method, and the judgement calls as they stand today, and it is rewritten as results arrive.</span>
+      </div>
+    </section>
 
-<main class="container">
-    <div class="detail-body">
-        <article class="project-detail">
-            <h1 data-lang="detail_pim_title">PIM-Accelerated Gradient Accumulation for 3DGS-SLAM (In Progress)</h1>
-            <p class="project-subtitle" data-lang="detail_pim_subtitle">Atomic-conflict mitigation via bank-local reductions</p>
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_r_s5">What went wrong</span></h2>
+      <div class="case">
+        <span>Symptom</span><div data-lang="detail_pim_accel_debug_symptom">Early PIM runs produced either incorrect accumulators or speedups too large to be explained by the compute and memory behaviour of the workload.</div>
+        <span>Hypotheses</span><div data-lang="detail_pim_accel_debug_hypothesis">The host was doing work that belonged to PIM; or the payload encoding between host and simulator did not match; or the binning layout broke the bank-locality assumption the whole design rests on.</div>
+        <span>Tests</span><div data-lang="detail_pim_accel_debug_tests">Locked the inputs and compared GPU-Atomic, GPU-BlockReduce, and PIM-Reduce on the identical fragment set, timing the binning, accumulation, and write-back stages separately instead of end to end.</div>
+        <span>Fix</span><div data-lang="detail_pim_accel_debug_fix">Defined the responsibilities strictly — host bins, PIM generates addresses and accumulates — made the binning layout explicit, and reported per-stage latency in every result.</div>
+        <span>Takeaway</span><div data-lang="detail_pim_accel_debug_takeaway">A PIM speedup is only meaningful with the staging cost attached. A number that hides the host's share of the work is not a comparison, it is an accounting choice.</div>
+      </div>
+    </section>
 
-            <img class="hero-img" src="assets/img/pim_accel.png" alt="PIM-accelerated gradient accumulation concept">
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_r_s6">Next steps</span></h2>
+      <ul>
+        <li data-lang="detail_pim_accel_next1">Run the contention sweep over P, G, D, and distribution skew, and produce the speedup-versus-skew curve the whole argument rests on.</li>
+        <li data-lang="detail_pim_accel_next2">Drive the benchmark from real 3DGS-SLAM traces instead of synthetic fragments, so the skew matches what rendering actually produces.</li>
+        <li data-lang="detail_pim_accel_next3">Report host binning as part of the PIM total, and find the skew below which paying for binning is not worth it.</li>
+      </ul>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_pim_overview"></p>
-            </section>
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
 
-            <section class="section-block">
-                <h2 data-lang="detail_contribution_heading">Key contributions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_pim_point1"></li>
-                    <li data-lang="detail_pim_point2"></li>
-                    <li data-lang="detail_pim_point3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_pim_arch_heading">System Architecture</h2>
-                <p data-lang="detail_pim_arch_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_pim_pipeline_heading">Bring-up Pipeline</h2>
-                <ol class="key-points">
-                    <li data-lang="detail_pim_pipeline_step1"></li>
-                    <li data-lang="detail_pim_pipeline_step2"></li>
-                    <li data-lang="detail_pim_pipeline_step3"></li>
-                    <li data-lang="detail_pim_pipeline_step4"></li>
-                </ol>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_pim_validation_heading">Validation & Evidence</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_pim_validation_item1"></li>
-                    <li data-lang="detail_pim_validation_item2"></li>
-                    <li data-lang="detail_pim_validation_item3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_pim_debug_heading">Debugging Case Study</h2>
-                <p><strong data-lang="detail_pim_debug_symptom_label">Symptom</strong>: <span data-lang="detail_pim_debug_symptom"></span></p>
-                <p><strong data-lang="detail_pim_debug_hypothesis_label">Hypotheses</strong>: <span data-lang="detail_pim_debug_hypothesis"></span></p>
-                <p><strong data-lang="detail_pim_debug_tests_label">Tests</strong>: <span data-lang="detail_pim_debug_tests"></span></p>
-                <p><strong data-lang="detail_pim_debug_fix_label">Fix</strong>: <span data-lang="detail_pim_debug_fix"></span></p>
-                <p><strong data-lang="detail_pim_debug_takeaway_label">Takeaway</strong>: <span data-lang="detail_pim_debug_takeaway"></span></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_pim_skills_heading">Skills Demonstrated</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_pim_skills_item1"></li>
-                    <li data-lang="detail_pim_skills_item2"></li>
-                    <li data-lang="detail_pim_skills_item3"></li>
-                    <li data-lang="detail_pim_skills_item4"></li>
-                </ul>
-            </section>
-
-        </article>
-    </div>
+  </div>
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
 </body>
 </html>

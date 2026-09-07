@@ -134,7 +134,7 @@ noscript .noscript-note{
 .item small{display:block;color:var(--slate);font-size:13px;line-height:1.55}
 .item.single{grid-template-columns:1fr}
 .skillgroup{margin-bottom:12px}
-.skillgroup span{
+.skillgroup > span{
   display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--slate);margin-bottom:6px;
 }

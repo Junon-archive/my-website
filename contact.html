@@ -1,89 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio | Contact</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
-    <script src="assets/js/sidebar.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · Junheon Lee</title>
+<meta name="description" content="Contact Junheon Lee — email, GitHub, and lab address at the University of Seoul.">
+<meta property="og:title" content="Contact · Junheon Lee">
+<meta property="og:description" content="Contact Junheon Lee — email, GitHub, and lab address at the University of Seoul.">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://junon-lee.pages.dev/contact.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/contact.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
 </head>
 <body class="page-contact">
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a class="active" href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
-        </div>
-    </div>
-</div>
+<div class="shell">
 
-<main class="container">
-    <div class="hero">
-        <div class="avatar">
-            <img src="assets/img/mono_profile.png" alt="profile">
-        </div>
-        <div class="identity">
-            <h1 data-lang="profile_name">Your Name</h1>
-            <h3 data-lang="profile_title">Your Title / Position</h3>
-        </div>
-    </div>
+<header class="site-header" data-site-header data-active="contact"></header>
 
-    <div class="main-grid">
-        <aside class="sidebar" data-sidebar></aside>
+<main class="site-main">
 
-        <section class="content-area">
-            <div class="content-stack">
-                <div class="section-block">
-                    <div class="section-label" data-lang="contact_intro_title">Contact guide</div>
-                    <p data-lang="contact_intro_desc"></p>
-                </div>
+  <div class="contact-wrap">
+    <div class="eyebrow" data-lang="contact_eyebrow">Contact</div>
+    <h1 data-lang="contact_title">Feel free to write about research, internships, and engineering roles.</h1>
 
-                <div class="section-block">
-                    <div class="contact-grid">
-                        <div class="contact-card">
-                            <strong data-lang="contact_card_lab_title"></strong>
-                            <p data-lang="contact_card_lab_desc"></p>
-                        </div>
-                        <div class="contact-card">
-                            <strong data-lang="contact_card_talks_title"></strong>
-                            <p data-lang="contact_card_talks_desc"></p>
-                        </div>
-                        <div class="contact-card">
-                            <strong data-lang="contact_card_collab_title"></strong>
-                            <p data-lang="contact_card_collab_desc"></p>
-                        </div>
-                        <div class="contact-card">
-                            <strong data-lang="contact_card_career_title"></strong>
-                            <p data-lang="contact_card_career_desc"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-block">
-                    <div class="section-label" data-lang="contact_form_title">Quick message</div>
-                    <p data-lang="contact_form_desc"></p>
-                    <form class="contact-form">
-                        <input type="text" data-placeholder="contact_form_name" placeholder="Your name" required>
-                        <input type="email" data-placeholder="contact_form_email" placeholder="Email" required>
-                        <textarea rows="5" data-placeholder="contact_form_message" placeholder="Message" required></textarea>
-                        <button type="submit" class="btn btn-primary" data-lang="contact_form_cta">Send message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+    <div class="contact-cards">
+      <a class="card" href="mailto:wnsgjs34@uos.ac.kr">
+        <h2 data-lang="contact_email_label">Email</h2>
+        <b data-lang="contact_email">wnsgjs34@uos.ac.kr</b>
+        <p data-lang="contact_email_note">The fastest way to reach me.</p>
+      </a>
+      <a class="card" href="https://github.com/Junon-archive" target="_blank" rel="noopener">
+        <h2 data-lang="contact_github_label">GitHub</h2>
+        <b data-lang="contact_github">Junon-archive</b>
+        <p data-lang="contact_github_note">Code and experiment scripts.</p>
+      </a>
+      <div class="card">
+        <h2 data-lang="contact_lab_label">Lab</h2>
+        <b data-lang="contact_lab_name">Architecture &amp; Computer Systems Laboratory</b>
+        <p data-lang="contact_lab_addr">Room 613, IT Building, University of Seoul</p>
+      </div>
     </div>
 
-    <div class="footer" data-lang="footer_text">© 2025 Junon Lee. All Rights Reserved.</div>
+    <div class="open">
+      <b data-lang="contact_open_label">Open to</b> ·
+      <span data-lang="contact_open_desc">Research collaboration, R&amp;D internships, and roles in computer architecture, memory systems, and GPU systems.</span>
+    </div>
+  </div>
+
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+</div>
 </body>
 </html>

@@ -1,99 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Project 5G O-RAN</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/project.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5G O-RAN End-to-End Simulation · Junheon Lee</title>
+<meta name="description" content="Bringing up Open5GS, srsRAN, and the O-RAN SC RIC as one working chain">
+<meta property="og:title" content="5G O-RAN End-to-End Simulation · Junheon Lee">
+<meta property="og:description" content="Bringing up Open5GS, srsRAN, and the O-RAN SC RIC as one working chain">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/project_5g_oran.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/5g_oran.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
 </head>
-<body>
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
-        </div>
+
+<body class="page-detail" data-work-id="5g_oran" data-work-type="project">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=project" data-lang="filter_projects">Projects</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_5g_oran_short">5G O-RAN</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_5g_oran_title">5G O-RAN End-to-End Simulation</h1>
+      <p class="detail-desc" data-lang="detail_5g_oran_subtitle">Bringing up Open5GS, srsRAN, and the O-RAN SC RIC as one working chain</p>
+      <div class="tagrow" data-work-tags></div>
     </div>
-</div>
 
-<main class="container">
-    <div class="detail-body">
-        <article class="project-detail">
-            <h1 data-lang="detail_5g_title">5G O-RAN end-to-end simulation</h1>
-            <p class="project-subtitle" data-lang="detail_5g_subtitle">Bringing Open5GS, srsRAN, and O-RAN SC together</p>
+    <div class="meta" data-work-meta></div>
 
-            <img class="hero-img" src="assets/img/oran_5g_system.png" alt="5G O-RAN simulation environment">
+    <figure class="hero-illus" data-illus="5g_oran.hero" role="img" aria-label="Three Docker Compose containers for the UE, gNB and core with the RIC linked to the gNB over E2"></figure>
 
-            <section class="section-block">
-                <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_5g_overview"></p>
-            </section>
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_p_s1">Problem</span></h2>
+      <p data-lang="detail_5g_oran_overview">A 5G stack is four independent programs that only work in one order: core, RIC, base station, handset. Reading about the interfaces between them does not tell you what each one prints when it is ready, or which failure belongs to which layer. The goal of this lab was to bring the whole chain up on a shared server with no radio hardware, and to write down the exact command and the exact confirmation signal for every step.</p>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_contribution_heading">Key contributions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_5g_point1"></li>
-                    <li data-lang="detail_5g_point2"></li>
-                    <li data-lang="detail_5g_point3"></li>
-                </ul>
-            </section>
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_p_s2">What I built</span></h2>
+      <ul>
+        <li data-lang="detail_5g_oran_point1">Brought up the four components in order — Open5GS 5GC under Docker Compose, the O-RAN SC RIC, an srsRAN gNB with E2 enabled, and srsUE in its own network namespace.</li>
+        <li data-lang="detail_5g_oran_point2">Ran the entire chain over ZMQ radio emulation on a remote lab server reached by SSH, using the upstream gnb_zmq.yaml and ue_zmq.conf configurations rather than hand-written ones.</li>
+        <li data-lang="detail_5g_oran_point3">Documented a gNB start-up failure end to end: the error, the four things I checked, and the fact that none of them was the cause.</li>
+      </ul>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_5g_arch_heading">System Architecture</h2>
-                <p data-lang="detail_5g_arch_body"></p>
-            </section>
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_p_s3">How it works</span></h2>
+      <p data-lang="detail_5g_oran_arch_body">srsUE talks to an srsRAN gNB over a ZMQ radio link, so no SDR hardware is involved. The gNB connects north to the Open5GS core — the AMF address it dials has to match the NGAP address inside the core container's amf.yaml — and sideways to the O-RAN SC RIC over E2. The core and the RIC each run as their own Docker Compose stack, and the UE runs in a separate Linux network namespace so its traffic stays separable from the host's.</p>
+      <figure class="diagram" data-illus="5g_oran.bringup" role="img" aria-label="A vertical sequence of four bring-up steps, core then RIC then gNB then UE, each with its own readiness signal">
+        <figcaption data-lang="detail_5g_oran_fig_bringup">Bring-up order with the signal that each step is up: the 5GC with a reachable AMF, the RIC printing "RMR is ready now...", the gNB started with -c gnb_zmq.yaml e2, and finally srsUE inside namespace ue1.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_5g_oran_pipeline_step1_title">Start the core</b><span data-lang="detail_5g_oran_pipeline_step1">docker compose up 5gc in srsRAN_Project/docker starts Open5GS; docker exec into the open5gs_5gc container confirms the AMF NGAP address the gNB will need.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_5g_oran_pipeline_step2_title">Start the RIC</b><span data-lang="detail_5g_oran_pipeline_step2">docker compose up in oran-sc-ric brings up the RIC. The log line "RMR is ready now..." is the point at which it will accept an E2 connection.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_5g_oran_pipeline_step3_title">Start the gNB</b><span data-lang="detail_5g_oran_pipeline_step3">./gnb -c gnb_zmq.yaml e2 with the AMF address and local bind address set, using the configuration file downloaded from the srsRAN documentation.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_5g_oran_pipeline_step4_title">Attach the UE</b><span data-lang="detail_5g_oran_pipeline_step4">ip netns add ue1 creates the namespace, then ./srsue ue_zmq.conf starts the handset; a successful attach completes the chain from core to UE.</span></div>
+      </div>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_5g_pipeline_heading">Bring-up Pipeline</h2>
-                <ol class="key-points">
-                    <li data-lang="detail_5g_pipeline_step1"></li>
-                    <li data-lang="detail_5g_pipeline_step2"></li>
-                    <li data-lang="detail_5g_pipeline_step3"></li>
-                    <li data-lang="detail_5g_pipeline_step4"></li>
-                </ol>
-            </section>
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_p_s4">Results</span></h2>
+      <ul data-validation>
+        <li data-lang="detail_5g_oran_validation_item1">The 5GC container reports its services running before the gNB is started, and amf.yaml inside the container shows the NGAP address the gNB configuration has to match.</li>
+        <li data-lang="detail_5g_oran_validation_item2">The RIC prints "RMR is ready now...", which is the readiness signal for the E2 termination.</li>
+        <li data-lang="detail_5g_oran_validation_item3">After the rebuild the gNB and the UE both start, and core, RIC, gNB, and UE run together as one chain.</li>
+      </ul>
+      <div class="takeaway">
+        <b data-lang="detail_common_takeaway">Key takeaway</b>
+        <span data-lang="detail_5g_oran_takeaway">The stack comes up in exactly one order, and each step has one line of output that says whether to continue. Recording those four lines is what turned a session of guesswork into a lab someone else can repeat.</span>
+      </div>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_5g_validation_heading">Validation & Evidence</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_5g_validation_item1"></li>
-                    <li data-lang="detail_5g_validation_item2"></li>
-                    <li data-lang="detail_5g_validation_item3"></li>
-                </ul>
-            </section>
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_p_s5">What went wrong</span></h2>
+      <div class="case">
+        <span>Symptom</span><div data-lang="detail_5g_oran_debug_symptom">The gNB exited during start-up with an INI error reporting that it could not read a section of cu_cp.amf, so no E2 session was ever established.</div>
+        <span>Hypotheses</span><div data-lang="detail_5g_oran_debug_hypothesis">The AMF address in the YAML was wrong; or the gnb_e2ap.pcap file that E2AP logging writes to was missing; or its filename in the YAML did not match the file on disk; or its path or permissions blocked the write.</div>
+        <span>Tests</span><div data-lang="detail_5g_oran_debug_tests">Read amf.yaml inside the open5gs_5gc container and confirmed the NGAP address matched the configuration. Confirmed gnb_e2ap.pcap existed, compared the filename in the YAML against the file, relaxed the file permissions, and moved the file to another directory with the path updated. The same error appeared every time.</div>
+        <span>Fix</span><div data-lang="detail_5g_oran_debug_fix">None of the four was the cause. The checked-out srsRAN source was out of date; rebuilding from the current upstream instructions made the same configuration work.</div>
+        <span>Takeaway</span><div data-lang="detail_5g_oran_debug_takeaway">The error named a configuration section, so I spent the session inside the configuration. A correct configuration can still fail because of the environment around it, and the version of the program producing the message is now the first thing I check, not the last.</div>
+      </div>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_5g_debug_heading">Debugging Case Study</h2>
-                <p><strong data-lang="detail_5g_debug_symptom_label">Symptom</strong>: <span data-lang="detail_5g_debug_symptom"></span></p>
-                <p><strong data-lang="detail_5g_debug_hypothesis_label">Hypotheses</strong>: <span data-lang="detail_5g_debug_hypothesis"></span></p>
-                <p><strong data-lang="detail_5g_debug_tests_label">Tests</strong>: <span data-lang="detail_5g_debug_tests"></span></p>
-                <p><strong data-lang="detail_5g_debug_fix_label">Fix</strong>: <span data-lang="detail_5g_debug_fix"></span></p>
-                <p><strong data-lang="detail_5g_debug_takeaway_label">Takeaway</strong>: <span data-lang="detail_5g_debug_takeaway"></span></p>
-            </section>
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_p_s6">Engineering decisions</span></h2>
+      <ul>
+        <li data-lang="detail_5g_oran_design_item1">Run every component in its own container or namespace instead of on the host. The core, the RIC, and the UE all want their own network stack, and the namespace is what keeps the UE's traffic separable.</li>
+        <li data-lang="detail_5g_oran_design_item2">Use ZMQ radio emulation instead of an SDR front end. There is no radio hardware in the lab, and ZMQ makes the whole chain reproducible over an SSH session on a shared server.</li>
+        <li data-lang="detail_5g_oran_design_item3">Take configuration files from the upstream documentation rather than writing my own. When the gNB failed that made my configuration the least likely explanation, which is exactly how the search ended up on the source version.</li>
+      </ul>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_5g_skills_heading">Skills Demonstrated</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_5g_skills_item1"></li>
-                    <li data-lang="detail_5g_skills_item2"></li>
-                    <li data-lang="detail_5g_skills_item3"></li>
-                    <li data-lang="detail_5g_skills_item4"></li>
-                </ul>
-            </section>
+    <section class="detail-section" id="s7">
+      <h2><span class="num">07</span><span data-lang="detail_common_p_s7">Stack &amp; artifacts</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
 
-        </article>
-    </div>
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
+
+  </div>
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
 </body>
 </html>

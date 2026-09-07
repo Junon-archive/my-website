@@ -14,7 +14,7 @@
   function stage(s, ctx) {
     var hero = ctx.variant === 'hero';
     var k = hero ? 1.5 : 0.85;
-    var O = hero ? [520, 348] : [135, 190];
+    var O = hero ? [500, 348] : [135, 190];
 
     var SW = 213 * k, SD = 102 * k, SH = 7 * k;            /* DRAM chip slab */
     var cw = 44 * k, cd = 38 * k, cg = 7 * k, ch = 12 * k;  /* bank cell      */
@@ -24,25 +24,25 @@
     I.isoSlab(s, O, SW, SD, { h: SH });
 
     var origin = P(O, 8 * k, 9.5 * k, SH);
-    var cells = I.isoBankArray(s, origin, 4, 2, { cw: cw, cd: cd, ch: ch, gap: cg, open: 3 });
+    var cells = I.isoBankArray(s, origin, 4, 2, { cw: cw, cd: cd, ch: ch, gap: cg });
     var bank = cells[3];                                   /* front-right bank */
 
     /* the open row: the one --blue subject of this scene */
     var rowO = P(bank.o, 0, (cd - rd) / 2, ch);
     I.isoBox(s, rowO, cw, rd, rh, { fill: 'accent' });
 
-    /* the next row of the same bank: outline only, target of a conflict */
-    var nextO = P(bank.o, 0, (cd - rd) / 2 + rd + 3 * k, ch);
+    /* the next row of the same bank, drawn in front: target of a conflict */
+    var nextO = P(bank.o, 0, (cd - rd) / 2 - rd - 3 * k, ch);
     if (hero) I.isoBox(s, nextO, cw, rd, rh, { fill: 'ghost' });
 
     /* strided accesses arrive from the front (perpendicular to the row) */
-    var tail = [30 * k, 17.5 * k], head = [12 * k, 7 * k], hits = [], i, T;
+    var tail = [30 * k, 17.5 * k], head = [9 * k, 5.2 * k], hits = [], i, T;
     for (i = 0; i < 3; i++) {
       T = P(rowO, (8 + i * 14) * k, rd / 2, rh);
       hits.push(T);
       I.arrow(s, T[0] + tail[0], T[1] + tail[1], T[0] + head[0], T[1] + head[1], { accent: true });
     }
-    var conflict = P(nextO, 8 * k, rd / 2, rh);
+    var conflict = P(nextO, 36 * k, rd / 2, rh);
     if (hero) I.arrow(s, conflict[0] + tail[0], conflict[1] + tail[1],
       conflict[0] + head[0], conflict[1] + head[1], { warn: true });
 
@@ -61,14 +61,14 @@
 
     /* hero: label column in the free space right of the chip */
     var cx = P(O, SW, 0, SH)[0] + 26;
-    var Eg = P(nextO, cw, rd / 2, rh);
+    var t1 = [hits[1][0] + tail[0], hits[1][1] + tail[1]];
     var t2 = [hits[2][0] + tail[0], hits[2][1] + tail[1]];
-    var tw = [conflict[0] + tail[0], conflict[1] + tail[1]];
-    I.leader(s, cx, Eg[1] - 6, Eg[0] + 8, Eg[1] - 2, 'row conflict', { anchor: 'start', warn: true });
-    I.leader(s, cx, E[1] + 12, E[0] + 8, E[1] + 2, 'open row (8 KB)', { anchor: 'start' });
-    I.leader(s, cx, E[1] + 44, hits[2][0] + head[0] + 5, hits[2][1] + head[1], 'row hit', { anchor: 'start', accent: true });
-    I.leader(s, cx, E[1] + 76, t2[0] + 6, t2[1] - 4, 'stride', { anchor: 'start' });
-    I.leader(s, cx, E[1] + 108, tw[0] + 8, tw[1] + 4, '4 B element', { anchor: 'start' });
+    var tw = [conflict[0] + head[0], conflict[1] + head[1]];
+    I.leader(s, cx, E[1] - 12, E[0] + 8, E[1] + 2, 'open row (8 KB)', { anchor: 'start' });
+    I.leader(s, cx, E[1] + 20, hits[2][0] + head[0] + 5, hits[2][1] + head[1], 'row hit', { anchor: 'start', accent: true });
+    I.leader(s, cx, E[1] + 52, (t1[0] + t2[0]) / 2 + 4, (t1[1] + t2[1]) / 2, 'stride', { anchor: 'start' });
+    I.leader(s, cx, E[1] + 84, hits[0][0] + head[0] + 4, hits[0][1] + head[1] + 2, '4 B element', { anchor: 'start' });
+    I.leader(s, cx, E[1] + 116, tw[0] + 6, tw[1] + 4, 'row conflict', { anchor: 'start', warn: true });
   }
 
   function thumb(s, ctx) { stage(s, ctx); }
@@ -128,7 +128,7 @@
     I.transition(s, empty, open, 'miss · activate', { dy: -12 });
     I.transition(s, open, open, ['row hit', 'read / write'], { self: true, accent: true, dy: -10 });
     I.transition(s, open, other, ['conflict', 'precharge + activate'], { warn: true, dy: -20 });
-    I.transition(s, other, empty, 'precharge / refresh', { curve: -104, dy: -8 });
+    I.transition(s, other, empty, 'precharge / refresh', { curve: -104, dy: 14 });
 
     I.label(s, 24, 268, 'blue = the fast path (same row) · amber = the stall (different row, same bank)', { size: 9.5 });
   }

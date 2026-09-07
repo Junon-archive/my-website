@@ -1,122 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Portfolio | Resume</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Junheon Lee · Computer Architecture &amp; Memory Systems</title>
+<meta name="description" content="Junheon Lee — M.S. student in computer architecture and memory systems at the University of Seoul. DRAM row buffer locality, eBPF latency tracing, and GPU memory for LLM inference.">
+<meta property="og:title" content="Junheon Lee · Computer Architecture &amp; Memory Systems">
+<meta property="og:description" content="Junheon Lee — M.S. student in computer architecture and memory systems at the University of Seoul. DRAM row buffer locality, eBPF latency tracing, and GPU memory for LLM inference.">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://junon-lee.pages.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
 <script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/home.js"></script>
+<script src="assets/js/scenes/ebpf.js"></script>
+<script src="assets/js/scenes/rowscope.js"></script>
+<script src="assets/js/scenes/can.js"></script>
+<script src="assets/js/scenes/5g_oran.js"></script>
+<script src="assets/js/scenes/opencl.js"></script>
+<script src="assets/js/scenes/dynamic_moh.js"></script>
+<script src="assets/js/scenes/pim_accel.js"></script>
 <script src="assets/js/lang.js" defer></script>
-<script src="assets/js/sidebar.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
 </head>
-<body class="page-index">
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Junon Lee</div>
-        <nav>
-            <a class="active" href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
-        </div>
+<body class="page-home">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="home"></header>
+
+<main class="site-main">
+
+  <section class="hero">
+    <div class="hero-text">
+      <div class="eyebrow" data-lang="hero_eyebrow">Computer Architecture &amp; Memory Systems</div>
+      <h1><span data-lang="hero_name_native">이준헌</span><span class="bar">|</span><span class="en" data-lang="hero_name_latin">Junheon Lee</span></h1>
+      <p class="subtitle" data-lang="hero_role">M.S. student · Architecture &amp; Computer Systems Laboratory, University of Seoul</p>
+      <p class="areas mono" data-lang="hero_areas">Computer Architecture · Memory Systems · GPU Systems</p>
+      <p class="lead" data-lang="hero_lead">I work on the memory side of performance: where data sits, how far it has to move, and what that movement costs. Recent work covers DRAM row buffer locality, kernel latency tracing with eBPF, and GPU memory management for LLM inference.</p>
+      <div class="actions">
+        <a class="btn primary" href="portfolio.html?filter=research">
+          <span data-lang="hero_cta_research">Research</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a class="btn" href="portfolio.html?filter=project">
+          <span data-lang="hero_cta_projects">Projects</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a class="btn" data-cv-button href="assets/pdf/Junheon_Lee_CV.pdf">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10"/></svg>
+          <span data-lang="hero_cta_cv">Download CV</span>
+        </a>
+      </div>
     </div>
-</div>
-
-<main class="container">
-    <div class="hero">
-        <div class="avatar">
-            <img src="assets/img/mono_profile.png" alt="profile">
-        </div>
-        <div class="identity">
-            <h1 data-lang="profile_name">Your Name</h1>
-            <h3 data-lang="profile_title">Your Title / Position</h3>
-        </div>
+    <div class="visual" aria-hidden="true" data-illus="home.hero" aria-label="Isometric memory hierarchy: GPU package with HBM, PCIe link, CPU with DDR DRAM">
+      <div class="hand">From Architecture<br>to Real Performance</div>
     </div>
+  </section>
 
-    <div class="main-grid">
-        <aside class="sidebar" data-sidebar></aside>
-
-        <section class="content-area">
-            <div class="content-stack">
-                <div class="section-block">
-                    <div class="section-label" data-lang="home_featured">Featured work</div>
-                    <p data-lang="home_intro_desc"></p>
-
-                    <div class="filter-controls">
-                        <button class="active" data-filter="all" data-lang="filter_all">All</button>
-                        <button data-filter="project" data-lang="filter_projects">Projects</button>
-                        <button data-filter="research" data-lang="filter_research">Research</button>
-                    </div>
-
-                    <div class="work-grid">
-                        <a class="work-card" data-category="project" href="project_ebpf.html">
-                            <img src="assets/img/eBPF.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_ebpf_title">Practical Latency Observability with eBPF</h4>
-                                <p class="work-secondary" data-lang="work_ebpf_sub">CPU, memory, and I/O latency measurements</p>
-                                <p class="work-date" data-lang="work_ebpf_date">2026.02</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_rowscope.html">
-                            <img src="assets/img/rowscope.png" alt="RowScope thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_rowscope_title">RowScope: DRAM Row Buffer Locality Analyzer</h4>
-                                <p class="work-secondary" data-lang="work_rowscope_sub">Quantifying memory access pattern effects on DRAM row buffer performance</p>
-                                <p class="work-date" data-lang="work_rowscope_date">2025.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_can.html">
-                            <img src="assets/img/CAN.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_can_title">CAN Bus Security Analysis and Intrusion Detection via LabVIEW</h4>
-                                <p class="work-secondary" data-lang="work_can_sub">Rate-based IDS with 64-bit multi-signal bit-packing in LabVIEW</p>
-                                <p class="work-date" data-lang="work_can_date">2025.01</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_5g_oran.html">
-                            <img src="assets/img/oran_5g_system.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_5g_title">5G O-RAN network simulation</h4>
-                                <p class="work-secondary" data-lang="work_5g_sub">Core↔RIC↔gNB bring-up</p>
-                                <p class="work-date" data-lang="work_5g_date">2024.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_opencl.html">
-                            <img src="assets/img/openCL.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_opencl_title">On-Device GPU Image Processing via OpenCL</h4>
-                                <p class="work-secondary" data-lang="work_opencl_sub">8.4× Gaussian blur speedup on Android</p>
-                                <p class="work-date" data-lang="work_opencl_date">2023.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="research" href="research_dynamic_moh.html">
-                            <img src="assets/img/dynamic_moh.png" alt="Research thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_moh_title">Memory-efficient LLM inference via MoH offloading</h4>
-                                <p class="work-secondary" data-lang="work_moh_sub">Head-wise routing traces and system trade-offs</p>
-                                <p class="work-date" data-lang="work_moh_date">In progress</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="research" href="research_pim_accel.html">
-                            <img src="assets/img/pim_accel.png" alt="Research thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_pim_title">PIM-accelerated gradient accumulation for 3DGS-SLAM</h4>
-                                <p class="work-secondary" data-lang="work_pim_sub">Atomic-conflict mitigation via bank-local reduction</p>
-                                <p class="work-date" data-lang="work_pim_date">In progress</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="pillrow">
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 15 8 9l3 3 6-8"/><path d="M3 17h14"/></svg></div>
+      <div><b>Analyze</b><small data-lang="pill_1_desc">Read the system before changing it: traces, counters, and data layout.</small></div>
     </div>
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M7 9l2 2-2 2M11 13h3"/></svg></div>
+      <div><b>Implement</b><small data-lang="pill_2_desc">Build the smallest thing that can be measured, then build the measurement with it.</small></div>
+    </div>
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16V9M9 16V5M14 16v-6"/><path d="M2 17h16"/></svg></div>
+      <div><b>Measure</b><small data-lang="pill_3_desc">Fixed durations, repeated runs, distributions instead of averages.</small></div>
+    </div>
+    <div class="pill">
+      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
+      <div><b>Optimize</b><small data-lang="pill_4_desc">Change one thing, keep the number that proves it, and report what it cost.</small></div>
+    </div>
+  </div>
 
-    <div class="footer" data-lang="footer_text">© 2025 Junon Lee. All Rights Reserved.</div>
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 data-lang="home_research_title">Featured Research</h2>
+        <p class="sub" data-lang="home_research_sub">Two open questions I work on at ACAS Lab. Both pages change as results arrive.</p>
+      </div>
+      <a class="textlink" href="portfolio.html?filter=research" data-lang="home_research_more">All research</a>
+    </div>
+    <div class="grid2" data-works="research" data-works-layout="wide"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 data-lang="home_projects_title">Selected Projects</h2>
+        <p class="sub" data-lang="home_projects_sub">Systems I built and measured, from DRAM address traces to on-device GPU kernels.</p>
+      </div>
+      <a class="textlink" href="portfolio.html?filter=project" data-lang="home_projects_more">All projects</a>
+    </div>
+    <div class="grid4" data-works="project" data-works-featured data-works-limit="4"></div>
+  </section>
+
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+</div>
 </body>
 </html>

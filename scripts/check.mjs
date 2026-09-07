@@ -94,6 +94,7 @@ function keysIn(text) {
     if (/^(placeholder|aria-label|title|alt|content)$/.test(raw)) continue; /* data-lang-attr value */
     if (raw.includes("{") || raw.includes("}")) continue;                   /* template placeholder */
     if (raw.includes("+") || raw.includes('"')) continue;                   /* JS concatenation */
+    if (!/^[a-z0-9_]+$/.test(raw)) continue;                                 /* doc comments, regex alternations, ellipses */
     out.add(raw);
   }
   return out;

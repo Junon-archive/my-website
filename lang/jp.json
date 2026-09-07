@@ -62,7 +62,7 @@
   "detail_common_r_s5": "What went wrong",
   "detail_common_r_s6": "Next steps",
   "detail_common_r_s7": "References",
-  "detail_common_r_note": "ポートフォリオ注記: このページは論文ではありません。現時点での問い、手法、判断根拠を示すものであり、結果が得られるたびに書き直されます。",
+  "detail_common_r_note": "このページは論文ではありません。現時点での問い、手法、判断根拠を示すものであり、結果が得られるたびに書き直されます。",
   "resume_eyebrow": "技術レジュメ",
   "resume_areas": "Computer Architecture · Memory Systems · GPU Systems",
   "resume_cv_cta": "CVをダウンロード",

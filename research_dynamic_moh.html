@@ -1,99 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Memory-Efficient LLM Inference via MoH-Guided Head-wise Offloading</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/project.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPU Memory System Optimization for LLM Inference · Junheon Lee</title>
+<meta name="description" content="MoH-guided head-wise offloading: routing traces, head regularity, and the transfer cost of acting on them">
+<meta property="og:title" content="GPU Memory System Optimization for LLM Inference · Junheon Lee">
+<meta property="og:description" content="MoH-guided head-wise offloading: routing traces, head regularity, and the transfer cost of acting on them">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/research_dynamic_moh.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/dynamic_moh.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
 </head>
-<body>
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+
+<body class="page-detail" data-work-id="dynamic_moh" data-work-type="research">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=research" data-lang="filter_research">Research</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_dynamic_moh_short">GPU Memory for LLM Inference</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_dynamic_moh_title">GPU Memory System Optimization for LLM Inference</h1>
+      <p class="detail-desc" data-lang="detail_dynamic_moh_subtitle">MoH-guided head-wise offloading: routing traces, head regularity, and the transfer cost of acting on them</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="dynamic_moh.hero" role="img" aria-label="A CPU with DRAM on the left and a GPU package on the right across PCIe, attention heads split between resident and offloaded"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_r_s1">Motivation</span></h2>
+      <p data-lang="detail_dynamic_moh_overview">LLM inference is bounded by attention-related memory cost: the KV cache footprint, the traffic it generates, and the host-device transfers that follow when it does not fit. Mixture-of-Head attention already produces a per-token signal about which heads matter. If that signal is stable enough, it can drive a memory decision — keep these heads resident, move those to host memory — instead of only a compute decision. This project tests whether that holds, and what it costs when it does.</p>
+      <div class="question">
+        <small>Key question</small>
+        <b data-lang="detail_dynamic_moh_question">Can MoH routing signals reduce effective attention cost, by using fewer heads or treating heads differently, without hurting output quality?</b>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_r_s2">System problem</span></h2>
+      <p data-lang="detail_dynamic_moh_arch_body">The target is a Mixture-of-Head attention model served with PyTorch and Transformers, with hooks on the router output that log which heads each token selects. Attention state lives in GPU memory; host DRAM is far larger but sits behind PCIe. Any head-wise offloading plan therefore has two costs that do not appear in a head count: the transfer of head state across PCIe, and the stalls when that transfer is not overlapped with compute. The router trace tells us which heads a policy would keep; the transfer measurement tells us whether keeping them is worth anything.</p>
+      <figure class="diagram" data-illus="dynamic_moh.arch" role="img" aria-label="Three boxes showing attention state resident on the GPU, host DRAM across a PCIe crossing, and the cost that crossing adds to any offloading decision">
+        <figcaption data-lang="detail_dynamic_moh_fig_arch">Where the cost sits. Attention state is resident in GPU memory, host DRAM is large but a PCIe crossing away, and every head-wise offloading decision pays for that crossing whether or not it saves compute.</figcaption>
+      </figure>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_r_s3">Approach</span></h2>
+      <figure class="diagram" data-illus="dynamic_moh.trace" role="img" aria-label="A token by head selection grid recorded from the router, with a Jaccard similarity comparison between neighbouring token columns">
+        <figcaption data-lang="detail_dynamic_moh_fig_trace">Token by head selection grid recorded from the router. If neighbouring tokens select the same heads, a residency policy can reuse them; the Jaccard similarity between adjacent columns is how that regularity is measured rather than assumed.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_dynamic_moh_pipeline_step1_title">Collect router traces</b><span data-lang="detail_dynamic_moh_pipeline_step1">Run inference on controlled prompts with scripts/run_router_trace.py and log per-token head selection and router scores to a trace file.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_dynamic_moh_pipeline_step2_title">Characterise the traces</b><span data-lang="detail_dynamic_moh_pipeline_step2">Plot head activation frequency and Jaccard similarity between neighbouring tokens and across layers, to test whether selection is regular enough for a residency policy to predict.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_dynamic_moh_pipeline_step3_title">Sweep rho</b><span data-lang="detail_dynamic_moh_pipeline_step3">Vary the fraction of heads kept and measure output quality against it, then extend the same sweep to latency, throughput, peak GPU memory, PCIe bytes, and overlap ratio.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_dynamic_moh_pipeline_step4_title">Compare policies</b><span data-lang="detail_dynamic_moh_pipeline_step4">Evaluate naive offloading, keep-hot with a window tau, and prefetch with overlap, recording for each what it has to know in advance and where it loses.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_r_s4">Current findings</span></h2>
+      <div class="findings">
+        <div class="finding">
+          <div class="k" data-lang="detail_dynamic_moh_finding1_label">Accuracy vs rho</div>
+          <p data-lang="detail_dynamic_moh_finding1_body">There is a gentle regime where dropping heads costs little quality, and a threshold past which the loss becomes sharp. The useful question is where that knee sits, not whether it exists.</p>
         </div>
-    </div>
-</div>
+        <div class="finding">
+          <div class="k" data-lang="detail_dynamic_moh_finding2_label">Regularity</div>
+          <p data-lang="detail_dynamic_moh_finding2_body">Head selection is less regular than the offloading idea needs. Similarity between neighbouring tokens is not high enough to justify a simple reuse heuristic, so a policy built on "the same heads stay hot" would misfire more often than the trace plots first suggested.</p>
+        </div>
+        <div class="finding">
+          <div class="k" data-lang="detail_dynamic_moh_finding3_label">Transfers</div>
+          <p data-lang="detail_dynamic_moh_finding3_body">Fewer active heads does not mean less time. Whether a head-wise policy wins depends on transfer size, pinned memory, and overlap, so the system metrics have to be measured alongside quality rather than after it.</p>
+        </div>
+      </div>
+      <figure class="diagram" data-illus="dynamic_moh.overlap" role="img" aria-label="Two timelines comparing serial layer compute and KV transfer against a prefetch version where the transfer overlaps compute">
+        <figcaption data-lang="detail_dynamic_moh_fig_overlap">The same two layers on two timelines. Serial: the transfer for layer i+1 starts after layer i finishes computing. Prefetch: the transfer runs underneath the compute, and only the uncovered part still costs time.</figcaption>
+      </figure>
+      <div class="takeaway">
+        <b>Portfolio note</b>
+        <span data-lang="detail_common_r_note">Portfolio note: this page is not a paper. It shows the question, the method, and the judgement calls as they stand today, and it is rewritten as results arrive.</span>
+      </div>
+    </section>
 
-<main class="container">
-    <div class="detail-body">
-        <article class="project-detail">
-            <h1 data-lang="detail_moh_title">Memory-Efficient LLM Inference via MoH-Guided Head-wise Offloading (In Progress)</h1>
-            <p class="project-subtitle" data-lang="detail_moh_subtitle">Routing trace analysis -> head importance & regularity -> offloading/prefetch strategies -> accuracy/performance trade-off validation</p>
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_r_s5">What went wrong</span></h2>
+      <div class="case">
+        <span>Symptom</span><div data-lang="detail_dynamic_moh_debug_symptom">Reducing the number of heads, or introducing offloading, sometimes produced almost no gain and sometimes made the run slower than the baseline.</div>
+        <span>Hypotheses</span><div data-lang="detail_dynamic_moh_debug_hypothesis">Many small transfers dominate the latency; or pageable memory and synchronous copies prevent any overlap with compute; or the router tracing itself is heavy enough to contaminate the timings.</div>
+        <span>Tests</span><div data-lang="detail_dynamic_moh_debug_tests">Microbenchmarked host-to-device and device-to-host bandwidth against transfer size, and copy-compute overlap separately; then ran ablations that toggled logging, batched the transfers, and separated trace collection from the timed run.</div>
+        <span>Fix</span><div data-lang="detail_dynamic_moh_debug_fix">Pinned memory with asynchronous transfers, a coarser transfer granularity, keep-hot with a window tau, and trace collection moved out of any run whose time is being reported.</div>
+        <span>Takeaway</span><div data-lang="detail_dynamic_moh_debug_takeaway">Algorithmic sparsity is not a system result. Transfer granularity, pinning, and overlap decide whether a smaller head count turns into a smaller number of milliseconds.</div>
+      </div>
+    </section>
 
-            <img class="hero-img" src="assets/img/dynamic_moh.png" alt="MoH-guided head-wise offloading visualization">
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_r_s6">Next steps</span></h2>
+      <ul>
+        <li data-lang="detail_dynamic_moh_next1">Add system metrics to every sweep — latency, throughput, peak GPU memory, PCIe bytes moved, overlap ratio — so a quality loss can be traded against a measured gain instead of an assumed one.</li>
+        <li data-lang="detail_dynamic_moh_next2">Measure host-to-device and device-to-host bandwidth against transfer size on the target GPU, and set the offloading granularity from that curve rather than from the head layout.</li>
+        <li data-lang="detail_dynamic_moh_next3">Run keep-hot and prefetch against a no-offload baseline on identical prompts, and report the prompts where the policies lose as well as the ones where they win.</li>
+      </ul>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_moh_overview"></p>
-            </section>
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
 
-            <section class="section-block">
-                <h2 data-lang="detail_contribution_heading">Key contributions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_moh_point1"></li>
-                    <li data-lang="detail_moh_point2"></li>
-                    <li data-lang="detail_moh_point3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_moh_arch_heading">System Architecture</h2>
-                <p data-lang="detail_moh_arch_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_moh_pipeline_heading">Bring-up Pipeline</h2>
-                <ol class="key-points">
-                    <li data-lang="detail_moh_pipeline_step1"></li>
-                    <li data-lang="detail_moh_pipeline_step2"></li>
-                    <li data-lang="detail_moh_pipeline_step3"></li>
-                    <li data-lang="detail_moh_pipeline_step4"></li>
-                </ol>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_moh_validation_heading">Validation & Evidence</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_moh_validation_item1"></li>
-                    <li data-lang="detail_moh_validation_item2"></li>
-                    <li data-lang="detail_moh_validation_item3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_moh_debug_heading">Debugging Case Study</h2>
-                <p><strong data-lang="detail_moh_debug_symptom_label">Symptom</strong>: <span data-lang="detail_moh_debug_symptom"></span></p>
-                <p><strong data-lang="detail_moh_debug_hypothesis_label">Hypotheses</strong>: <span data-lang="detail_moh_debug_hypothesis"></span></p>
-                <p><strong data-lang="detail_moh_debug_tests_label">Tests</strong>: <span data-lang="detail_moh_debug_tests"></span></p>
-                <p><strong data-lang="detail_moh_debug_fix_label">Fix</strong>: <span data-lang="detail_moh_debug_fix"></span></p>
-                <p><strong data-lang="detail_moh_debug_takeaway_label">Takeaway</strong>: <span data-lang="detail_moh_debug_takeaway"></span></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_moh_skills_heading">Skills Demonstrated</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_moh_skills_item1"></li>
-                    <li data-lang="detail_moh_skills_item2"></li>
-                    <li data-lang="detail_moh_skills_item3"></li>
-                    <li data-lang="detail_moh_skills_item4"></li>
-                </ul>
-            </section>
-
-        </article>
-    </div>
+  </div>
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
 </body>
 </html>

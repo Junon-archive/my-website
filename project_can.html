@@ -1,89 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>CAN Bus Security Analysis and Intrusion Detection via LabVIEW</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/project.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAN Bus Security Analysis and Intrusion Detection · Junheon Lee</title>
+<meta name="description" content="Bit-level multi-signal packing and rate-based anomaly detection on a simulated ECU network">
+<meta property="og:title" content="CAN Bus Security Analysis and Intrusion Detection · Junheon Lee">
+<meta property="og:description" content="Bit-level multi-signal packing and rate-based anomaly detection on a simulated ECU network">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/project_can.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/can.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/figures.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
 </head>
-<body>
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
+
+<body class="page-detail" data-work-id="can" data-work-type="project">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=project" data-lang="filter_projects">Projects</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_can_short">CAN Bus IDS</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_can_title">CAN Bus Security Analysis and Intrusion Detection</h1>
+      <p class="detail-desc" data-lang="detail_can_subtitle">Bit-level multi-signal packing and rate-based anomaly detection on a simulated ECU network</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="can.hero" role="img" aria-label="A CAN bus with three ECU nodes and a LabVIEW monitor, with injected packets crowding between the regular ones"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_p_s1">Problem</span></h2>
+      <p data-lang="detail_can_overview">CAN has been the standard bus between vehicle ECUs since 1986, and it carries no sender authentication. Any node with bus access can transmit any identifier, and every node receives every frame, which is the structural reason spoofing, sniffing, and message injection all work. Our six-person team analysed the data frame field by field and rebuilt a working transmitter, receiver, monitor, and intrusion detector in LabVIEW. Instead of conventional ECU signals we packed six human biometric signals into the payload, which made the bit-packing design something we had to derive rather than copy.</p>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_p_s2">What I built</span></h2>
+      <ul>
+        <li data-lang="detail_can_point1">A 64-bit signal map for six signals — LFT 10, HEM 19, BRAIN 21, WATER 3, GENDER 1, STRESS 10 bits — that fills the data field exactly, with no overlap and no unused bits.</li>
+        <li data-lang="detail_can_point2">Symmetric transmit and receive bit packing in LabVIEW Formula Nodes using AND, OR, and shift, verified byte by byte against hand-computed patterns.</li>
+        <li data-lang="detail_can_point3">A rate-based intrusion detector: the receive loop measures the actual packet interval, switches the hazard LED to red when it exceeds the configured rate, and stops the loop in the same cycle.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_p_s3">How it works</span></h2>
+      <p data-lang="detail_can_arch_body">The demonstrator is a single LabVIEW VI with two loops. The transmit loop takes six signal values, packs them into byte0 through byte7 in a Formula Node, and joins them into a uint8[8] array that stands for the data field of a frame with identifier 5 and DLC 8. The receive loop indexes that array, runs the inverse bit operations, drives the monitoring gauges, and feeds the rate monitor that decides whether traffic looks injected.</p>
+      <figure class="diagram" data-illus="can.frame" role="img" aria-label="The CAN data frame fields from SOF through EOF with the data field highlighted as the only payload-carrying field">
+        <figcaption data-lang="detail_can_fig_frame">The standard CAN data frame: SOF 1 bit, arbitration 12 (11-bit identifier and RTR), control 6, data 0 to 64, CRC 16, ACK 2, EOF 7. Only the data field carries payload, and no field identifies the sender.</figcaption>
+      </figure>
+      <figure class="diagram" data-illus="can.packing" role="img" aria-label="A 64-bit map showing six signals packed edge to edge with byte boundaries marked">
+        <figcaption data-lang="detail_can_fig_packing">The 64-bit payload map. Bit boundaries were computed by hand and chain exactly: 0+10, 10+19, 29+21, 50+3, 53+1, 54+10 = 64. Signals cross byte boundaries, so byte1 holds LFT bits 9 to 8 together with HEM bits 5 to 0.</figcaption>
+      </figure>
+      <figure class="diagram" data-illus="can.ids" role="img" aria-label="A timeline of packet arrival intervals turning from a steady normal rate to a dense injected burst that trips the alert threshold">
+        <figcaption data-lang="detail_can_fig_ids">Packet arrival intervals against the configured rate. While the measured interval matches the threshold the indicator stays green; once it exceeds the threshold the indicator turns red and the receive loop stops on the same iteration.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_can_pipeline_step1_title">Pack</b><span data-lang="detail_can_pipeline_step1">The transmit Formula Node masks and shifts the six values into eight bytes, for example byte1 = ((LFT &amp; 0x300) &gt;&gt; 8) | ((HEM &amp; 0x3F) &lt;&lt; 2).</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_can_pipeline_step2_title">Frame</b><span data-lang="detail_can_pipeline_step2">Build Array joins byte0 through byte7 into the uint8[8] payload, transmitted with identifier 5 and DLC 8.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_can_pipeline_step3_title">Unpack</b><span data-lang="detail_can_pipeline_step3">The receive Formula Node applies the inverse operations, for example LFT = ((byte1 &amp; 0x03) &lt;&lt; 8) | byte0, and writes the six values to the front panel indicators.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_can_pipeline_step4_title">Compare</b><span data-lang="detail_can_pipeline_step4">A comparison tab shows the transmitted and reconstructed byte arrays side by side, which is how a wrong bit boundary becomes visible immediately.</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_can_pipeline_step5_title">Detect</b><span data-lang="detail_can_pipeline_step5">The receive loop measures the packet interval, compares it against the configured rate, raises the hazard LED and terminates the loop when the interval exceeds it.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_p_s4">Results</span></h2>
+      <div class="results">
+        <div class="chartbox" data-results></div>
+        <div class="stats">
+          <div class="stat">
+            <div class="v" data-lang="detail_can_stat1_value">6</div>
+            <div class="l" data-lang="detail_can_stat1_label">Signals in one frame</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-lang="detail_can_stat2_value">64 bits</div>
+            <div class="l" data-lang="detail_can_stat2_label">Payload used, DLC = 8</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-lang="detail_can_stat3_value">0</div>
+            <div class="l" data-lang="detail_can_stat3_label">Overlapping or unused bits</div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+      <div class="takeaway">
+        <b data-lang="detail_common_takeaway">Key takeaway</b>
+        <span data-lang="detail_can_takeaway">With all six signals at maximum (LFT 1023, HEM 524287, BRAIN 2097151, WATER 7, GENDER 1, STRESS 1023) every transmitted byte reads 0xFF and the receiver reconstructs the original values; a mid-range BRAIN of 100000 reproduces the expected pattern across byte3 to byte6. Stepping the receive interval 200 → 210 → 250 → 300 ms against a 200 ms threshold trips the alert and stops the loop within one cycle.</span>
+      </div>
+    </section>
 
-<main class="container">
-    <div class="detail-body">
-        <article class="project-detail">
-            <h1 data-lang="detail_can_title">CAN Bus Security Analysis and Intrusion Detection via LabVIEW</h1>
-            <p class="project-subtitle" data-lang="detail_can_subtitle">Bit-level multi-signal packing with rate-based anomaly detection on a simulated ECU network</p>
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_p_s6">Engineering decisions</span></h2>
+      <ul>
+        <li data-lang="detail_can_design_item1">Pack six signals into one frame rather than sending one frame per signal. The data field is fixed at 8 bytes, so six separate frames would carry the same information at six times the bus load.</li>
+        <li data-lang="detail_can_design_item2">Detect intrusion by packet rate rather than by payload content. CAN offers no sender authentication, so timing is the only signal available without changing the protocol — and the cost is real: a forged frame sent at the normal rate is invisible to this detector.</li>
+        <li data-lang="detail_can_design_item3">Carry fractional and negative values with a x100 scale and a +100 offset instead of widening the fields. Two's complement would consume the whole 10-bit STRESS field, while a shared offset costs no bits at all; the price is that everything below the second decimal is lost.</li>
+      </ul>
+    </section>
 
-            <img class="hero-img" src="assets/img/CAN.png" alt="CAN Bus Security Analysis and Intrusion Detection via LabVIEW">
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_p_s7">Stack &amp; artifacts</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
 
-            <section class="section-block">
-                <h2 data-lang="detail_overview_heading">Overview</h2>
-                <p data-lang="detail_can_overview"></p>
-            </section>
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
 
-            <section class="section-block">
-                <h2 data-lang="detail_contribution_heading">Key contributions</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_can_point1"></li>
-                    <li data-lang="detail_can_point2"></li>
-                    <li data-lang="detail_can_point3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_can_arch_heading">CAN Frame Structure</h2>
-                <p data-lang="detail_can_arch_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_can_pack_heading">Signal Bit-Packing Design</h2>
-                <p data-lang="detail_can_pack_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_can_vuln_heading">Security Vulnerabilities &amp; Intrusion Detection</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_can_vuln_step1"></li>
-                    <li data-lang="detail_can_vuln_step2"></li>
-                    <li data-lang="detail_can_vuln_step3"></li>
-                </ul>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_can_ext_heading">Extended Feature: Floating-Point &amp; Negative Value Support</h2>
-                <p data-lang="detail_can_ext_body"></p>
-            </section>
-
-            <section class="section-block">
-                <h2 data-lang="detail_can_skills_heading">Skills Demonstrated</h2>
-                <ul class="key-points">
-                    <li data-lang="detail_can_skills_item1"></li>
-                    <li data-lang="detail_can_skills_item2"></li>
-                    <li data-lang="detail_can_skills_item3"></li>
-                    <li data-lang="detail_can_skills_item4"></li>
-                </ul>
-            </section>
-        </article>
-    </div>
+  </div>
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
 </body>
 </html>

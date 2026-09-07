@@ -1,127 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio | Projects</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/lang-data.js"></script>
-    <script src="assets/js/lang.js" defer></script>
-    <script src="assets/js/sidebar.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio · Junheon Lee</title>
+<meta name="description" content="Seven works by Junheon Lee: DRAM locality analysis, eBPF latency observability, CAN bus intrusion detection, 5G O-RAN bring-up, on-device OpenCL, and two ongoing research directions.">
+<meta property="og:title" content="Portfolio · Junheon Lee">
+<meta property="og:description" content="Seven works by Junheon Lee: DRAM locality analysis, eBPF latency observability, CAN bus intrusion detection, 5G O-RAN bring-up, on-device OpenCL, and two ongoing research directions.">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://junon-lee.pages.dev/portfolio.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/portfolio.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/home.js"></script>
+<script src="assets/js/scenes/ebpf.js"></script>
+<script src="assets/js/scenes/rowscope.js"></script>
+<script src="assets/js/scenes/can.js"></script>
+<script src="assets/js/scenes/5g_oran.js"></script>
+<script src="assets/js/scenes/opencl.js"></script>
+<script src="assets/js/scenes/dynamic_moh.js"></script>
+<script src="assets/js/scenes/pim_accel.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
 </head>
 <body class="page-portfolio">
-<div class="nav-shell">
-    <div class="nav-inner">
-        <div class="nav-logo" data-lang="brand_name">Your Name</div>
-        <nav>
-            <a href="index.html" data-lang="nav_home">Home</a>
-            <a href="resume.html" data-lang="nav_resume">Resume</a>
-            <a class="active" href="portfolio.html" data-lang="nav_portfolio">Portfolio</a>
-            <a href="contact.html" data-lang="nav_contact">Contact</a>
-        </nav>
-        <div class="lang-switch">
-            <button data-lang-code="kr" onclick="setLang('kr')">KR</button>
-            <button data-lang-code="en" onclick="setLang('en')">EN</button>
-            <button data-lang-code="jp" onclick="setLang('jp')">JP</button>
-        </div>
-    </div>
-</div>
+<div class="shell">
 
-<main class="container">
-    <div class="hero">
-        <div class="avatar">
-            <img src="assets/img/mono_profile.png" alt="profile">
-        </div>
-        <div class="identity">
-            <h1 data-lang="profile_name">Your Name</h1>
-            <h3 data-lang="profile_title">Your Title / Position</h3>
-        </div>
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="site-main">
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-lang="portfolio_eyebrow">Portfolio</div>
+        <h1 data-lang="portfolio_title">Research &amp; Projects</h1>
+        <p class="sub" data-lang="portfolio_sub">Seven works: five engineering projects and two ongoing research directions.</p>
+      </div>
     </div>
 
-    <div class="main-grid">
-        <aside class="sidebar" data-sidebar></aside>
-
-        <section class="content-area">
-            <div class="content-stack">
-                <div class="section-block">
-                    <div class="section-label" data-lang="portfolio_intro_title">Portfolio overview</div>
-                    <p data-lang="portfolio_intro_desc"></p>
-                </div>
-
-                <div class="section-block">
-                    <div class="section-label" data-lang="portfolio_projects_title">Engineering projects</div>
-                    <p data-lang="portfolio_projects_desc"></p>
-
-                    <div class="filter-controls">
-                        <button class="active" data-filter="all" data-lang="filter_all">All</button>
-                        <button data-filter="project" data-lang="portfolio_projects_title">Engineering projects</button>
-                        <button data-filter="research" data-lang="portfolio_research_title">Research & publications</button>
-                    </div>
-
-                    <div class="work-grid">
-                        <a class="work-card" data-category="project" href="project_ebpf.html">
-                            <img src="assets/img/eBPF.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_ebpf_title">Practical Latency Observability with eBPF</h4>
-                                <p class="work-secondary" data-lang="work_ebpf_sub">CPU, memory, and I/O latency measurements</p>
-                                <p class="work-date" data-lang="work_ebpf_date">2026.02</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_rowscope.html">
-                            <img src="assets/img/rowscope.png" alt="RowScope thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_rowscope_title">RowScope: DRAM Row Buffer Locality Analyzer</h4>
-                                <p class="work-secondary" data-lang="work_rowscope_sub">Quantifying memory access pattern effects on DRAM row buffer performance</p>
-                                <p class="work-date" data-lang="work_rowscope_date">2025.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_can.html">
-                            <img src="assets/img/CAN.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_can_title">CAN Bus Security Analysis and Intrusion Detection via LabVIEW</h4>
-                                <p class="work-secondary" data-lang="work_can_sub">Rate-based IDS with 64-bit multi-signal bit-packing in LabVIEW</p>
-                                <p class="work-date" data-lang="work_can_date">2025.01</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_5g_oran.html">
-                            <img src="assets/img/oran_5g_system.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_5g_title">5G O-RAN network simulation</h4>
-                                <p class="work-secondary" data-lang="work_5g_sub">Core↔RIC↔gNB bring-up</p>
-                                <p class="work-date" data-lang="work_5g_date">2024.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="project" href="project_opencl.html">
-                            <img src="assets/img/openCL.png" alt="Project thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_opencl_title">On-Device GPU Image Processing via OpenCL</h4>
-                                <p class="work-secondary" data-lang="work_opencl_sub">8.4× Gaussian blur speedup on Android</p>
-                                <p class="work-date" data-lang="work_opencl_date">2023.12</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="research" href="research_dynamic_moh.html">
-                            <img src="assets/img/dynamic_moh.png" alt="Research thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_moh_title">Memory-efficient LLM inference via MoH offloading</h4>
-                                <p class="work-secondary" data-lang="work_moh_sub">Head-wise routing traces and system trade-offs</p>
-                                <p class="work-date" data-lang="work_moh_date">In progress</p>
-                            </div>
-                        </a>
-                        <a class="work-card" data-category="research" href="research_pim_accel.html">
-                            <img src="assets/img/pim_accel.png" alt="Research thumbnail">
-                            <div class="work-card-body">
-                                <h4 data-lang="work_pim_title">PIM-accelerated gradient accumulation for 3DGS-SLAM</h4>
-                                <p class="work-secondary" data-lang="work_pim_sub">Atomic-conflict mitigation via bank-local reduction</p>
-                                <p class="work-date" data-lang="work_pim_date">In progress</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="filters" role="group" aria-label="Filter by type">
+      <button type="button" data-filter="all" data-lang="filter_all" aria-pressed="true">All</button>
+      <button type="button" data-filter="project" data-lang="filter_projects" aria-pressed="false">Projects</button>
+      <button type="button" data-filter="research" data-lang="filter_research" aria-pressed="false">Research</button>
     </div>
 
-    <div class="footer" data-lang="footer_text">© 2025 Junon Lee. All Rights Reserved.</div>
+    <div class="grid3" id="pf-grid" data-works="all"></div>
+  </section>
+
 </main>
+
+<footer class="site-footer" data-site-footer></footer>
+</div>
 </body>
 </html>
