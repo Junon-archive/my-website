@@ -15,7 +15,7 @@
      data-lang=KEY data-lang-attr="placeholder|aria-label|title|alt|content"
                                          -> element.setAttribute(attr, value)
                                             (comma separated list allowed)
-     data-placeholder="key"              -> legacy alias for the above
+     data-placeholder=KEY              -> legacy alias for the above
      data-no-lang                        -> <a> excluded from ?lang= propagation
      [data-lang-code="kr|en|jp"]         -> language button, gets aria-pressed
 
