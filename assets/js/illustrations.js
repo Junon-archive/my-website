@@ -19,6 +19,11 @@
 
   /* viewBox per scene kind (08 section 2, "크기") */
   var KIND = { thumb: [400, 225], hero: [1200, 400], diagram: [780, 300] };
+  /* Default label size in viewBox units, chosen so text lands at ~10-11 CSS px
+     at the display width of each kind (thumb ~380px, hero ~780-900px, diagram 780px).
+     A scene that declares its own canvas (fn.width / fn.height) is drawn at its own
+     scale, so it keeps 10.5 unless it sets fn.font. */
+  var KIND_FONT = { thumb: 12, hero: 15, diagram: 10.5 };
 
   /* ---------------------------------------------------------------- tokens */
   /* Fallbacks are the light values of 01 section 1, used only when
@@ -106,18 +111,73 @@
     return s;
   }
 
-  /** 28px blueprint grid at 45% --line. Decorative -> aria-hidden. */
+  /** 28px blueprint grid at 45% --line. Decorative -> aria-hidden.
+      Drawn as a pattern-filled rect so fitToContent() can resize it. */
   function grid(s, o) {
     o = o || {};
-    var m = meta(s), t = m.tokens, step = o.step || 28, x, y;
-    var g = mk(s, 'g', {
-      'aria-hidden': 'true', fill: 'none', stroke: t.line, 'stroke-width': 1,
+    var m = meta(s), t = m.tokens, step = o.step || 28;
+    var defs = ensureDefs(s);
+    var id = 'illus-' + m.id + '-grid';
+    var pat = mk(defs, 'pattern', {
+      id: id, width: step, height: step, patternUnits: 'userSpaceOnUse'
+    });
+    mk(pat, 'path', {
+      d: 'M' + step + ' 0 L 0 0 0 ' + step, fill: 'none',
+      stroke: t.line, 'stroke-width': 1
+    });
+    var g = mk(null, 'g', {
+      'data-illus-grid': '', 'aria-hidden': 'true',
       opacity: o.opacity == null ? 0.45 : o.opacity
     });
-    if (s.firstChild !== g) s.insertBefore(g, s.firstChild);
-    for (x = step; x < m.W; x += step) mk(g, 'line', { x1: x, y1: 0, x2: x, y2: m.H });
-    for (y = step; y < m.H; y += step) mk(g, 'line', { x1: 0, y1: y, x2: m.W, y2: y });
+    mk(g, 'rect', { x: 0, y: 0, width: m.W, height: m.H, fill: 'url(#' + id + ')' });
+    s.insertBefore(g, defs.nextSibling);
     return g;
+  }
+
+  function ensureDefs(s) {
+    var defs = s.querySelector('defs');
+    if (!defs) { defs = mk(null, 'defs'); s.insertBefore(defs, s.firstChild); }
+    return defs;
+  }
+
+  /**
+   * Crop a thumb/hero viewBox to what the scene actually drew, expanded back to
+   * the frame aspect ratio, so every card fills its frame the same way.
+   * Text is rescaled by the same factor so its rendered size does not change.
+   */
+  function fitToContent(s) {
+    var m = meta(s), wrap = s.querySelector('[data-illus-content]');
+    if (!wrap) return;
+    var ar = m.W / m.H;
+    function measure() {
+      try { return wrap.getBBox(); } catch (e) { return null; }
+    }
+    function boxOf(b) {
+      var p = Math.max(b.width, b.height) * 0.06;
+      var x = b.x - p, y = b.y - p, w = b.width + 2 * p, h = b.height + 2 * p, n;
+      if (w / h < ar) { n = h * ar; x -= (n - w) / 2; w = n; }
+      else { n = w / ar; y -= (n - h) / 2; h = n; }
+      return [x, y, w, h];
+    }
+    var bb = measure();
+    if (!bb || !(bb.width > 0) || !(bb.height > 0)) return;   /* detached / hidden */
+    var box = boxOf(bb), k = box[2] / m.W, i, texts, fs;
+    if (Math.abs(k - 1) > 0.01) {
+      texts = s.querySelectorAll('text');
+      for (i = 0; i < texts.length; i++) {
+        fs = parseFloat(texts[i].getAttribute('font-size')) || m.font;
+        texts[i].setAttribute('font-size', +(fs * k).toFixed(2));
+      }
+      bb = measure();
+      if (bb && bb.width > 0 && bb.height > 0) box = boxOf(bb);
+    }
+    s.setAttribute('viewBox', box.map(function (v) { return +v.toFixed(1); }).join(' '));
+    m.W = box[2]; m.H = box[3]; m.font = m.font * k;
+    var gr = s.querySelector('[data-illus-grid] rect');
+    if (gr) {
+      gr.setAttribute('x', box[0].toFixed(1)); gr.setAttribute('y', box[1].toFixed(1));
+      gr.setAttribute('width', box[2].toFixed(1)); gr.setAttribute('height', box[3].toFixed(1));
+    }
   }
 
   /* ------------------------------------------------------------ isometric */
@@ -523,8 +583,7 @@
   function marker(node, color) {
     var s = rootSvg(node), m = meta(node);
     if (!m.markers[color]) {
-      var defs = s.querySelector('defs');
-      if (!defs) { defs = mk(null, 'defs'); s.insertBefore(defs, s.firstChild); }
+      var defs = ensureDefs(s);
       var id = 'illus-' + m.id + '-a' + Object.keys(m.markers).length;
       var mk1 = mk(defs, 'marker', {
         id: id, viewBox: '0 0 8 8', refX: 6.6, refY: 4,
@@ -622,18 +681,35 @@
       for (i = kids.length - 1; i >= 0; i--) {
         if (kids[i].nodeType === 1 && kids[i].nodeName.toLowerCase() === 'svg') node.removeChild(kids[i]);
       }
+      var font = fn.font || ((fn.width || fn.height) ? 10.5 : (KIND_FONT[kind] || 10.5));
       var s = svg(null, {
-        viewBox: '0 0 ' + W + ' ' + H, aria: aria,
-        font: kind === 'thumb' ? 9.5 : 10.5
+        viewBox: '0 0 ' + W + ' ' + H, aria: aria, font: font
       });
       s.setAttribute('data-illus-kind', kind);
       node.insertBefore(s, node.firstChild);
       var ctx = {
         W: W, H: H, variant: name, kind: kind, name: name, set: setId,
-        tokens: s.__illus.tokens, el: node
+        font: font, tokens: s.__illus.tokens, el: node
       };
       try { fn(s, ctx); }
       catch (err) { if (global.console) console.error('[Illus] scene failed:', key, err); }
+
+      /* group everything the scene drew (grid and defs stay outside) so the
+         drawn extent can be measured */
+      var drawn = [], c, cn;
+      for (c = s.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType !== 1) continue;
+        cn = c.nodeName.toLowerCase();
+        if (cn === 'defs' || c.hasAttribute('data-illus-grid')) continue;
+        drawn.push(c);
+      }
+      if (drawn.length) {
+        var wrap = mk(s, 'g', { 'data-illus-content': '' });
+        for (i = 0; i < drawn.length; i++) wrap.appendChild(drawn[i]);
+      }
+      /* thumbs and heroes are auto-fitted; diagrams and scenes that declare their
+         own viewBox (home.hero) keep the declared box */
+      if ((kind === 'thumb' || kind === 'hero') && !fn.width && !fn.height) fitToContent(s);
       return s;
     },
 

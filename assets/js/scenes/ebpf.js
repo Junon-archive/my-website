@@ -19,6 +19,7 @@
     var k = hero ? 1.7 : 0.95;
     var O = hero ? [481, 374] : [148, 211];
     var t = ctx.tokens, i;
+    var F = ctx.font || 10.5;
 
     I.grid(s);
 
@@ -72,11 +73,11 @@
 
     /* --------------------------------------------------------- labels --- */
     var kL = P(O, 0, KD, KH / 2);                 /* left edge of the slab  */
-    var uB = P(UO, UW / 2, UD, UT);               /* back edge of the shelf */
+    var uB = P(UO, 0, UD, UT);                    /* back-left of the shelf */
     var cardR = P(card1, cardW, cardD / 2, cardH);
 
     I.label(s, kL[0] - 9 * k, kL[1] + 14 * k, 'kernel', { anchor: 'end' });
-    I.label(s, uB[0], uB[1] - 10 * k, 'user space', { anchor: 'middle' });
+    I.label(s, uB[0] - 8 * k, uB[1] - 3 * k, 'user space', { anchor: 'end' });
 
     if (!hero) {
       I.label(s, caps[0][0] - 8 * k, caps[0][1] - 5 * k, 'tracepoint', { anchor: 'end' });
@@ -90,8 +91,9 @@
       I.label(s, caps[i][0] - 9 * k, caps[i][1] - 6 * k, probes[i], { anchor: 'end' });
     }
     I.label(s, mapFront[0], mapFront[1] + 15 * k, 'BPF map', { anchor: 'middle', accent: true });
-    I.label(s, colTop[0], colTop[1] - 3, ['collector', 'Go'], { anchor: 'middle', lineHeight: 12.5 });
-    I.leader(s, cardR[0] + 12 * k, cardR[1] + 4 * k, cardR[0] + 3, cardR[1],
+    I.leader(s, colTop[0], colTop[1] - 22 * k, colTop[0], colTop[1] - 2,
+      'collector (Go)', { anchor: 'middle' });
+    I.leader(s, cardR[0] + 14 * k, cardR[1] + 15 * k, cardR[0] + 3, cardR[1],
       'csv + summary.json', { anchor: 'start' });
   }
 

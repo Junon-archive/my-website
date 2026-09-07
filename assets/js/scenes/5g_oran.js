@@ -18,14 +18,19 @@
     var k = hero ? 1.76 : 1;
     var O = hero ? [534, 372] : [131, 211];
     var t = ctx.tokens, i;
+    var F = ctx.font || 10.5;
+    /* Names on an isometric top face stay at the frame font so they are still
+       legible when the hero is shown at body width (~780px); what keeps them
+       inside the face is that they are one short word, not a smaller size. */
+    var LF = F;
 
     I.grid(s);
 
     /* one label block centred on an isometric top face */
-    function topLabel(pt, lines, o) {
-      var n = Array.isArray(lines) ? lines.length : 1, lh = 12.5;
-      I.label(s, pt[0], pt[1] + 3.5 - (n - 1) * lh / 2, lines,
-        { anchor: 'middle', lineHeight: lh, accent: o && o.accent });
+    function topLabel(pt, lines) {
+      var n = Array.isArray(lines) ? lines.length : 1, lh = LF * 1.25;
+      I.label(s, pt[0], pt[1] + LF * 0.34 - (n - 1) * lh / 2, lines,
+        { anchor: 'middle', size: LF, lineHeight: lh });
     }
 
     /* ---- floor: the Docker Compose slab -------------------------------- */
@@ -78,16 +83,15 @@
       { dashed: true, both: true, accent: true });
 
     /* --------------------------------------------------------- labels --- */
-    var names = hero
-      ? [['UE', 'srsRAN', 'netns ue1'], ['gNB', 'srsRAN'], ['Core', 'Open5GS', 'AMF']]
-      : ['UE', 'gNB', 'Core'];
+    /* short names on the faces; the interfaces carry the rest of the story */
+    var names = hero ? ['UE', 'gNB', ['Core', 'AMF']] : ['UE', 'gNB', 'Core'];
     for (i = 0; i < 3; i++) topLabel(tops[i], names[i]);
-    topLabel(ricTop, hero ? ['RIC', 'O-RAN SC'] : 'RIC');
+    topLabel(ricTop, 'RIC');
 
     if (!hero) return;
 
-    I.label(s, (e2Top[0] + e2Bot[0]) / 2 - 9 * k, (e2Top[1] + e2Bot[1]) / 2 - 3,
-      ['E2', 'E2AP'], { anchor: 'end', accent: true, lineHeight: 13 });
+    I.label(s, (e2Top[0] + e2Bot[0]) / 2 - 9 * k, (e2Top[1] + e2Bot[1]) / 2 - F * 0.3,
+      ['E2', 'E2AP'], { anchor: 'end', accent: true, lineHeight: F * 1.2 });
     I.label(s, zmq[0], zmq[1] + 2, 'ZMQ', { anchor: 'middle' });
     I.label(s, n2n3[0], n2n3[1] + 2, 'N2/N3', { anchor: 'middle' });
     var fL = P(O, 0, FD, 0);
