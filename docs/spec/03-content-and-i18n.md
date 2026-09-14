@@ -63,7 +63,7 @@ resume_edu2_title/sub     University of Seoul · B.S. ECE / 2019 – 2025
 resume_awards_title       "Awards"
 resume_award1_title/sub   Science & Engineering Academic Research Support Program · NRF (KR 이공분야 학술연구지원사업) / Master's student research grant · 2026.08
 resume_award2_title/sub   Excellence Award · Korea Automotive Technology Institute (KATECH) / CAN communication project · Next-generation communications winter internship · 2025.01
-resume_award3_title/sub   Grand Prize · Incheon University Student City Policy Presentation (KR 인천 대학생 시 정책 발표대회) / User-centered redesign of subway wayfinding signage · 2019.08
+resume_award3_title/sub   Grand Prize · Incheon University Student City Policy Presentation (KR 인천 대학생 시 정책 발표대회) / Proposed a user-centered subway wayfinding redesign for intuitive, efficient navigation · 2019.08
 resume_skills_title       "Skills"
 resume_skills_lang_label  "Languages"      resume_skills_lang      "C / C++ · Python · CUDA · Go"
 resume_skills_sys_label   "Systems"        resume_skills_sys       "Linux · eBPF · Docker · OpenCL"
