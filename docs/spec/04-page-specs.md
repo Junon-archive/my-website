@@ -45,7 +45,7 @@
 | portfolio.html | Portfolio · Junheon Lee |
 | resume.html | Resume · Junheon Lee |
 | contact.html | Contact · Junheon Lee |
-| project_*.html / research_*.html | {detail title} · Junheon Lee |
+| project_*.html / research_*.html / app_*.html | {detail title} · Junheon Lee |
 
 ---
 
@@ -65,6 +65,7 @@
 │  └─ .actions
 │     ├─ a.btn.primary → portfolio.html?filter=research   hero_cta_research + 화살표 아이콘
 │     ├─ a.btn         → portfolio.html?filter=project    hero_cta_projects + 화살표
+│     ├─ a.btn         → portfolio.html?filter=app        hero_cta_apps + 화살표
 │     └─ a.btn         → assets/pdf/Junheon_Lee_CV.pdf    다운로드 아이콘 + hero_cta_cv  (download 속성)
 └─ .visual (aria-hidden)
    ├─ svg#iso            figures.js가 생성하는 등각 메모리 계층 도식 (프리뷰 코드 이관)
@@ -86,6 +87,10 @@ h1의 이름은 모든 언어에서 동일하다. `.visual`은 모바일(≤960p
 - 카드 상단에 `.thumb` 등각 장면(08 문서, `scenes/<id>.js`의 `thumb`), 16:9. 그 아래 card-top(배지+날짜) → h3 → desc → `.keyfact`(mono 한 줄, 값이 있을 때만) → tagrow. Featured Research 카드(`.card.wide`)는 썸네일을 오른쪽 200px 열에 둔다.
 - 카드에 데이터 스파크라인은 넣지 않는다. 그래프는 상세 Results에만.
 
+### 1.4a Web Apps (2026-09-14)
+- 헤드: `home_apps_title` "Web Apps", `home_apps_sub`, `home_apps_more` → portfolio.html?filter=app
+- `type: app` 전부를 정렬 규칙대로 `.grid3`에 표준 `.card`로 렌더. 카드 상단 배지는 App + Maintained.
+
 ### 1.5 Footer
 공통. 왼쪽 `footer_affiliation`, 오른쪽 링크 GitHub / Email, © {year} `footer_copyright`.
 
@@ -96,24 +101,25 @@ h1의 이름은 모든 언어에서 동일하다. `.visual`은 모바일(≤960p
 
 ## 2. Portfolio (`portfolio.html`)
 
-역할: 전체 작업 7개를 훑고 필터링한다.
+역할: 전체 작업(10개)을 훑고 필터링한다.
 
 ```
 .section
 ├─ .section-head
-│  └─ .eyebrow portfolio_eyebrow "Portfolio" / h2 portfolio_title "Research & Projects" / .sub portfolio_sub
+│  └─ .eyebrow portfolio_eyebrow "Portfolio" / h2 portfolio_title "Research, Projects & Apps" / .sub portfolio_sub
 ├─ .filters (role=group)
-│  ├─ button[data-filter=all]      filter_all      + " · 7"
+│  ├─ button[data-filter=all]      filter_all      + " · 10"
 │  ├─ button[data-filter=project]  filter_projects + " · 5"
-│  └─ button[data-filter=research] filter_research + " · 2"
-└─ .grid3#pf-grid   works.js가 7개 전부 렌더
+│  ├─ button[data-filter=research] filter_research + " · 2"
+│  └─ button[data-filter=app]      filter_apps     + " · 3"
+└─ .grid3#pf-grid   works.js가 전부 렌더
 ```
 
 카드: `.card` 표준. 상단 `.thumb` 등각 장면(16:9, Home과 같은 `thumb` 함수), 배지(type + status), 날짜(in-progress는 날짜 대신 status 배지만), h3 `work_<id>_title`, desc `work_<id>_sub`, keyfact, 태그. 래스터 썸네일은 쓰지 않는다. 카드 순서는 정렬 규칙.
 
 필터:
 - `?filter=` 쿼리로 초기 상태. 버튼 클릭 시 `history.replaceState`로 쿼리 갱신.
-- 숨김은 `hidden` 속성. 버튼 `aria-pressed`.
+- 숨김은 `hidden` 속성. 버튼 `aria-pressed`. `.card{display:flex}`가 UA의 `[hidden]` 규칙을 이기므로 base.css에 `[hidden]{display:none !important}`가 필수(2026-09-14 버그 수정).
 - 개수는 works-data에서 계산해 라벨 뒤에 붙인다.
 
 Home과의 차이를 유지한다: Portfolio는 히어로 없음, 전체 목록 7개, 필터 있음, 3열. Home은 히어로 있음, 대표작만, 4열.

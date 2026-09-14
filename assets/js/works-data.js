@@ -1,8 +1,8 @@
 /* Single source of truth for the work list.
    Card order, detail meta strips, charts, evidence, artifacts and pager all derive from this file.
    Strings that need translation live in lang/*.json under work_<id>_* and detail_<id>_*.
-   Sort order (see docs/spec/02 section 4): projects before research, date descending,
-   in-progress items first within their type. */
+   Sort order (see docs/spec/02 section 4): projects, then research, then apps;
+   date descending, in-progress items first within their type. */
 
 window.SITE = {
   name: "Junheon Lee",
@@ -270,6 +270,135 @@ window.WORKS = [
     results: null,
     evidence: [],
     artifacts: [],
+    prevNext: true
+  },
+
+  {
+    id: "nihongo",
+    type: "app",
+    status: "maintained",
+    date: "2026.09",
+    period: "2026.09 – present",
+    updated: null,
+    featured: true,
+    href: "app_nihongo.html",
+    role: "Solo · product, backend, frontend, ops",
+    stack: ["Python 3.12", "FastAPI", "PostgreSQL 16", "SQLAlchemy · Alembic", "FSRS", "SudachiPy", "TypeScript", "Vite", "Playwright", "Docker Compose", "Cloudflare"],
+    tags: ["FastAPI", "PostgreSQL", "TypeScript", "Spaced repetition", "LLM pipeline"],
+    illus: {
+      thumb: "thumb",
+      hero: "hero",
+      alt: "Server slab with an API, a worker and a PostgreSQL stack; the worker asks an LLM for sentences that land in the database"
+    },
+    diagrams: [
+      { name: "arch", section: "s3" }
+    ],
+    keyfact: "2,078 tests · trial makes 0 API calls",
+    results: null,
+    evidence: [
+      { src: "assets/img/nihongo-home.png", webp: "assets/img/nihongo-home.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Home screen with two cards: try expression learning, or learn kana first", captionKey: "detail_nihongo_shot1" },
+      { src: "assets/img/nihongo-sheet.png", webp: "assets/img/nihongo-sheet.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Explanation sheet for the tapped expression with reading, meaning, meaning in context, nuance and an example", captionKey: "detail_nihongo_shot2" },
+      { src: "assets/img/nihongo-furigana.png", webp: "assets/img/nihongo-furigana.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Trial sentence with furigana readings above the kanji and the Korean translation revealed", captionKey: "detail_nihongo_shot3" },
+      { src: "assets/img/nihongo-kana.png", webp: "assets/img/nihongo-kana.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Hiragana table with range chips and romaji under each character", captionKey: "detail_nihongo_shot4" },
+      { src: "assets/img/nihongo-quiz-choose.png", webp: "assets/img/nihongo-quiz-choose.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Kana quiz asking for the romaji of a character from four choices", captionKey: "detail_nihongo_shot5" },
+      { src: "assets/img/nihongo-quiz-read.png", webp: "assets/img/nihongo-quiz-read.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Kana quiz in read-aloud mode with the answer revealed and right or wrong buttons", captionKey: "detail_nihongo_shot6" }
+    ],
+    artifacts: [
+      { label: "Live site", href: "https://japanese.our-lab-never-sleeps.xyz", kind: "link" },
+      { label: "Source", href: "https://github.com/Junon-archive/japanese-learning-app", kind: "code" }
+    ],
+    prevNext: true
+  },
+
+  {
+    id: "life_heatmap",
+    type: "app",
+    status: "maintained",
+    date: "2026.08",
+    period: "2026.08 – present",
+    updated: null,
+    featured: true,
+    href: "app_life_heatmap.html",
+    role: "Solo · product, design, build, deploy",
+    stack: ["Preact 10", "TypeScript", "Vite 6", "Workbox PWA", "Cloudflare Pages Functions", "Workers KV", "Vitest"],
+    tags: ["PWA", "Offline-first", "Sync", "Preact", "Serverless"],
+    illus: {
+      thumb: "thumb",
+      hero: "hero",
+      alt: "Phone showing a heatmap of days with one highlighted streak, synced through an edge key-value store to a PC"
+    },
+    diagrams: [
+      { name: "arch", section: "s3" }
+    ],
+    keyfact: "34 tests · 28 KB gzip · 1 runtime dependency",
+    results: null,
+    evidence: [
+      { src: "assets/img/heatmap-desktop.png", webp: "assets/img/heatmap-desktop.webp", width: 1600, height: 1000, frame: "wide", zoom: true,
+        alt: "Desktop view with a streak heatmap, a basic heatmap and a conditional heatmap side by side", captionKey: "detail_life_heatmap_shot1" },
+      { src: "assets/img/heatmap-streak.png", webp: "assets/img/heatmap-streak.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Streak heatmap on a phone with a purple intensity gradient, milestone glows and a failed day marked X", captionKey: "detail_life_heatmap_shot2" },
+      { src: "assets/img/heatmap-editor.png", webp: "assets/img/heatmap-editor.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Cell editor bottom sheet with fill style, colour, mark and border options", captionKey: "detail_life_heatmap_shot3" },
+      { src: "assets/img/heatmap-trend.png", webp: "assets/img/heatmap-trend.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Trend popup with a line chart of sleep hours and average, minimum and maximum chips", captionKey: "detail_life_heatmap_shot4" },
+      { src: "assets/img/heatmap-year.png", webp: "assets/img/heatmap-year.webp", width: 1600, height: 1000, frame: "half", zoom: true,
+        alt: "Year view with three contribution-style grids of 53 weeks", captionKey: "detail_life_heatmap_shot5" },
+      { src: "assets/img/heatmap-legend.png", webp: "assets/img/heatmap-legend.webp", width: 1600, height: 1000, frame: "half", zoom: true,
+        alt: "Legend popover opened on the basic heatmap", captionKey: "detail_life_heatmap_shot6" }
+    ],
+    artifacts: [
+      { label: "Live site", href: "https://heatmap-for-me.pages.dev/", kind: "link" },
+      { label: "Source", href: "https://github.com/Junon-archive/life-heatmap", kind: "code" }
+    ],
+    prevNext: true
+  },
+
+  {
+    id: "riff",
+    type: "app",
+    status: "maintained",
+    date: "2026.07",
+    period: "2026.07 – present",
+    updated: null,
+    featured: true,
+    href: "app_riff.html",
+    role: "Solo · design, build, deploy",
+    stack: ["Astro 5", "TypeScript", "VexFlow 4", "jsdom", "Web Audio API", "Service Worker", "Cloudflare Pages"],
+    tags: ["Astro", "TypeScript", "SVG rendering", "i18n", "PWA"],
+    illus: {
+      thumb: "thumb",
+      hero: "hero",
+      alt: "Guitar neck with a pentatonic scale shape highlighted, rendered from a score card, next to a stack of lesson pages"
+    },
+    diagrams: [
+      { name: "arch", section: "s3" }
+    ],
+    keyfact: "1,012 static pages · 28 KB gzip JS",
+    results: null,
+    evidence: [
+      { src: "assets/img/riff-home.png", webp: "assets/img/riff-home.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Riff home page in English with practice tool cards, a guitar and bass filter and course cards", captionKey: "detail_riff_shot1" },
+      { src: "assets/img/riff-course.png", webp: "assets/img/riff-course.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Course page for Solo and Scale Mastery with a progress bar at 27 percent, 14 of 52 days", captionKey: "detail_riff_shot2" },
+      { src: "assets/img/riff-lesson.png", webp: "assets/img/riff-lesson.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Lesson page with combined staff notation and tablature showing half and full bends", captionKey: "detail_riff_shot3" },
+      { src: "assets/img/riff-lesson-dark.png", webp: "assets/img/riff-lesson-dark.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Lesson in dark mode with a sixteenth-note muted rhythm in staff and tab", captionKey: "detail_riff_shot4" },
+      { src: "assets/img/riff-bass-ja.png", webp: "assets/img/riff-bass-ja.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Bass lesson in Japanese with green theme and fretboard diagrams for 4- and 5-string bass", captionKey: "detail_riff_shot5" },
+      { src: "assets/img/riff-metronome.png", webp: "assets/img/riff-metronome.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Metronome tool with BPM, time signature, subdivision and sound options", captionKey: "detail_riff_shot6" }
+    ],
+    artifacts: [
+      { label: "Live site", href: "https://guitar-riff.pages.dev", kind: "link" },
+      { label: "Source", href: "https://github.com/Junon-archive/Riff", kind: "code" }
+    ],
     prevNext: true
   }
 ];

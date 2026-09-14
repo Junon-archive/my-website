@@ -69,7 +69,7 @@
 4. **숫자는 증거다.** 카드와 상세 페이지의 그래프는 실제 측정값만 사용한다. 값이 없으면 그래프를 넣지 않는다.
 4a. **그림은 코드로 그린다.** 썸네일, 히어로, 설명 도식은 08 문서 체계의 inline SVG. 래스터 이미지는 스크린샷과 측정 플롯 같은 실제 산출물에만 쓴다. 생성형 개념 이미지는 쓰지 않는다.
 5. **구조는 정보다.** 번호 TOC는 실제 순서(문제→구현→측정→결과)를 가진 상세 페이지에만 쓴다.
-6. **기존 URL 유지.** `project_*.html`, `research_*.html` 파일명은 바꾸지 않는다. 외부에 공유된 링크가 있을 수 있다.
+6. **기존 URL 유지.** `project_*.html`, `research_*.html`, `app_*.html` 파일명은 바꾸지 않는다. 외부에 공유된 링크가 있을 수 있다.
 7. **빌드 없이도 열린다.** `file://`로 열어도 레이아웃이 깨지지 않아야 한다. fetch 실패 시 `lang-data.js` 폴백으로 동작한다.
 
 ## 5. 미결 사항 → 확정 (Phase 0, 2026-09-07)
@@ -90,3 +90,15 @@
 | Q10 | NRF 연구장려금 | 포함 (2026.08) | 목업 기준. 사실과 다르면 `resume_award1_*` 삭제 |
 | Q11 | 기존 PNG 판정 | rowscope.png 유지(플롯). CAN.png, openCL.png는 Phase 3에서 열어 판정. 나머지 삭제 | 06 문서 1절 |
 | Q12 | 브랜치 | `redesign-2026-09` 단일 브랜치, Phase별 커밋. main 머지와 배포는 사용자 확인 후 | 07 문서 |
+
+## 6. 2026-09-14 업데이트 결정
+
+| # | 항목 | 확정 | 근거 / 되돌리는 방법 |
+|---|---|---|---|
+| Q13 | 푸터 인용구 | 삭제 (`footer_quote` 키 제거) | 사용자 지시 |
+| Q14 | 세 번째 작업 유형 | `type: "app"`, 라벨 "App"/"Apps", 파일 `app_<id>.html`. 대상: Riff, Life Heatmap, Nihongo Context | 사용자 결정("Build" 대신 App) |
+| Q15 | 정렬 | project → research → app (app이 맨 뒤) | 사용자 결정. `works.js`의 `TYPES` 배열 순서 |
+| Q16 | 앱 상태 배지 | `status: "maintained"` → "Maintained" / "운영 중" / "運用中" | 계속 운영 중이라는 의미. Completed로 바꾸려면 works-data의 status를 `completed`로 |
+| Q17 | 노출 | Home "Web Apps" 섹션, Resume "Web apps" 블록, Hero CTA "Apps" | 사용자 결정 |
+| Q18 | AI 도구 표기 | 사이트 문구에 개발 도구로서의 AI 에이전트 언급 금지. `check.mjs` 11번이 "Claude"/"Anthropic"을 검사 | 사용자 지시. 제품 기능으로서의 LLM은 "LLM"으로만 표기 |
+| Q19 | 앱 스크린샷 | 라이브 사이트(또는 로컬 빌드 + 가짜 시드 데이터)를 headless Chrome CDP로 캡처. 개인 데이터 금지 | 06 문서 1절 |

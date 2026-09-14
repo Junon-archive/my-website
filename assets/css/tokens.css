@@ -24,6 +24,8 @@
   --ok-soft:#e6f4ec;
   --warn:#a1620b;
   --warn-soft:#fbf1e0;
+  --teal:#0f6f68;        /* App type badge (01 §1) */
+  --teal-soft:#e2f3f1;
   --shadow:0 10px 30px rgba(18,57,95,.08);
   /* text colour of a filled (primary) button: light theme = the canvas tone */
   --on-navy:#f5f8fb;
@@ -73,6 +75,8 @@
     --ok-soft:#14301f;
     --warn:#f0b85a;
     --warn-soft:#3a2a10;
+    --teal:#6fd6cb;
+    --teal-soft:#10302e;
     --shadow:0 10px 30px rgba(0,0,0,.35);
     --on-navy:#0b1421;
   }
@@ -92,6 +96,8 @@
   --ok-soft:#14301f;
   --warn:#f0b85a;
   --warn-soft:#3a2a10;
+  --teal:#6fd6cb;
+  --teal-soft:#10302e;
   --shadow:0 10px 30px rgba(0,0,0,.35);
   --on-navy:#0b1421;
 }

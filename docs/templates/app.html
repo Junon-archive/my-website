@@ -1,0 +1,169 @@
+<!doctype html>
+<!-- =========================================================================
+     APP DETAIL TEMPLATE  (docs/spec/05-detail-templates.md §3a)
+
+     How to use
+       1. cp docs/templates/app.html app_<id>.html
+       2. Replace every {id} with the works-data id (search for "{id}").
+       3. Replace the {…} prose in <head> and in the fallback text of each
+          element. Fallback text is what a visitor sees if JS never runs, so
+          write real English, never a placeholder.
+       4. One <figure class="evidence" data-evidence="N"> per works-data
+          evidence entry (N = index). works.js adds the frame class
+          (wide / half / phone) and the zoom link.
+       5. 4 or 6 highlight cards, 3 or 4 stat tiles. Delete the rest.
+       6. node scripts/check.mjs
+
+     Empty containers (data-work-*, data-evidence) are filled by works.js from
+     works-data.js; leave them empty here.
+     ========================================================================= -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{Detail title} · Junheon Lee</title>
+<meta name="description" content="{One English sentence describing the app.}">
+<meta property="og:title" content="{Detail title} · Junheon Lee">
+<meta property="og:description" content="{One English sentence describing the app.}">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/app_{id}.html">
+<meta property="og:url" content="https://junon-lee.pages.dev/app_{id}.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/{id}.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
+</head>
+
+<body class="page-detail" data-work-id="{id}" data-work-type="app">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">›</span>
+      <a href="portfolio.html?filter=app" data-lang="filter_apps">Apps</a><span class="sep">›</span>
+      <span data-lang="detail_{id}_short">{Short title}</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_{id}_title">{Detail title}</h1>
+      <p class="detail-desc" data-lang="detail_{id}_subtitle">{One or two sentences: what the app is and who it is for.}</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="{id}.hero" role="img" aria-label="{What the isometric scene shows.}"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_a_s1">Why I built it</span></h2>
+      <p data-lang="detail_{id}_overview">{The problem, who has it, and why existing tools did not solve it.}</p>
+      <div class="findings">
+        <div class="finding"><div class="k" data-lang="detail_{id}_goal1_label">{Goal 1}</div><p data-lang="detail_{id}_goal1_body">{What the goal means in practice.}</p></div>
+        <div class="finding"><div class="k" data-lang="detail_{id}_goal2_label">{Goal 2}</div><p data-lang="detail_{id}_goal2_body">{What the goal means in practice.}</p></div>
+        <div class="finding"><div class="k" data-lang="detail_{id}_goal3_label">{Goal 3}</div><p data-lang="detail_{id}_goal3_body">{What the goal means in practice.}</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_a_s2">What it does</span></h2>
+      <ul>
+        <li data-lang="detail_{id}_feature1">{Feature, one sentence.}</li>
+        <li data-lang="detail_{id}_feature2">{Feature, one sentence.}</li>
+        <li data-lang="detail_{id}_feature3">{Feature, one sentence.}</li>
+        <li data-lang="detail_{id}_feature4">{Feature, one sentence.}</li>
+      </ul>
+      <div class="shots">
+        <figure class="evidence" data-evidence="0"><figcaption data-lang="detail_{id}_shot1">{What the screenshot shows.}</figcaption></figure>
+        <figure class="evidence" data-evidence="1"><figcaption data-lang="detail_{id}_shot2">{What the screenshot shows.}</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_a_s3">How it works</span></h2>
+      <p data-lang="detail_{id}_arch_body">{One paragraph on the architecture: the pieces and how data moves between them.}</p>
+      <figure class="diagram" data-illus="{id}.arch" role="img" aria-label="{What the diagram shows.}">
+        <figcaption data-lang="detail_{id}_fig_arch">{The one-sentence conclusion the diagram makes.}</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_{id}_pipeline_step1_title">{Step 1}</b><span data-lang="detail_{id}_pipeline_step1">{What happens in step 1.}</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_{id}_pipeline_step2_title">{Step 2}</b><span data-lang="detail_{id}_pipeline_step2">{What happens in step 2.}</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_{id}_pipeline_step3_title">{Step 3}</b><span data-lang="detail_{id}_pipeline_step3">{What happens in step 3.}</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_{id}_pipeline_step4_title">{Step 4}</b><span data-lang="detail_{id}_pipeline_step4">{What happens in step 4.}</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_{id}_pipeline_step5_title">{Step 5}</b><span data-lang="detail_{id}_pipeline_step5">{What happens in step 5.}</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_a_s4">Engineering highlights</span></h2>
+      <div class="highlights">
+        <div class="highlight"><b data-lang="detail_{id}_hl1_title">{Hard problem}</b><p data-lang="detail_{id}_hl1_body">{Problem, approach, and the result.}</p></div>
+        <div class="highlight"><b data-lang="detail_{id}_hl2_title">{Hard problem}</b><p data-lang="detail_{id}_hl2_body">{Problem, approach, and the result.}</p></div>
+        <div class="highlight"><b data-lang="detail_{id}_hl3_title">{Hard problem}</b><p data-lang="detail_{id}_hl3_body">{Problem, approach, and the result.}</p></div>
+        <div class="highlight"><b data-lang="detail_{id}_hl4_title">{Hard problem}</b><p data-lang="detail_{id}_hl4_body">{Problem, approach, and the result.}</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_a_s5">Quality &amp; numbers</span></h2>
+      <div class="statrow">
+        <div class="stat"><div class="v" data-lang="detail_{id}_stat1_value">{value}</div><div class="l" data-lang="detail_{id}_stat1_label">{What the number is and how it was measured.}</div></div>
+        <div class="stat"><div class="v" data-lang="detail_{id}_stat2_value">{value}</div><div class="l" data-lang="detail_{id}_stat2_label">{What the number is and how it was measured.}</div></div>
+        <div class="stat"><div class="v" data-lang="detail_{id}_stat3_value">{value}</div><div class="l" data-lang="detail_{id}_stat3_label">{What the number is and how it was measured.}</div></div>
+      </div>
+      <ul>
+        <li data-lang="detail_{id}_quality1">{How correctness is checked.}</li>
+        <li data-lang="detail_{id}_quality2">{How correctness is checked.}</li>
+        <li data-lang="detail_{id}_quality3">{How correctness is checked.}</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_a_s6">Decisions &amp; trade-offs</span></h2>
+      <ul>
+        <li data-lang="detail_{id}_design_item1">{Decision. Reason, and what it cost.}</li>
+        <li data-lang="detail_{id}_design_item2">{Decision. Reason, and what it cost.}</li>
+        <li data-lang="detail_{id}_design_item3">{Decision. Reason, and what it cost.}</li>
+      </ul>
+      <div class="takeaway">
+        <b data-lang="detail_common_a_retro">Looking back</b>
+        <span data-lang="detail_{id}_takeaway">{What building and running it taught.}</span>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s7">
+      <h2><span class="num">07</span><span data-lang="detail_common_a_s7">Stack &amp; links</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
+
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
+
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+</body>
+</html>

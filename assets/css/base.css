@@ -130,6 +130,12 @@ table{border-collapse:collapse;font-variant-numeric:tabular-nums}
 .badge.project{background:var(--tint);color:var(--slate);border:1px solid var(--line)}
 .badge.progress{background:var(--warn-soft);color:var(--warn)}
 .badge.done{background:var(--ok-soft);color:var(--ok)}
+.badge.app{background:var(--teal-soft);color:var(--teal)}
+.badge.maintained{background:var(--ok-soft);color:var(--ok)}
+.badge.maintained::before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:currentColor;margin-right:6px;vertical-align:1px;
+}
 
 /* --- tag ------------------------------------------------------------------ */
 .tag{

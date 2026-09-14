@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Heatmap: An Offline-First Habit Tracker with Serverless Sync · Junheon Lee</title>
+<meta name="description" content="Life Heatmap: an offline-first habit tracker PWA with per-cell last-write-wins sync through a 48-line Cloudflare function.">
+<meta property="og:title" content="Life Heatmap: An Offline-First Habit Tracker with Serverless Sync · Junheon Lee">
+<meta property="og:description" content="Life Heatmap: an offline-first habit tracker PWA with per-cell last-write-wins sync through a 48-line Cloudflare function.">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/app_life_heatmap.html">
+<meta property="og:url" content="https://junon-lee.pages.dev/app_life_heatmap.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/life_heatmap.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
+</head>
+
+<body class="page-detail" data-work-id="life_heatmap" data-work-type="app">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=app" data-lang="filter_apps">Apps</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_life_heatmap_short">Life Heatmap</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_life_heatmap_title">Life Heatmap: An Offline-First Habit Tracker with Serverless Sync</h1>
+      <p class="detail-desc" data-lang="detail_life_heatmap_subtitle">A mobile-first PWA that keeps the free-form notation of a paper habit grid, adds streaks, rule-based colouring and statistics, and keeps a phone and a PC in sync through a 48-line serverless function.</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="life_heatmap.hero" role="img" aria-label="Phone showing a heatmap of days with one highlighted streak, synced through an edge key-value store to a PC"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_a_s1">Why I built it</span></h2>
+      <p data-lang="detail_life_heatmap_overview">For a long time I tracked daily routines on paper grids: hatching, solid fills, numbers and symbols in each cell. It worked because the notation was free-form. It failed because paper was not always with me, streaks had to be counted by hand, and months of history could not be summarised. Habit apps solve the counting but reduce every day to done or not done. Life Heatmap keeps the expressiveness of paper and adds only what software is good at: derived streaks, colouring by rule, statistics, a year view, and the same data on phone and PC, with nothing to operate or pay for.</p>
+      <div class="findings">
+        <div class="finding"><div class="k" data-lang="detail_life_heatmap_goal1_label">Three taps or fewer</div><p data-lang="detail_life_heatmap_goal1_body">No input screen. Tap a cell, change it in place, and it is already saved.</p></div>
+        <div class="finding"><div class="k" data-lang="detail_life_heatmap_goal2_label">Same data, even offline</div><p data-lang="detail_life_heatmap_goal2_body">Writes always succeed locally, and phone and PC converge once they are back online.</p></div>
+        <div class="finding"><div class="k" data-lang="detail_life_heatmap_goal3_label">Nothing to operate</div><p data-lang="detail_life_heatmap_goal3_body">Static hosting plus one small function on a free tier, and a single runtime dependency.</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_a_s2">What it does</span></h2>
+      <ul>
+        <li data-lang="detail_life_heatmap_feature1">Heatmaps created as needed, in three types that can be switched later without losing data: basic, streak and conditional.</li>
+        <li data-lang="detail_life_heatmap_feature2">Streaks counted from the last failed day, with a five-level intensity gradient, milestone glows and current and best counters. Auto mode colours the days without any input.</li>
+        <li data-lang="detail_life_heatmap_feature3">Conditional heatmaps colour a number by user-defined ranges, offer a weekly-average mode, and open a trend chart drawn in plain SVG.</li>
+        <li data-lang="detail_life_heatmap_feature4">A cell is a fill (hatch or solid, six colours), a mark (a number or ○ X ★) and a border, edited in a bottom sheet on mobile or a popover on desktop. Every tap saves.</li>
+        <li data-lang="detail_life_heatmap_feature5">A GitHub-style year view sized to the screen, monthly and quarterly statistics, and JSON backup with merge or replace on import.</li>
+        <li data-lang="detail_life_heatmap_feature6">Sync between devices with a secret code instead of an account, in an installable PWA that works offline.</li>
+      </ul>
+      <div class="shots">
+        <figure class="evidence" data-evidence="0"><figcaption data-lang="detail_life_heatmap_shot1">Desktop: streak, basic and conditional heatmaps side by side. All data in these screenshots is generated sample data; the interface is in Korean.</figcaption></figure>
+        <figure class="evidence" data-evidence="1"><figcaption data-lang="detail_life_heatmap_shot2">Streak heatmap: intensity grows with the streak, milestones glow, and a failed day (X) resets the count.</figcaption></figure>
+        <figure class="evidence" data-evidence="2"><figcaption data-lang="detail_life_heatmap_shot3">Editor bottom sheet. The grid stays tappable while it is open, so several past days can be filled in a row.</figcaption></figure>
+        <figure class="evidence" data-evidence="3"><figcaption data-lang="detail_life_heatmap_shot4">Trend popup for a conditional heatmap: a hand-written SVG chart with average, minimum and maximum.</figcaption></figure>
+        <figure class="evidence" data-evidence="4"><figcaption data-lang="detail_life_heatmap_shot5">Year view: 53-week grids whose cell size is computed from the measured container width.</figcaption></figure>
+        <figure class="evidence" data-evidence="5"><figcaption data-lang="detail_life_heatmap_shot6">Legends stay hidden until requested, so a glance at the screen does not reveal what the colours mean.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_a_s3">How it works</span></h2>
+      <p data-lang="detail_life_heatmap_arch_body">The app is local-first. The whole state is one JSON document in localStorage, and every change goes through a single store function that persists it, notifies the Preact components and schedules a sync. Nothing derived is stored: streaks, intensity levels, statistics and trend lines are recomputed from the entries by pure functions on each render. Sync exists only once the user sets a code. The client hashes that code with SHA-256, pulls the document from a Cloudflare Pages Function backed by Workers KV, merges it with the local copy, and pushes the result only if it differs. The function validates the key, the size and the JSON, and stores the blob. It never interprets the data.</p>
+      <figure class="diagram" data-illus="life_heatmap.arch" role="img" aria-label="Device-side store, derived visuals and sync with per-cell merging, linked by a hashed key to a Pages Function and Workers KV.">
+        <figcaption data-lang="detail_life_heatmap_fig_arch">The device is the source of truth. The server is a 48-line blob store keyed by the hash of a secret, and all merging happens on the client.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_life_heatmap_pipeline_step1_title">Tap</b><span data-lang="detail_life_heatmap_pipeline_step1">A tap calls store.update(), which writes the whole document to localStorage at once, so an edit never waits for the network.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_life_heatmap_pipeline_step2_title">Derive</b><span data-lang="detail_life_heatmap_pipeline_step2">cellVisual() computes each cell's colour, intensity, marks and milestone state from raw entries, for both the week grid and the year view.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_life_heatmap_pipeline_step3_title">Schedule</b><span data-lang="detail_life_heatmap_pipeline_step3">A sync runs 3 s after the last edit, on app open, on tab focus and on reconnect. Requests that arrive during a sync collapse into one more run.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_life_heatmap_pipeline_step4_title">Merge</b><span data-lang="detail_life_heatmap_pipeline_step4">The client pulls the remote document and merges it per heatmap and per date by timestamp, applying tombstones for deleted heatmaps.</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_life_heatmap_pipeline_step5_title">Push</b><span data-lang="detail_life_heatmap_pipeline_step5">Only when the merged result differs from the server copy is it sent back, keyed by the SHA-256 of the sync code.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_a_s4">Engineering highlights</span></h2>
+      <div class="highlights">
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl1_title">Multi-device sync without CRDTs</b><p data-lang="detail_life_heatmap_hl1_body">For one user on a few devices, last-write-wins is enough if the unit is small. The merge works per (heatmap, date), so edits to different cells on two devices both survive. Clearing a cell is stored as a timestamped empty entry, so the clear wins instead of the old value coming back. Deleted heatmaps leave tombstones compared with the heatmap's latest touch, so an edit after a delete brings it back deterministically. Nine merge tests pin this down.</p></div>
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl2_title">An account-less backend in 48 lines</b><p data-lang="detail_life_heatmap_hl2_body">A random 24-character code (about 124 bits) never leaves the device; its SHA-256 hex is the KV key. The Pages Function checks the key format, rejects bodies over 5 MB with 413 and invalid JSON with 400, and stores the blob with no-store caching. Without a code the app makes no network calls, and a visitor to the public URL sees an empty app.</p></div>
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl3_title">Store facts, derive everything else</b><p data-lang="detail_life_heatmap_hl3_body">Streak lengths, levels, milestones, statistics and regressions are never persisted. One pure cellVisual() function holds every precedence rule (fail over fill, rule colour over manual fill, value over mark) and feeds both views, so four rule changes shipped without migrating any stored data.</p></div>
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl4_title">Dates without a date library</b><p data-lang="detail_life_heatmap_hl4_body">new Date('YYYY-MM-DD') parses as UTC and shifts the day in Korea, so dates stay local YYYY-MM-DD strings, day differences are rounded to absorb 23- and 25-hour days, and week numbers follow the paper convention (a week belongs to the year of its Saturday). Streaks break only on explicit fails, never on empty days. Fourteen date and streak tests cover the edge cases.</p></div>
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl5_title">A Safari layout bug fixed by measuring</b><p data-lang="detail_life_heatmap_hl5_body">The 53-column year grid collapsed on a real iPhone: first 1fr tracks grew to fit their content, then aspect-ratio cells produced squashed rows. I replaced CSS sizing with a ResizeObserver that computes an integer cell size from the container width and writes explicit pixel tracks, and recorded the banned pattern in the spec so it would not come back.</p></div>
+        <div class="highlight"><b data-lang="detail_life_heatmap_hl6_title">Input that keeps up with the hand</b><p data-lang="detail_life_heatmap_hl6_body">The editor's backdrop swallowed taps on other cells, which broke filling several days in a row; a document-level click filter replaced it. Typing a decimal lost the dot because the input re-rendered the parsed number; the in-progress string now lives in local state. Loading 24 older weeks corrects scrollTop in a layout effect, so the view does not jump.</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_a_s5">Quality &amp; numbers</span></h2>
+      <div class="statrow">
+        <div class="stat"><div class="v" data-lang="detail_life_heatmap_stat1_value">34</div><div class="l" data-lang="detail_life_heatmap_stat1_label">unit tests for dates, streaks, merging and regression, all passing in Vitest</div></div>
+        <div class="stat"><div class="v" data-lang="detail_life_heatmap_stat2_value">28 KB</div><div class="l" data-lang="detail_life_heatmap_stat2_label">app JavaScript after gzip, with Preact as the only runtime dependency</div></div>
+        <div class="stat"><div class="v" data-lang="detail_life_heatmap_stat3_value">48</div><div class="l" data-lang="detail_life_heatmap_stat3_label">lines in the entire serverless backend</div></div>
+        <div class="stat"><div class="v" data-lang="detail_life_heatmap_stat4_value">110 KiB</div><div class="l" data-lang="detail_life_heatmap_stat4_label">offline precache for the whole app (13 files)</div></div>
+      </div>
+      <ul>
+        <li data-lang="detail_life_heatmap_quality1">Tests target the pure logic where a bug would silently corrupt data: date arithmetic, streak rules, the merge and the regression maths.</li>
+        <li data-lang="detail_life_heatmap_quality2">The build runs tsc --noEmit in strict mode first, so a type error blocks a deploy. The live bundle hash matches a clean build of the repository.</li>
+        <li data-lang="detail_life_heatmap_quality3">The specs record 32 requirements and 25 dated design decisions with reasons, for example replacing drag-to-reorder with buttons because touch drag fights scrolling.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_a_s6">Decisions &amp; trade-offs</span></h2>
+      <ul>
+        <li data-lang="detail_life_heatmap_design_item1">Last-write-wins per cell instead of CRDTs or a database. It fits a single user and keeps the server dumb. The known costs are device clock skew and no compare-and-swap in KV, which re-merging on every trigger makes tolerable.</li>
+        <li data-lang="detail_life_heatmap_design_item2">A secret code instead of accounts. There is no auth to build or leak, but the data is not encrypted at rest yet; client-side encryption keyed by the code is the next step.</li>
+        <li data-lang="detail_life_heatmap_design_item3">Preact and a hand-written store instead of a larger framework and a state library. The whole state is one document, so one update path and a subscription hook are enough.</li>
+        <li data-lang="detail_life_heatmap_design_item4">Charts, statistic bars and even the PNG icon generator written by hand. A dependency allow-list in the spec keeps the bundle at 28 KB gzip and the project maintainable for years.</li>
+      </ul>
+      <div class="takeaway">
+        <b data-lang="detail_common_a_retro">Looking back</b>
+        <span data-lang="detail_life_heatmap_takeaway">Version 1 went from scaffold to a deployed PWA with KV sync in one day, and version 2.4.1 followed eight days later, driven by what actual use exposed: iPhone layout bugs, editor friction, a lost decimal point. The lesson was that a small consistency model chosen on purpose, with its failure modes written down, is worth more than a sophisticated one I could not explain.</span>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s7">
+      <h2><span class="num">07</span><span data-lang="detail_common_a_s7">Stack &amp; links</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
+
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
+
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+</body>
+</html>

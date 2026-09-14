@@ -31,6 +31,9 @@
 <script src="assets/js/scenes/opencl.js"></script>
 <script src="assets/js/scenes/dynamic_moh.js"></script>
 <script src="assets/js/scenes/pim_accel.js"></script>
+<script src="assets/js/scenes/riff.js"></script>
+<script src="assets/js/scenes/life_heatmap.js"></script>
+<script src="assets/js/scenes/nihongo.js"></script>
 <script src="assets/js/lang.js" defer></script>
 <script src="assets/js/layout.js" defer></script>
 <script src="assets/js/works.js" defer></script>
@@ -59,6 +62,10 @@
         </a>
         <a class="btn" href="portfolio.html?filter=project">
           <span data-lang="hero_cta_projects">Projects</span>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a class="btn" href="portfolio.html?filter=app">
+          <span data-lang="hero_cta_apps">Apps</span>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         </a>
         <a class="btn" data-cv-button href="assets/pdf/Junheon_Lee_CV.pdf">
@@ -111,6 +118,17 @@
       <a class="textlink" href="portfolio.html?filter=project" data-lang="home_projects_more">All projects</a>
     </div>
     <div class="grid4" data-works="project" data-works-featured data-works-limit="4"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2 data-lang="home_apps_title">Web Apps</h2>
+        <p class="sub" data-lang="home_apps_sub">Three web apps I designed, built, deployed, and still maintain: a static guitar curriculum, an offline-first habit heatmap, and a full-stack Japanese learning service.</p>
+      </div>
+      <a class="textlink" href="portfolio.html?filter=app" data-lang="home_apps_more">All apps</a>
+    </div>
+    <div class="grid3" data-works="app"></div>
   </section>
 
 </main>

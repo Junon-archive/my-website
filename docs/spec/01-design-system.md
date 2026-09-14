@@ -19,6 +19,7 @@
 | `--canvas` | `#F5F8FB` | 셸 바깥 바탕 |
 | `--ok` / `--ok-soft` | `#1F7A4D` / `#E6F4EC` | Completed 배지 |
 | `--warn` / `--warn-soft` | `#A1620B` / `#FBF1E0` | In progress 배지 |
+| `--teal` / `--teal-soft` | `#0F6F68` / `#E2F3F1` | App 유형 배지 (2026-09-14) |
 | `--shadow` | `0 10px 30px rgba(18,57,95,.08)` | 카드 hover |
 
 ### 다크 (`@media (prefers-color-scheme: dark)` 내 `:root:not([data-theme="light"])`, 그리고 `:root[data-theme="dark"]`)
@@ -36,6 +37,7 @@
 | `--canvas` | `#0B1421` |
 | `--ok` / `--ok-soft` | `#6DD39A` / `#14301F` |
 | `--warn` / `--warn-soft` | `#F0B85A` / `#3A2A10` |
+| `--teal` / `--teal-soft` | `#6FD6CB` / `#10302E` |
 
 규칙:
 - `body`는 반드시 `background: var(--canvas)`를 명시한다.
@@ -125,6 +127,8 @@ mono 11px, `padding: 3px 8px`, radius 6px. 종류:
 - `.project` (`--tint`/`--slate`, `--line` 테두리)
 - `.progress` (`--warn-soft`/`--warn`) 텍스트 "In progress"
 - `.done` (`--ok-soft`/`--ok`) 텍스트 "Completed"
+- `.app` (`--teal-soft`/`--teal`) 텍스트 "App"
+- `.maintained` (`--ok-soft`/`--ok`, 앞에 6px 점) 텍스트 "Maintained"
 
 ### 4.4 Tag `.tag`
 mono 11px, `--tint` 배경, `--line` 테두리. 한 카드에 최대 5개. 상세 페이지 상단은 최대 6개.

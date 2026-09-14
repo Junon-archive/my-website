@@ -30,12 +30,12 @@
 | `brand_` | 브랜드 | `brand_name` |
 | `hero_` | Home 히어로 | `hero_eyebrow`, `hero_name_native`, `hero_name_latin`, `hero_role`, `hero_areas`, `hero_lead`, `hero_cta_research`, `hero_cta_projects`, `hero_cta_cv` |
 | `pill_` | 가치 제안 4개 | `pill_1_title`, `pill_1_desc` … `pill_4_desc` |
-| `home_` | Home 섹션 헤드 | `home_research_title`, `home_research_sub`, `home_research_more`, `home_projects_title`, `home_projects_sub`, `home_projects_more` |
-| `portfolio_` | Portfolio | `portfolio_eyebrow`, `portfolio_title`, `portfolio_sub`, `filter_all`, `filter_projects`, `filter_research` |
+| `home_` | Home 섹션 헤드 | `home_research_title`, `home_research_sub`, `home_research_more`, `home_projects_title`, `home_projects_sub`, `home_projects_more`, `home_apps_title`, `home_apps_sub`, `home_apps_more` |
+| `portfolio_` | Portfolio | `portfolio_eyebrow`, `portfolio_title`, `portfolio_sub`, `filter_all`, `filter_projects`, `filter_research`, `filter_apps` |
 | `work_<id>_` | 카드 문자열 | `work_ebpf_title`, `work_ebpf_sub` (date는 works-data로 이동, 키 삭제) |
 | `detail_<id>_` | 상세 본문 (영어 단일, kr/jp는 en과 동일 값) | 05 문서의 필드 목록 |
 | `detail_common_` | 상세 공통 라벨 | `detail_common_contents`, `detail_common_back`, `detail_common_role`, `detail_common_period`, `detail_common_stack`, `detail_common_artifacts`, `detail_common_prev`, `detail_common_next`, `detail_common_updated` |
-| `badge_` | 배지 텍스트 | `badge_project`, `badge_research`, `badge_progress`, `badge_done` |
+| `badge_` | 배지 텍스트 | `badge_project`, `badge_research`, `badge_app`, `badge_progress`, `badge_done`, `badge_maintained` |
 | `resume_` | 이력서 | 아래 4절 |
 | `contact_` | 연락처 | `contact_eyebrow`, `contact_title`, `contact_email_label`, `contact_email_note`, `contact_github_label`, `contact_github_note`, `contact_lab_label`, `contact_lab_name`, `contact_lab_addr`, `contact_open_label`, `contact_open_desc` |
 | `footer_` | 푸터 | `footer_affiliation`, `footer_copyright` (연도 제외 "Junheon Lee"). 인용구(`footer_quote`)는 2026-09-14 삭제 |
@@ -55,6 +55,7 @@ resume_exp2_when/role/desc     Teaching assistant · Systems programming (2025)
 resume_exp3_when/role/desc     Republic of Korea Air Force (2019.08 – 2021.05)
 resume_research_title     "Current research"      (항목은 works-data research에서 렌더)
 resume_projects_title     "Selected projects"     (항목은 works-data project에서 렌더)
+resume_apps_title         "Web apps"              (항목은 works-data app에서 렌더)
 resume_edu_title          "Education"
 resume_edu1_title/sub     University of Seoul · M.S. ECE / 2025 – present · ACAS Lab
 resume_edu2_title/sub     University of Seoul · B.S. ECE / 2019 – 2025
@@ -78,8 +79,8 @@ resume_skills_tools_label "Tools"          resume_skills_tools     "GPGPU-Sim ·
 window.WORKS = [
   {
     id: "ebpf",                     // 파일명, lang 키 prefix
-    type: "project",                // "project" | "research"
-    status: "completed",            // "completed" | "in-progress"
+    type: "project",                // "project" | "research" | "app"
+    status: "completed",            // "completed" | "in-progress" | "maintained"(앱)
     date: "2026.02",                // YYYY.MM, in-progress면 null
     period: "2025.12 – 2026.02",    // 메타 스트립 Period (연구는 "2025.09 – present")
     updated: "2026.02",             // 연구만. "updated YYYY.MM" 표기. 프로젝트는 null
@@ -95,7 +96,8 @@ window.WORKS = [
     },
     keyfact: null,                  // 카드 desc 아래 한 줄 mono. 예: "8.4× faster · 2059 → 246 ms". 실측값만
     results: null,                  // 상세 Results 차트 spec (05 문서 6절). 없으면 validation 불릿
-    evidence: [],                   // 실제 산출물 이미지. { src:"assets/img/rowscope-plot.png", alt, caption }
+    evidence: [],                   // 실제 산출물 이미지. { src, webp, width, height, alt, captionKey }
+                                    // 앱 스크린샷은 추가로 frame: "wide"|"half"|"phone", zoom: true
     artifacts: [
       { label: "Source", href: "https://github.com/...", kind: "code" },
       { label: "Report (PDF)", href: "assets/pdf/...", kind: "pdf" }

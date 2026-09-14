@@ -7,19 +7,19 @@
      window.works.sortedWorks()                    -> sorted copy of WORKS
      window.works.byId(id)                         -> work | null
      window.works.renderCards(container, opts)     -> rendered works
-         opts = { filter:"all|project|research", featuredOnly:bool,
+         opts = { filter:"all|project|research|app", featuredOnly:bool,
                   limit:number, layout:"grid"|"wide" }
      window.works.render()                         re-runs every auto hook
 
    Declarative markup hooks (all optional)
      LIST PAGES
-       [data-works="all|project|research"]         card container
+       [data-works="all|project|research|app"]     card container
          data-works-layout="grid|wide"
          data-works-featured                       projects with featured:true only
          data-works-limit="4"
-       [data-filter="all|project|research"]        filter button (portfolio)
+       [data-filter="all|project|research|app"]    filter button (portfolio)
      RESUME
-       [data-resume-research]   [data-resume-projects]
+       [data-resume-research]   [data-resume-projects]   [data-resume-apps]
      DETAIL PAGES  (driven by body[data-work-id] / body[data-work-type])
        [data-work-badges] [data-work-tags] [data-work-meta]
        [data-work-stack]  [data-work-artifacts] [data-work-pager]
@@ -69,6 +69,16 @@
 
   function remove(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
 
+  /* type order on every list and in the pager: projects, research, apps */
+  var TYPES = ["project", "research", "app"];
+  var TYPE_LABEL = { project: "Project", research: "Research", app: "App" };
+
+  /* status -> badge. "completed" shows the date on cards instead of a badge. */
+  var STATUS_BADGE = {
+    "in-progress": { cls: "progress",   key: "badge_progress",   text: "In progress" },
+    "maintained":  { cls: "maintained", key: "badge_maintained", text: "Maintained" }
+  };
+
   function tr(key, fallbackText) {
     var v = typeof window.t === "function" ? window.t(key) : "";
     return v || fallbackText || "";
@@ -79,7 +89,7 @@
   function all() { return (window.WORKS || []).slice(); }
 
   function compare(a, b) {
-    if (a.type !== b.type) return a.type === "project" ? -1 : 1;
+    if (a.type !== b.type) return TYPES.indexOf(a.type) - TYPES.indexOf(b.type);
     var ap = a.status === "in-progress", bp = b.status === "in-progress";
     if (ap !== bp) return ap ? -1 : 1;
     var ad = a.date || "", bd = b.date || "";
@@ -133,15 +143,23 @@
     });
   }
 
-  function cardTop(w) {
-    var kids = [];
-    kids.push(h("span", {
+  function typeBadge(w) {
+    return h("span", {
       "class": "badge " + w.type,
       "data-lang": "badge_" + w.type,
-      text: w.type === "research" ? "Research" : "Project"
-    }));
-    if (w.status === "in-progress") {
-      kids.push(h("span", { "class": "badge progress", "data-lang": "badge_progress", text: "In progress" }));
+      text: TYPE_LABEL[w.type] || w.type
+    });
+  }
+
+  function statusBadge(sb) {
+    return h("span", { "class": "badge " + sb.cls, "data-lang": sb.key, text: sb.text });
+  }
+
+  function cardTop(w) {
+    var kids = [typeBadge(w)];
+    var sb = STATUS_BADGE[w.status];
+    if (sb) {
+      kids.push(statusBadge(sb));
     } else if (w.date) {
       kids.push(h("span", { "class": "date", text: w.date }));
     }
@@ -240,7 +258,8 @@
     var buttons = document.querySelectorAll("[data-filter]");
     if (!buttons.length) return;
     var cards = document.querySelectorAll("[data-works] .card, .work-grid .card");
-    var counts = { all: 0, project: 0, research: 0 };
+    var counts = { all: 0 };
+    TYPES.forEach(function (t) { counts[t] = 0; });
     all().forEach(function (w) { counts.all++; counts[w.type] = (counts[w.type] || 0) + 1; });
 
     function apply(value, write) {
@@ -267,7 +286,7 @@
     }
 
     var initial = queryParam("filter");
-    if (["all", "project", "research"].indexOf(initial) === -1) initial = "all";
+    if (initial !== "all" && TYPES.indexOf(initial) === -1) initial = "all";
     apply(initial, false);
   }
 
@@ -295,23 +314,26 @@
       clear(p);
       select({ filter: "project" }).forEach(function (w) { p.appendChild(resumeItem(w, true)); });
     }
+    var a = document.querySelector("[data-resume-apps]");
+    if (a) {
+      clear(a);
+      select({ filter: "app" }).forEach(function (w) { a.appendChild(resumeItem(w, true)); });
+    }
   }
 
   /* ---------- detail: badges / tags / meta -------------------------------- */
 
   function renderBadges(el, w) {
     clear(el);
-    el.appendChild(h("span", {
-      "class": "badge " + w.type,
-      "data-lang": "badge_" + w.type,
-      text: w.type === "research" ? "Research" : "Project"
-    }));
-    if (w.status === "in-progress") {
-      el.appendChild(h("span", { "class": "badge progress", "data-lang": "badge_progress", text: "In progress" }));
+    el.appendChild(typeBadge(w));
+    var sb = STATUS_BADGE[w.status];
+    if (sb) {
+      el.appendChild(statusBadge(sb));
     } else {
       el.appendChild(h("span", { "class": "badge done", "data-lang": "badge_done", text: "Completed" }));
     }
-    var when = w.date || w.period || "";
+    /* a maintained app is still running, so its period ("2026.07 – present") says more than one date */
+    var when = (w.status === "maintained" ? w.period : w.date) || w.period || "";
     if (w.updated) {
       when = (when ? when + " · " : "") + tr("detail_common_updated", "updated") + " " + w.updated;
     }
@@ -462,6 +484,9 @@
       var pic = h("picture", null, e.webp
         ? [h("source", { type: "image/webp", srcset: e.webp }), img]
         : [img]);
+      /* app screenshots: open the full-size file, and size the figure by frame */
+      if (e.zoom) pic = h("a", { "class": "zoom", href: e.src, target: "_blank", rel: "noopener" }, [pic]);
+      if (e.frame) fig.classList.add(e.frame);
       var cap = fig.querySelector("figcaption");
       fig.insertBefore(pic, cap || null);
       if (cap && !cap.getAttribute("data-lang")) {

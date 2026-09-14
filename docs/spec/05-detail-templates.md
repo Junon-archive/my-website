@@ -1,6 +1,6 @@
 # 05. 상세 페이지 템플릿 (Detail Templates)
 
-프로젝트와 연구는 서로 다른 섹션 구성을 갖는다. 두 템플릿은 같은 골격(브레드크럼, 헤드, 메타, TOC, pager)을 공유한다. 본문은 영어 단일.
+프로젝트, 연구, 앱은 서로 다른 섹션 구성을 갖는다. 세 템플릿은 같은 골격(브레드크럼, 헤드, 메타, TOC, pager)을 공유한다. 본문은 영어 단일.
 
 ## 1. 공통 골격
 
@@ -85,6 +85,31 @@ CAN의 현행 섹션(Frame Structure, Bit-Packing, Vulnerabilities, Extended Fea
 | dynamic_moh | "Can MoH routing signals reduce effective attention cost, by using fewer heads or treating heads differently, without hurting output quality?" | s2 `arch`, s3 `trace`, s4 `overlap` | validation_item1..3 → Accuracy vs ρ / Regularity / Transfers |
 | pim_accel | "Can bank-local reduction inside PIM remove the atomic contention that dominates 3DGS-SLAM's rendering backward pass?" | s2 `contention`, s3 `stages` | validation_item1..3 → Correctness / Metrics / Evidence target |
 
+## 3a. 앱 템플릿 (`app_<id>.html`, 2026-09-14)
+
+직접 설계·구현·배포하고 운영 중인 웹앱. 읽는 사람은 채용 면접관이다. "무엇을 만들었나"보다 "어떤 문제를 어떤 판단으로 풀었나"가 보이게 쓴다. 숫자는 레포에서 직접 재현한 값만(테스트 수, 번들 크기, 콘텐츠 수, 커밋 기간).
+
+| # | id | h2 (`detail_common_a_*`) | 내용 | 필수 |
+|---|---|---|---|---|
+| 01 | s1 | Why I built it | `detail_<id>_overview` + `.findings` 설계 목표 3칸 `detail_<id>_goal1..3_label/body` | 필수 |
+| 02 | s2 | What it does | 기능 불릿 `detail_<id>_feature1..n`(4~6) → `.shots` 스크린샷 갤러리. `figure.evidence[data-evidence=i]` + 캡션 `detail_<id>_shot<i+1>` | 필수 |
+| 03 | s3 | How it works | `detail_<id>_arch_body` → 도식 `arch`(08 문서 4.8~4.10) → `.flow` 스텝 3~5 | 필수 |
+| 04 | s4 | Engineering highlights | `.highlights` 2열 카드 4~6개 `detail_<id>_hl<n>_title/body`. 각 카드: 문제 → 접근 → 결과(코드 위치 수준의 구체성) | 필수 |
+| 05 | s5 | Quality & numbers | `.statrow` stat 타일 3~4개 `detail_<id>_stat<n>_value/label` + 불릿 `detail_<id>_quality1..3` | 필수 |
+| 06 | s6 | Decisions & trade-offs | `detail_<id>_design_item1..n` "결정. 이유와 비용." + `.takeaway`(`detail_common_a_retro` "Looking back") `detail_<id>_takeaway` | 필수 |
+| 07 | s7 | Stack & links | stack 태그 + artifacts 버튼(Live site `link`, Source `code`) | 필수 |
+
+- 배지: `App` + `Maintained` + period("2026.07 – present").
+- 스크린샷: works-data `evidence[]`에 `frame`("wide" 전체 폭, "half" 2열, "phone" 3열)과 `zoom: true`(원본 새 탭). WebP + PNG 폴백, 06 문서 1절.
+- figures.js는 로드하지 않는다(차트 없음).
+- 브레드크럼: Home › Apps(`filter_apps`, `?filter=app`) › `detail_<id>_short`.
+
+| id | 레포 | 라이브 |
+|---|---|---|
+| riff | github.com/Junon-archive/Riff | guitar-riff.pages.dev |
+| life_heatmap | github.com/Junon-archive/life-heatmap | heatmap-for-me.pages.dev |
+| nihongo | github.com/Junon-archive/japanese-learning-app | japanese.our-lab-never-sleeps.xyz |
+
 ## 4. 메타 스트립 렌더 규칙
 
 ```
@@ -128,8 +153,8 @@ Artifacts works.artifacts → 링크. 없으면 열 생략 → grid는 남은 �
 1. `works-data.js`에 항목 추가 (id, type, date, tags, stack, artifacts, illus, keyfact, results, evidence).
 2. `lang/en.json`에 `detail_<id>_*` 추가. kr/jp에 동일 값 복사(`scripts/build-lang-data.mjs --sync-detail <id>` 옵션으로 자동 복사).
 3. `assets/js/scenes/<id>.js`에 `thumb`(필수), `hero`, 섹션 도식 함수 작성. `docs/gallery.html`에서 일관성 확인.
-4. `docs/templates/project.html` 또는 `research.html`을 복사해 `project_<id>.html` 생성, `data-work-id`와 `data-lang` 키의 `<id>`만 치환. 도식 `figure.diagram` 자리 배치.
+4. `docs/templates/project.html`, `research.html`, `app.html` 중 하나를 복사해 `<type>_<id>.html` 생성, `data-work-id`와 `data-lang` 키의 `<id>`만 치환. 도식 `figure.diagram` 자리 배치.
 5. 증거 이미지가 있으면 추가 후 `npm run images`.
 6. `npm run build && npm run check`.
 
-`docs/templates/`에 두 템플릿 파일을 둔다(Phase 3 산출물).
+`docs/templates/`에 세 템플릿 파일을 둔다(project/research는 Phase 3 산출물, app은 2026-09-14).

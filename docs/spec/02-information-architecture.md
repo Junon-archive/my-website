@@ -14,6 +14,9 @@
 /project_opencl.html
 /research_dynamic_moh.html                연구 상세
 /research_pim_accel.html
+/app_riff.html                            앱 상세 (2026-09-14)
+/app_life_heatmap.html
+/app_nihongo.html
 /404.html                                 (신규) Cloudflare Pages 커스텀 404
 ```
 
@@ -55,12 +58,13 @@ Contact ───────────────▶ mailto:, GitHub
 
 ## 4. 작업 목록과 정렬 규칙
 
-작업(work)은 프로젝트와 연구 두 종류. 모든 목록(Home, Portfolio, Resume, pager)은 아래 규칙으로 정렬된 하나의 배열에서 파생된다. 소스는 `assets/js/works-data.js` (03 문서 참조).
+작업(work)은 프로젝트, 연구, 앱 세 종류. 모든 목록(Home, Portfolio, Resume, pager)은 아래 규칙으로 정렬된 하나의 배열에서 파생된다. 소스는 `assets/js/works-data.js` (03 문서 참조).
 
 정렬:
-1. `type: project` 전부가 `type: research`보다 앞.
+1. type 순서: `project` → `research` → `app`.
 2. 같은 type 안에서 `date` 내림차순 (YYYY.MM 문자열 비교).
 3. `status: in-progress`는 date가 없으므로 해당 type의 맨 앞.
+4. 앱의 `date`는 첫 공개 배포 월.
 
 확정 순서 (2026-09 기준):
 
@@ -73,19 +77,24 @@ Contact ───────────────▶ mailto:, GitHub
 | 5 | opencl | project | 2023.12 | completed |
 | 6 | dynamic_moh | research | — | in-progress |
 | 7 | pim_accel | research | — | in-progress |
+| 8 | nihongo | app | 2026.09 | maintained |
+| 9 | life_heatmap | app | 2026.08 | maintained |
+| 10 | riff | app | 2026.07 | maintained |
 
-pager 순서도 이 순서다. 1번의 Previous와 7번의 Next는 "Back to portfolio".
+pager 순서도 이 순서다. 1번의 Previous와 마지막 항목의 Next는 "Back to portfolio".
 
 Home 노출:
 - Featured Research: research 전부 (현재 2개).
 - Selected Projects: `featured: true`인 프로젝트 최대 4개, 정렬 규칙 유지. 초기값: ebpf, rowscope, can, opencl (5g_oran은 Portfolio에서만).
 
-Portfolio 노출: 7개 전부. 필터 버튼에 개수 표기 ("All · 7").
+- Web Apps: app 전부, `.grid3`.
+
+Portfolio 노출: 전부. 필터 버튼에 개수 표기 ("All · 10").
 
 ## 5. URL 규약
 
-- 파일명 유지: `project_<id>.html`, `research_<id>.html`. id는 works-data의 id와 같다.
-- 쿼리: `?lang=kr|en|jp`, `?filter=all|project|research` (portfolio.html만).
+- 파일명 유지: `project_<id>.html`, `research_<id>.html`, `app_<id>.html`. id는 works-data의 id와 같다.
+- 쿼리: `?lang=kr|en|jp`, `?filter=all|project|research|app` (portfolio.html만).
 - 상세 페이지 섹션 anchor: `#s1` ~ `#s6` (템플릿 공통, 05 문서 참조).
 - 새 작업 추가 시 절차: works-data에 항목 추가 → lang JSON에 `detail_<id>_*` 추가 → `project_<id>.html` 생성 → 이미지 추가. 카드 HTML을 손으로 쓰지 않는다.
 
@@ -94,7 +103,7 @@ Portfolio 노출: 7개 전부. 필터 버튼에 개수 표기 ("All · 7").
 ```
 /
 ├─ index.html  portfolio.html  resume.html  contact.html  404.html
-├─ project_*.html  research_*.html
+├─ project_*.html  research_*.html  app_*.html
 ├─ assets/
 │  ├─ css/
 │  │  ├─ tokens.css        색/서체/간격 토큰, 다크 토큰
@@ -120,7 +129,7 @@ Portfolio 노출: 7개 전부. 필터 버튼에 개수 표기 ("All · 7").
 │  └─ optimize-images.sh   PNG → WebP, 리사이즈
 ├─ docs/spec/              이 문서들
 ├─ docs/gallery.html       모든 장면·도식을 한 화면에 렌더하는 개발용 갤러리 (noindex)
-├─ docs/templates/         project.html, research.html 템플릿
+├─ docs/templates/         project.html, research.html, app.html 템플릿
 └─ temp/                   목업, 프리뷰 (배포 제외)
 ```
 

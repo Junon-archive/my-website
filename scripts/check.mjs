@@ -11,7 +11,8 @@
    7  no placeholder strings ("To be added", "Your Name", "Lorem", "TBD")
    8  every page has <title>, <meta name="description"> and og:title
    9  (extension) no colour literals outside assets/css/tokens.css
-  10  (extension) works-data ids and project_/research_*.html files map 1:1
+  10  (extension) works-data ids and project_/research_/app_*.html files map 1:1
+  11  (extension) no AI-tool credits in site copy ("Claude", "Anthropic")
 
    Exit code 1 when any check fails. Warnings never fail the run.
    ========================================================================== */
@@ -74,7 +75,8 @@ const hasWorks = existsSync(p("assets", "js", "works-data.js"));
 const RUNTIME_KEYS = [
   "brand_name", "nav_home", "nav_resume", "nav_portfolio", "nav_contact",
   "footer_affiliation", "footer_copyright",
-  "badge_project", "badge_research", "badge_progress", "badge_done",
+  "badge_project", "badge_research", "badge_app", "badge_progress", "badge_done",
+  "badge_maintained",
   "detail_common_role", "detail_common_period", "detail_common_stack",
   "detail_common_artifacts", "detail_common_prev", "detail_common_next",
   "detail_common_back", "detail_common_updated", "detail_common_contents",
@@ -257,7 +259,7 @@ const FORBIDDEN = ["To be added", "Your Name", "Lorem", "TBD"];
 
 {
   const pages = rootHtml.map((f) => f.name)
-    .filter((n) => /^(project|research)_.+\.html$/.test(n));
+    .filter((n) => /^(project|research|app)_.+\.html$/.test(n));
   if (!hasWorks) {
     skip(10, "works ids map 1:1 to detail pages", "works-data.js missing");
   } else {
@@ -268,6 +270,24 @@ const FORBIDDEN = ["To be added", "Your Name", "Lorem", "TBD"];
     if (bad.length) fail(10, "works ids map 1:1 to detail pages", bad);
     else pass(10, "works ids map 1:1 to detail pages", `${pages.length} pages`);
   }
+}
+
+/* ---------- 11. no AI-tool credits ------------------------------------------ */
+
+{
+  const re = /\b(claude|anthropic)\b/i;
+  const hits = [];
+  for (const [lang, d] of Object.entries(dicts)) {
+    for (const [k, v] of Object.entries(d)) {
+      if (typeof v === "string" && re.test(v)) hits.push(`lang/${lang}.json ${k}`);
+    }
+  }
+  for (const f of [...rootHtml, { name: "assets/js/works-data.js", file: p("assets", "js", "works-data.js") }]) {
+    if (!existsSync(f.file)) continue;
+    read(f.file).split("\n").forEach((line, i) => { if (re.test(line)) hits.push(`${f.name}:${i + 1}`); });
+  }
+  if (hits.length) fail(11, "no AI-tool credits in site copy", hits);
+  else pass(11, "no AI-tool credits in site copy");
 }
 
 /* ---------- report ---------------------------------------------------------- */

@@ -92,7 +92,7 @@ window.Illus = {
 };
 ```
 
-렌더 진입점: `Illus.render(el)`은 `el.dataset.illus`(예: `"rowscope.thumb"`, `"can.frame"`)를 읽어 `Illus.scenes[id][name](svg)`를 호출한다. 장면과 도식은 `assets/js/scenes/<id>.js`에 작업별로 분리한다(파일당 100~200줄). 페이지는 필요한 scene 파일만 로드한다. 카드 목록 페이지는 7개 전부 로드(합계 < 40KB 목표).
+렌더 진입점: `Illus.render(el)`은 `el.dataset.illus`(예: `"rowscope.thumb"`, `"can.frame"`)를 읽어 `Illus.scenes[id][name](svg)`를 호출한다. 장면과 도식은 `assets/js/scenes/<id>.js`에 작업별로 분리한다(파일당 100~200줄). 페이지는 필요한 scene 파일만 로드한다. 카드 목록 페이지는 전부 로드(합계 < 40KB 목표).
 
 ## 4. 작업별 장면과 도식
 
@@ -139,6 +139,18 @@ window.Illus = {
 - **s2 도식 `contention`** (flat, 좌우 비교): 왼쪽 GPU `atomicAdd`: 화살표 12개가 `acc[g]` 셀 하나로 몰림(`--warn` 셀). 오른쪽 PIM: 같은 12개가 뱅크 4개로 분산, 각 뱅크 `Σ`. 캡션 "same fragments, no global atomics".
 - **s3 도식 `stages`** (flat): `bin (host)` → `transfer` → `accumulate (PIM)` → `write-back`. 각 단계 아래 측정 항목(latency, bytes moved).
 - **s4 도식**: 결과 데이터 확보 전 없음. Zipf skew vs speedup 라인 차트 자리를 06 문서 line spec으로 예약.
+
+### 4.8 riff — Static guitar curriculum (app, 2026-09-14)
+- **thumb/hero (iso)**: 긴 넥 보드(6현, 프렛선) 위 A minor 펜타토닉 1번 박스(5–8프렛) 음표 12개가 `--blue`. 왼쪽 위에 떠 있는 score 카드에서 점선이 넥으로, 오른쪽 뒤에 레슨 페이지 3장 스택. 라벨: `score JSON`, `SVG fretboard`, `lesson days`. 히어로 추가: `pentatonic box · frets 5–8`, `static pages · KR / EN / JP`.
+- **s3 도식 `arch`** (flat): 점선으로 나눈 두 레인. build time(Node): lesson .md ×3 → build-content.mjs(`--warn` "build fails") → Astro static build → fretboard.ts / staff.ts(`--blue`, SVG 생성 지점). run time(browser): 1,012 static pages → Cloudflare Pages CDN → browser(app.ts ⇄ localStorage, import() audio tools).
+
+### 4.9 life_heatmap — Offline-first habit PWA (app)
+- **thumb/hero (iso)**: 폰 화면 위 7×6 셀 격자, 연속된 9칸 streak만 `--blue`. 뒤쪽 한 단 위 KV 컨테이너, 오른쪽 PC 슬래브. 동기화 링크는 slate 점선. 라벨: `phone · PWA`, `KV sync`, `streak`, `PC`. 히어로 추가: `9 days in a row · counted, not typed`, `Cloudflare KV · last-write-wins per cell`, `works offline`.
+- **s3 도식 `arch`** (flat): device 프레임(Preact UI → store.update() → localStorage, cellVisual(), sync.ts → merge.ts `--blue`, service worker)과 Cloudflare 프레임(Pages Function 48 lines ↔ Workers KV). 둘 사이 `X-Sync-Key` `--blue` 점선.
+
+### 4.10 nihongo — Full-stack Japanese learning app (app)
+- **thumb/hero (iso)**: 서버 슬래브 위 API·worker 컨테이너와 PostgreSQL 층 스택, 위에 떠 있는 LLM 칩. worker → LLM → DB 점선이 `--blue`(사전 생성 경로). 왼쪽 폰 → API는 slate. 라벨: `API`, `worker`, `PostgreSQL`, `LLM`. 히어로 추가: `browser · trial and kana need no server`, `sentences generated ahead of time`, `review schedule · furigana stored`.
+- **s3 도식 `arch`** (flat): browser ↔ static hosting, browser ⇢ FastAPI(study only) ↔ PostgreSQL ↔ worker ↔ LLM(`--blue`). API → LLM에 `--warn` 점선 곡선 "never in a request". worker+LLM 아래 브래킷 "13 checks before any write → ready pool".
 
 ## 5. 도식 배치 규칙 (상세 페이지)
 

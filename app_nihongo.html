@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nihongo Context: Learning Japanese Expressions in Real Sentences · Junheon Lee</title>
+<meta name="description" content="Nihongo Context: a FastAPI and PostgreSQL study app with context-based spaced repetition and a validated LLM sentence pipeline.">
+<meta property="og:title" content="Nihongo Context: Learning Japanese Expressions in Real Sentences · Junheon Lee">
+<meta property="og:description" content="Nihongo Context: a FastAPI and PostgreSQL study app with context-based spaced repetition and a validated LLM sentence pipeline.">
+<meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://junon-lee.pages.dev/app_nihongo.html">
+<meta property="og:url" content="https://junon-lee.pages.dev/app_nihongo.html">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/detail.css">
+<script src="assets/js/lang-data.js"></script>
+<script src="assets/js/works-data.js"></script>
+<script src="assets/js/illustrations.js"></script>
+<script src="assets/js/scenes/nihongo.js"></script>
+<script src="assets/js/lang.js" defer></script>
+<script src="assets/js/layout.js" defer></script>
+<script src="assets/js/works.js" defer></script>
+<script src="assets/js/toc.js" defer></script>
+</head>
+
+<body class="page-detail" data-work-id="nihongo" data-work-type="app">
+<div class="shell">
+
+<header class="site-header" data-site-header data-active="portfolio"></header>
+
+<main class="detail-wrap">
+  <aside class="toc" data-toc></aside>
+
+  <div class="detail-body">
+
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="index.html" data-lang="nav_home">Home</a><span class="sep">&rsaquo;</span>
+      <a href="portfolio.html?filter=app" data-lang="filter_apps">Apps</a><span class="sep">&rsaquo;</span>
+      <span data-lang="detail_nihongo_short">Nihongo Context</span>
+    </nav>
+
+    <div class="detail-head">
+      <div class="badges" data-work-badges></div>
+      <h1 class="detail-title" data-lang="detail_nihongo_title">Nihongo Context: Learning Japanese Expressions in Real Sentences</h1>
+      <p class="detail-desc" data-lang="detail_nihongo_subtitle">A full-stack study app that shows the sentence first, explains only what you tap, and brings each expression back in the same, then a similar, then a new context. New sentences are generated ahead of time by an LLM and validated before anyone sees them.</p>
+      <div class="tagrow" data-work-tags></div>
+    </div>
+
+    <div class="meta" data-work-meta></div>
+
+    <figure class="hero-illus" data-illus="nihongo.hero" role="img" aria-label="Server slab with an API, a worker and a PostgreSQL stack; the worker asks an LLM for sentences that land in the database"></figure>
+
+    <section class="detail-section" id="s1">
+      <h2><span class="num">01</span><span data-lang="detail_common_a_s1">Why I built it</span></h2>
+      <p data-lang="detail_nihongo_overview">Textbook study and exam preparation did not get me closer to following everyday Japanese on YouTube. That takes recognising many words, grammar patterns and set phrases inside real sentences, and flashcards strip them out of the sentences they live in. Nihongo Context turns this around. You read a Japanese sentence with the translation hidden, tap only what you do not know, and read what that expression means in this sentence. The app then decides when the expression should come back and in which context, starting with the sentence where you first met it and moving on to sentences you have never seen. Visitors can try the same interaction on 171 fixed sentences, and practise hiragana and katakana, without logging in.</p>
+      <div class="findings">
+        <div class="finding"><div class="k" data-lang="detail_nihongo_goal1_label">Context over cards</div><p data-lang="detail_nihongo_goal1_body">Every review shows an expression inside a sentence, and the context gets less familiar as the expression gets more familiar.</p></div>
+        <div class="finding"><div class="k" data-lang="detail_nihongo_goal2_label">Never wait on a model</div><p data-lang="detail_nihongo_goal2_body">An LLM writes new sentences in the background. A tap is always answered from explanations that already exist.</p></div>
+        <div class="finding"><div class="k" data-lang="detail_nihongo_goal3_label">Nothing untrusted reaches the learner</div><p data-lang="detail_nihongo_goal3_body">Generated sentences pass deterministic checks before they are stored, and stored browser state is validated before it is used.</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s2">
+      <h2><span class="num">02</span><span data-lang="detail_common_a_s2">What it does</span></h2>
+      <ul>
+        <li data-lang="detail_nihongo_feature1">Sentence-first study: tap an expression to see its reading, dictionary form, core meaning, meaning in this sentence, nuance and an example, then optionally say whether you knew it.</li>
+        <li data-lang="detail_nihongo_feature2">A 12-minute session that mixes review, new and exploration sentences at 70/20/10, and switches to a review-heavy mix when too many items are due.</li>
+        <li data-lang="detail_nihongo_feature3">Review timing by FSRS, and review context by a ladder: the original sentence, a near-copy, then new sentences, stepping back after an explicit "didn't know".</li>
+        <li data-lang="detail_nihongo_feature4">A login-free trial with 171 fixed sentences covering all 200 seed expressions, using the same renderer and interaction code as the real study screen.</li>
+        <li data-lang="detail_nihongo_feature5">Hiragana and katakana tables across seven ranges (263 entries) with two quiz modes, and a furigana toggle that places readings over kanji.</li>
+        <li data-lang="detail_nihongo_feature6">Owner-only login with Argon2id and a strict host-only session cookie, study history, and a background worker that keeps the sentence pool topped up.</li>
+      </ul>
+      <div class="shots">
+        <figure class="evidence" data-evidence="0"><figcaption data-lang="detail_nihongo_shot1">Home: visitors choose between the expression trial and kana practice, with no account. The interface is in Korean because the app is built for Korean speakers learning Japanese.</figcaption></figure>
+        <figure class="evidence" data-evidence="1"><figcaption data-lang="detail_nihongo_shot2">Tapping 知っ opens the explanation sheet: reading, dictionary form, meaning, meaning in this sentence, nuance and an example. Rating it is optional.</figcaption></figure>
+        <figure class="evidence" data-evidence="2"><figcaption data-lang="detail_nihongo_shot3">Furigana on and translation revealed. The readings were computed when the sentence was saved, not when it is shown.</figcaption></figure>
+        <figure class="evidence" data-evidence="3"><figcaption data-lang="detail_nihongo_shot4">Hiragana table with seven ranges; each entry shows romaji and a Korean sound approximation.</figcaption></figure>
+        <figure class="evidence" data-evidence="4"><figcaption data-lang="detail_nihongo_shot5">Kana quiz, choose-the-romaji mode. Missed characters come back once at the end of the round.</figcaption></figure>
+        <figure class="evidence" data-evidence="5"><figcaption data-lang="detail_nihongo_shot6">Kana quiz, read-aloud mode: reveal the answer, then mark yourself right or wrong.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s3">
+      <h2><span class="num">03</span><span data-lang="detail_common_a_s3">How it works</span></h2>
+      <p data-lang="detail_nihongo_arch_body">The system has four parts with strict boundaries. The frontend is static TypeScript on Cloudflare; the home, trial and kana screens run entirely on data bundled into it and make no API calls. Logged-in study goes to a FastAPI service reached through a Cloudflare Tunnel, which reads and writes learning state in PostgreSQL and picks the next sentence. It never talks to the LLM. A separate worker claims jobs from a PostgreSQL table, asks the LLM for batches of sentences with explanations, validates them, adds furigana with a morphological analyzer, and stores them. The API, the worker and PostgreSQL run in Docker Compose on one host, with the database bound to localhost.</p>
+      <figure class="diagram" data-illus="nihongo.arch" role="img" aria-label="Browser, static hosting, FastAPI, PostgreSQL, worker and LLM, with the API never calling the LLM.">
+        <figcaption data-lang="detail_nihongo_fig_arch">The request path (browser, API, PostgreSQL) never waits on the LLM. Generation happens in the worker, and the public screens do not use the API at all.</figcaption>
+      </figure>
+      <div class="flow">
+        <div class="step"><i>1</i><b data-lang="detail_nihongo_pipeline_step1_title">Read</b><span data-lang="detail_nihongo_pipeline_step1">The learner sees a Japanese sentence with the translation hidden. Tappable expressions already carry their explanations.</span></div>
+        <div class="step"><i>2</i><b data-lang="detail_nihongo_pipeline_step2_title">Signal</b><span data-lang="detail_nihongo_pipeline_step2">Taps, reveals and optional self-reports are stored as idempotent events. Only explicit answers become FSRS ratings; silence defers the item for 12 hours instead.</span></div>
+        <div class="step"><i>3</i><b data-lang="detail_nihongo_pipeline_step3_title">Schedule</b><span data-lang="detail_nihongo_pipeline_step3">FSRS decides when an item is due. The context ladder decides whether it returns in its original sentence, a near-copy or a new sentence.</span></div>
+        <div class="step"><i>4</i><b data-lang="detail_nihongo_pipeline_step4_title">Generate</b><span data-lang="detail_nihongo_pipeline_step4">When no suitable sentence exists, a job is queued. The worker claims it with SKIP LOCKED and asks the LLM for a structured batch.</span></div>
+        <div class="step"><i>5</i><b data-lang="detail_nihongo_pipeline_step5_title">Validate</b><span data-lang="detail_nihongo_pipeline_step5">Thirteen checks run before any write. Accepted sentences get furigana and join the learner's ready pool.</span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s4">
+      <h2><span class="num">04</span><span data-lang="detail_common_a_s4">Engineering highlights</span></h2>
+      <div class="highlights">
+        <div class="highlight"><b data-lang="detail_nihongo_hl1_title">Separating when from which context</b><p data-lang="detail_nihongo_hl1_body">FSRS answers when an expression is due; a context ladder (anchor, near-original, varied, new context) answers which sentence shows it. The ladder climbs after each exposure and drops one step only on an explicit "didn't know", which also schedules a context repair. Reinforcement tops exposures up to five meaningful ones without shortening FSRS intervals, and a review with no answer neither rates FSRS nor loops.</p></div>
+        <div class="highlight"><b data-lang="detail_nihongo_hl2_title">LLM output treated as untrusted input</b><p data-lang="detail_nihongo_hl2_body">The model never sees database IDs, only request-local labels that the worker maps back. One strict-schema call returns sentences, translations, spans and full explanations. Thirteen deterministic checks (span bounds and overlap, surface match, length, required explanations, exact and near-duplicate detection at 0.90 similarity, unknown references) run before anything is written, and each rejection keeps a reason code.</p></div>
+        <div class="highlight"><b data-lang="detail_nihongo_hl3_title">A job queue inside PostgreSQL</b><p data-lang="detail_nihongo_hl3_body">No Redis or Celery. Jobs are rows claimed with FOR UPDATE SKIP LOCKED, with a 300 s lease for crashed workers, retries with backoff, idempotency keys and a closed set of dead-letter reasons. The provider call happens outside any database transaction, and daily request and token ceilings are checked before a job is claimed, so a limit never burns retries.</p></div>
+        <div class="highlight"><b data-lang="detail_nihongo_hl4_title">Furigana at save time, not request time</b><p data-lang="detail_nihongo_hl4_body">A morphological analyzer adds about 200 MB to an image and gets common context-dependent readings wrong. It runs only in the worker when a sentence is saved: readings align to kanji runs, never cross a tappable span, prefer the reading from the item's own explanation, and fall back to a small table of context rules. The API just slices the stored ruby. On the 171 trial sentences: 171 computed, 0 failures, 0 reading mismatches.</p></div>
+        <div class="highlight"><b data-lang="detail_nihongo_hl5_title">A public trial that cannot reach the API</b><p data-lang="detail_nihongo_hl5_body">The trial reuses the real renderer and interaction controller, with network operations swapped for a generated fixture in the API's payload shape. Isolation is enforced three ways: a TypeScript AST import-graph test bans API modules from public screens, a build check scans the bundle, and a Playwright test runs the screens with no API. Stored progress is validated as untrusted input on load.</p></div>
+        <div class="highlight"><b data-lang="detail_nihongo_hl6_title">Correct under retries and double taps</b><p data-lang="detail_nihongo_hl6_body">One piece of evidence per exposure is enforced by a unique index, so a retried self-report gets 409 and cannot run the mastery update or the FSRS step twice. A partial unique index allows one open presentation per session, FSRS rows are locked while they change, and a boot-time audit refuses to start if any route outside a two-entry allowlist is reachable without authentication.</p></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s5">
+      <h2><span class="num">05</span><span data-lang="detail_common_a_s5">Quality &amp; numbers</span></h2>
+      <div class="statrow">
+        <div class="stat"><div class="v" data-lang="detail_nihongo_stat1_value">1,273</div><div class="l" data-lang="detail_nihongo_stat1_label">backend unit and integration tests, run against a real PostgreSQL 16</div></div>
+        <div class="stat"><div class="v" data-lang="detail_nihongo_stat2_value">750</div><div class="l" data-lang="detail_nihongo_stat2_label">frontend unit tests, including import-graph and bundle checks</div></div>
+        <div class="stat"><div class="v" data-lang="detail_nihongo_stat3_value">55</div><div class="l" data-lang="detail_nihongo_stat3_label">end-to-end tests in real Chrome covering study, trial, kana and furigana</div></div>
+        <div class="stat"><div class="v" data-lang="detail_nihongo_stat4_value">0</div><div class="l" data-lang="detail_nihongo_stat4_label">API calls from the home, trial and kana screens, checked on the live site</div></div>
+      </div>
+      <ul>
+        <li data-lang="detail_nihongo_quality1">mypy in strict mode and ruff report no issues across 176 Python files, and the frontend type-checks with tsc --noEmit.</li>
+        <li data-lang="detail_nihongo_quality2">Architecture rules are tests: 14 import and write guards keep the LLM SDK out of the API process, FSRS writes inside the scheduling module, and commits inside allowlisted functions.</li>
+        <li data-lang="detail_nihongo_quality3">Operations are rehearsed: migrations run only after a verified backup, and a restore check rebuilds the database in a scratch copy and exercises login and history before dropping it.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section" id="s6">
+      <h2><span class="num">06</span><span data-lang="detail_common_a_s6">Decisions &amp; trade-offs</span></h2>
+      <ul>
+        <li data-lang="detail_nihongo_design_item1">PostgreSQL as the job queue instead of Redis. One host means one datastore to back up; SKIP LOCKED and leases give enough concurrency for one worker pool, at the cost of polling.</li>
+        <li data-lang="detail_nihongo_design_item2">No UI framework on the frontend. Plain DOM with textContent only keeps the bundle small, and made it possible to prove with an import-graph test which screens can reach the API.</li>
+        <li data-lang="detail_nihongo_design_item3">No corrections to self-reports. Undoing a mastery or FSRS step needs history that is not stored, so a second answer is rejected rather than half-applied.</li>
+        <li data-lang="detail_nihongo_design_item4">No lockout on the single-account login. Lockout would let anyone lock the owner out; a 16-character minimum password hashed with Argon2id is the defence instead.</li>
+      </ul>
+      <div class="takeaway">
+        <b data-lang="detail_common_a_retro">Looking back</b>
+        <span data-lang="detail_nihongo_takeaway">The product idea is simple; the work was in the boundaries. Deciding that the model never sits in a request, that its output is validated like user input, and that every rule about which code may touch what is a test, is what let a learning engine, an LLM pipeline and a public demo live in one codebase without stepping on each other.</span>
+      </div>
+    </section>
+
+    <section class="detail-section" id="s7">
+      <h2><span class="num">07</span><span data-lang="detail_common_a_s7">Stack &amp; links</span></h2>
+      <div class="tagrow" data-work-stack></div>
+      <div class="artifacts" data-work-artifacts></div>
+    </section>
+
+    <nav class="pager" data-work-pager aria-label="Previous and next work"></nav>
+
+  </div>
+</main>
+
+<footer class="site-footer" data-site-footer></footer>
+
+</div>
+</body>
+</html>
