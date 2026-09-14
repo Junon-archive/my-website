@@ -293,17 +293,17 @@ window.WORKS = [
     diagrams: [
       { name: "arch", section: "s3" }
     ],
-    keyfact: "2,078 tests · trial makes 0 API calls",
+    keyfact: "2,078 tests · 13 checks per generated sentence",
     results: null,
     evidence: [
-      { src: "assets/img/nihongo-home.png", webp: "assets/img/nihongo-home.webp", width: 780, height: 1688, frame: "phone", zoom: true,
-        alt: "Home screen with two cards: try expression learning, or learn kana first", captionKey: "detail_nihongo_shot1" },
       { src: "assets/img/nihongo-sheet.png", webp: "assets/img/nihongo-sheet.webp", width: 780, height: 1688, frame: "phone", zoom: true,
-        alt: "Explanation sheet for the tapped expression with reading, meaning, meaning in context, nuance and an example", captionKey: "detail_nihongo_shot2" },
+        alt: "Explanation sheet for the tapped expression with reading, meaning, meaning in context, nuance and an example", captionKey: "detail_nihongo_shot1" },
       { src: "assets/img/nihongo-furigana.png", webp: "assets/img/nihongo-furigana.webp", width: 780, height: 1688, frame: "phone", zoom: true,
-        alt: "Trial sentence with furigana readings above the kanji and the Korean translation revealed", captionKey: "detail_nihongo_shot3" },
+        alt: "Study sentence with furigana readings above the kanji and the Korean translation revealed", captionKey: "detail_nihongo_shot2" },
       { src: "assets/img/nihongo-kana.png", webp: "assets/img/nihongo-kana.webp", width: 780, height: 1688, frame: "phone", zoom: true,
-        alt: "Hiragana table with range chips and romaji under each character", captionKey: "detail_nihongo_shot4" },
+        alt: "Hiragana table with range chips and romaji under each character", captionKey: "detail_nihongo_shot3" },
+      { src: "assets/img/nihongo-loanwords.png", webp: "assets/img/nihongo-loanwords.webp", width: 780, height: 1688, frame: "phone", zoom: true,
+        alt: "Katakana loanword list with romaji and Korean meanings", captionKey: "detail_nihongo_shot4" },
       { src: "assets/img/nihongo-quiz-choose.png", webp: "assets/img/nihongo-quiz-choose.webp", width: 780, height: 1688, frame: "phone", zoom: true,
         alt: "Kana quiz asking for the romaji of a character from four choices", captionKey: "detail_nihongo_shot5" },
       { src: "assets/img/nihongo-quiz-read.png", webp: "assets/img/nihongo-quiz-read.webp", width: 780, height: 1688, frame: "phone", zoom: true,

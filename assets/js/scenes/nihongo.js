@@ -51,7 +51,7 @@
     I.isoPhone(s, p(0, 10, 0), { w: 38 * k, d: 58 * k, h: 5 * k });
     var phoneTop = p(19, 39, 5);
 
-    /* ---- plain request path: browser -> API (logged-in study only) ------ */
+    /* ---- plain request path: browser -> API -------------------------------- */
     var ph = p(38, 36, 8), ap = p(66, 30, SH + 10);
     I.arrow(s, ph[0] + 2 * k, ph[1], ap[0] - 2 * k, ap[1], { color: t.slate, width: 1.2 });
 
@@ -71,7 +71,7 @@
     if (!hero) return;
 
     I.leader(s, phoneTop[0] - 30 * k, phoneTop[1] - 50 * k, phoneTop[0], phoneTop[1] - 2,
-      'browser · trial and kana need no server', { anchor: 'end' });
+      'browser · static TypeScript frontend', { anchor: 'end' });
     var mid = [(wkTop[0] + llmFoot[0]) / 2, (wkTop[1] + llmFoot[1]) / 2 - 3 * k];
     I.leader(s, mid[0] - 50 * k, mid[1] - 34 * k, mid[0] - 2, mid[1],
       'sentences generated ahead of time', { anchor: 'end', accent: true });
@@ -85,17 +85,17 @@
 
   function hero(s, ctx) { stage(s, ctx); }
   hero.kind = 'hero';
-  hero.aria = 'Isometric view of Nihongo Context: a browser uses the API only for logged-in study, while a background worker asks an LLM for new study sentences ahead of time and stores them, with their review schedule and furigana, in PostgreSQL.';
+  hero.aria = 'Isometric view of Nihongo Context: a browser talks to the API for study, while a background worker asks an LLM for new study sentences ahead of time and stores them, with their review schedule and furigana, in PostgreSQL.';
 
   /* ---------------------------------------------------------- s3: arch */
   function arch(s, ctx) {
     var t = ctx.tokens;
 
-    I.box(s, 24, 40, 176, 62, { label: 'browser', sub: 'trial · kana: 0 API calls' });
+    I.box(s, 24, 40, 176, 62, { label: 'browser', sub: 'static TypeScript' });
     I.arrow(s, 112, 102, 112, 150, { both: true, label: 'HTML / JS', labelDx: 8, labelAnchor: 'start', labelDy: 4 });
     I.box(s, 24, 150, 176, 52, { label: 'static hosting', sub: 'Cloudflare' });
 
-    I.arrow(s, 200, 71, 272, 71, { dashed: true, label: 'study only', labelDy: -8, size: 9.5 });
+    I.arrow(s, 200, 71, 272, 71, { dashed: true, label: 'study API', labelDy: -8, size: 9.5 });
     I.box(s, 272, 40, 156, 62, { label: 'FastAPI', sub: 'auth · selection · events' });
     I.arrow(s, 350, 102, 350, 150, { both: true });
     I.box(s, 272, 150, 156, 62, { label: 'PostgreSQL 16', sub: '20 tables · job queue' });
@@ -117,7 +117,7 @@
   }
   arch.kind = 'diagram';
   arch.height = 310;
-  arch.aria = 'The browser loads static files from Cloudflare and uses the FastAPI service only for logged-in study; the API reads and writes PostgreSQL. A worker claims jobs from PostgreSQL with SKIP LOCKED, calls the LLM for structured JSON, and runs 13 checks before writing to the ready pool. A crossed dashed line marks that the API never calls the LLM.';
+  arch.aria = 'The browser loads static files from Cloudflare and uses the FastAPI service for study; the API reads and writes PostgreSQL. A worker claims jobs from PostgreSQL with SKIP LOCKED, calls the LLM for structured JSON, and runs 13 checks before writing to the ready pool. A crossed dashed line marks that the API never calls the LLM.';
 
   I.scenes.nihongo = { thumb: thumb, hero: hero, arch: arch };
 })();
