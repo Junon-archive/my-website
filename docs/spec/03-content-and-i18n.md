@@ -51,7 +51,7 @@ resume_areas              "Computer Architecture · Memory Systems · GPU System
 resume_cv_cta             "Download CV"
 resume_exp_title          "Experience"
 resume_exp1_when/role/desc     Graduate researcher · ACAS Lab (2025 – now)
-resume_exp2_when/role/desc     TA · Systems programming (2025)
+resume_exp2_when/role/desc     TA · Systems programming (2025.08 – 2025.12)
 resume_exp3_when/role/desc     Research intern · ACAS Lab, University of Seoul (2025.01 – 2025.08, desc는 RowScope·eBPF 작업)
 resume_exp4_when/role/desc     Republic of Korea Air Force (2019.08 – 2021.05)
 resume_research_title     "Current research"      (항목은 works-data research에서 렌더)
