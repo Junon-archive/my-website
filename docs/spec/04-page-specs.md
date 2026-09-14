@@ -137,7 +137,7 @@ Home과의 차이를 유지한다: Portfolio는 히어로 없음, 전체 목록 
 
 .resume-grid (1.25fr .75fr)
 ├─ 왼쪽
-│  ├─ .rblock Experience      resume_exp1..4 (when / role / desc), 날짜 내림차순  .item 2열(120px 날짜열, tabular-nums)
+│  ├─ .rblock Experience      resume_exp1..5 (when / role / desc), 날짜 내림차순  .item 2열(120px 날짜열, tabular-nums)
 │  ├─ .rblock Current research works.js: research 항목 → title(링크) + work_<id>_sub
 │  ├─ .rblock Selected projects works.js: project 전부 5개 → date / title(링크) + work_<id>_sub
 │  └─ .rblock Web apps       works.js: app 전부 → date / title(링크) + work_<id>_sub
