@@ -52,7 +52,7 @@ resume_cv_cta             "Download CV"
 resume_exp_title          "Experience"
 resume_exp1_when/role/desc     Graduate researcher · ACAS Lab (2025 – now)
 resume_exp2_when/role/desc     TA · Systems programming (2025)
-resume_exp3_when/role          Research intern · ACAS Lab, University of Seoul (2025.01 – 2025.08, desc 없음)
+resume_exp3_when/role/desc     Research intern · ACAS Lab, University of Seoul (2025.01 – 2025.08, desc는 RowScope·eBPF 작업)
 resume_exp4_when/role/desc     Republic of Korea Air Force (2019.08 – 2021.05)
 resume_research_title     "Current research"      (항목은 works-data research에서 렌더)
 resume_projects_title     "Selected projects"     (항목은 works-data project에서 렌더)
@@ -61,9 +61,9 @@ resume_edu_title          "Education"
 resume_edu1_title/sub     University of Seoul · M.S. ECE / 2025 – present · ACAS Lab
 resume_edu2_title/sub     University of Seoul · B.S. ECE / 2019 – 2025
 resume_awards_title       "Awards"
-resume_award1_title/sub   NRF Graduate Research Scholarship / 2026.08   (Q10 확인)
+resume_award1_title/sub   Science & Engineering Academic Research Support Program · NRF (KR 이공분야 학술연구지원사업) / Master's student research grant · 2026.08
 resume_award2_title/sub   Excellence Award · Korea Automotive Technology Institute (KATECH) / CAN communication project · Next-generation communications winter internship · 2025.01
-resume_award3_title/sub   Grand Prize · Incheon Student Policy Presentation / 2019.08
+resume_award3_title/sub   Grand Prize · Incheon University Student City Policy Presentation (KR 인천 대학생 시 정책 발표대회) / 지하철 표기법 개선 제안 · 2019.08
 resume_skills_title       "Skills"
 resume_skills_lang_label  "Languages"      resume_skills_lang      "C / C++ · Python · CUDA · Go"
 resume_skills_sys_label   "Systems"        resume_skills_sys       "Linux · eBPF · Docker · OpenCL"
