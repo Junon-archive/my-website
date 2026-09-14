@@ -110,7 +110,6 @@
   "contact_lab_addr": "Room 613, IT Building, University of Seoul",
   "contact_open_label": "열려 있는 것",
   "contact_open_desc": "컴퓨터 아키텍처, 메모리 시스템, GPU 시스템 분야의 연구 협업, R&D 인턴십, 그리고 채용 기회입니다.",
-  "footer_quote": "시스템을 이해하고, 진실을 측정하고, 더 나은 해결책을 만듭니다.",
   "footer_affiliation": "Architecture & Computer Systems Laboratory · University of Seoul",
   "footer_copyright": "Junheon Lee",
   "meta_desc_home": "이준헌 — 서울시립대학교에서 컴퓨터 구조와 메모리 시스템을 연구하는 석사과정 연구원입니다. DRAM 로우 버퍼 지역성, eBPF 지연시간 트레이싱, LLM 추론을 위한 GPU 메모리를 다룹니다.",

@@ -17,7 +17,7 @@ Rules that implementers should not have to guess:
 ## 1. Chrome (header, footer, injected by layout.js — every page)
 
 `brand_name`, `nav_home`, `nav_resume`, `nav_portfolio`, `nav_contact`,
-`footer_quote`, `footer_affiliation`, `footer_copyright`.
+`footer_affiliation`, `footer_copyright`.
 
 Badges (used by works.js on cards and detail heads): `badge_project`, `badge_research`,
 `badge_progress`, `badge_done`.

@@ -15,6 +15,5 @@ Approved translations (reuse verbatim when the same English string reappears):
 - "Open to" (contact_open_label) → KR "열려 있는 것" / JP "募集中" — reused from temp/preview_v2.html I18N dict per explicit instruction to mine that file for contact-section wording.
 - badge_progress "In progress" → KR "진행 중" / JP "進行中"; badge_done "Completed" → KR "완료" / JP "完了" (matches 03 spec default).
 - detail_common_evidence "Evidence" → KR "근거 자료" / JP "エビデンス".
-- footer_quote → KR "시스템을 이해하고, 진실을 측정하고, 더 나은 해결책을 만듭니다." / JP "システムを理解し、真実を測定し、より良い解決策を築く。" (JP kept as a terse motto, not です・ます, since it functions as a slogan/tagline rather than prose).
 
 See [[scope-decisions]] for which key families are translated vs. kept English, and [[style]] for tone rules.

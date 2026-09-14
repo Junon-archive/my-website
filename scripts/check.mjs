@@ -73,7 +73,7 @@ const hasWorks = existsSync(p("assets", "js", "works-data.js"));
 /* keys that JS builds at runtime and a regex can never see */
 const RUNTIME_KEYS = [
   "brand_name", "nav_home", "nav_resume", "nav_portfolio", "nav_contact",
-  "footer_quote", "footer_affiliation", "footer_copyright",
+  "footer_affiliation", "footer_copyright",
   "badge_project", "badge_research", "badge_progress", "badge_done",
   "detail_common_role", "detail_common_period", "detail_common_stack",
   "detail_common_artifacts", "detail_common_prev", "detail_common_next",

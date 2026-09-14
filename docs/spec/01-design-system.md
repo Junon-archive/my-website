@@ -58,7 +58,7 @@ Caveat:wght@500
 | `--display` | Manrope, Noto Sans KR, system-ui | h1~h4, 카드 제목, 버튼, 브랜드 |
 | `--body` | Noto Sans KR, Manrope, -apple-system, system-ui | 본문, 설명 |
 | `--mono` | JetBrains Mono, ui-monospace, Menlo | 날짜, 태그, 배지, 메타 라벨, 축 라벨, 수치 타일, eyebrow |
-| `--hand` | Caveat, cursive | 히어로 손글씨 한 줄, footer 인용구. 그 외 사용 금지 |
+| `--hand` | Caveat, cursive | 히어로 손글씨 한 줄. 그 외 사용 금지 |
 
 타입 스케일 (px, line-height):
 

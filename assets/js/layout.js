@@ -82,19 +82,14 @@
     var email = s.email || "";
     return '' +
       '<div class="footer-inner">' +
-        '<span class="q" data-lang="footer_quote">' +
-          '“Understand the system, measure the truth, build a better solution.”' +
-        '</span>' +
-        '<div class="footer-right">' +
-          '<div class="aff" data-lang="footer_affiliation">' +
-            'Architecture &amp; Computer Systems Laboratory · University of Seoul' +
-          '</div>' +
-          '<div class="links">' +
-            '<a href="' + githubUrl() + '" target="_blank" rel="noopener" data-no-lang>GitHub</a>' +
-            (email ? '<a href="mailto:' + email + '" data-no-lang>Email</a>' : "") +
-            '<span>© <span data-year>' + new Date().getFullYear() + '</span> ' +
-              '<span data-lang="footer_copyright">Junheon Lee</span></span>' +
-          '</div>' +
+        '<div class="aff" data-lang="footer_affiliation">' +
+          'Architecture &amp; Computer Systems Laboratory · University of Seoul' +
+        '</div>' +
+        '<div class="links">' +
+          '<a href="' + githubUrl() + '" target="_blank" rel="noopener" data-no-lang>GitHub</a>' +
+          (email ? '<a href="mailto:' + email + '" data-no-lang>Email</a>' : "") +
+          '<span>© <span data-year>' + new Date().getFullYear() + '</span> ' +
+            '<span data-lang="footer_copyright">Junheon Lee</span></span>' +
         '</div>' +
       '</div>';
   }

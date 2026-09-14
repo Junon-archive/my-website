@@ -38,7 +38,7 @@
 | `badge_` | 배지 텍스트 | `badge_project`, `badge_research`, `badge_progress`, `badge_done` |
 | `resume_` | 이력서 | 아래 4절 |
 | `contact_` | 연락처 | `contact_eyebrow`, `contact_title`, `contact_email_label`, `contact_email_note`, `contact_github_label`, `contact_github_note`, `contact_lab_label`, `contact_lab_name`, `contact_lab_addr`, `contact_open_label`, `contact_open_desc` |
-| `footer_` | 푸터 | `footer_quote`, `footer_affiliation`, `footer_copyright` (연도 제외 "Junheon Lee") |
+| `footer_` | 푸터 | `footer_affiliation`, `footer_copyright` (연도 제외 "Junheon Lee"). 인용구(`footer_quote`)는 2026-09-14 삭제 |
 | `meta_` | SEO | `meta_desc_home`, `meta_desc_portfolio`, `meta_desc_resume`, `meta_desc_contact` |
 
 삭제할 현행 키: `profile_*`(hero_로 대체), `sidebar_*` 전부(사이드바 제거), `intro_*`, `home_featured`, `home_intro_desc`, `portfolio_intro_*`, `portfolio_projects_*`, `portfolio_research_*`, `contact_card_*`, `contact_form_*`, `work_*_date`, `resume_pub*`, `resume_proj*`, `resume_intro_*`, 죽은 페이지의 `detail_*`와 `work_*`.

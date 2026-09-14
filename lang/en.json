@@ -110,7 +110,6 @@
   "contact_lab_addr": "Room 613, IT Building, University of Seoul",
   "contact_open_label": "Open to",
   "contact_open_desc": "Research collaboration, R&D internships, and roles in computer architecture, memory systems, and GPU systems.",
-  "footer_quote": "Understand the system, measure the truth, build a better solution.",
   "footer_affiliation": "Architecture & Computer Systems Laboratory · University of Seoul",
   "footer_copyright": "Junheon Lee",
   "meta_desc_home": "Junheon Lee, M.S. student in computer architecture and memory systems at the University of Seoul. DRAM locality, eBPF latency tracing, GPU memory for LLM inference.",

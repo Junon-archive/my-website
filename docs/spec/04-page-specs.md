@@ -87,7 +87,7 @@ h1의 이름은 모든 언어에서 동일하다. `.visual`은 모바일(≤960p
 - 카드에 데이터 스파크라인은 넣지 않는다. 그래프는 상세 Results에만.
 
 ### 1.5 Footer
-공통. `footer_quote`, `footer_affiliation`, 링크 GitHub / Email, © {year} `footer_copyright`.
+공통. 왼쪽 `footer_affiliation`, 오른쪽 링크 GitHub / Email, © {year} `footer_copyright`.
 
 ### 1.6 삭제되는 것
 사이드바(프로필/학력/연락처), 필터 버튼, 세로 프로필 사진(`mono_profile.png`). 프로필 사진은 어디에도 쓰지 않는다. 히어로 오른쪽은 도식이다.

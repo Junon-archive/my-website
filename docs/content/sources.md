@@ -33,7 +33,6 @@ Source files:
 | `contact_lab_addr` | Room 613, IT Building, University of Seoul | EN0 `contact_card_lab_desc` |
 | `SITE.cvUrl` | null | SPEC 00 Q7 — no CV PDF exists |
 | phone number | removed | SPEC 00 Q6 |
-| `footer_quote` | Understand the system, measure the truth, build a better solution. | task brief / mockup |
 | `resume_edu1_*`, `resume_edu2_*` | UoS M.S. ECE 2025–present, B.S. ECE 2019–2025 | EN0 `sidebar_education_*` |
 | `resume_exp1_*` | Graduate researcher · ACAS Lab, 2025 – now | EN0 `resume_exp1_*` + SPEC 03 section 4 |
 | `resume_exp3_*` | ROK Air Force 2019.08 – 2021.05, staff sergeant, honorable discharge | EN0 `resume_exp4_*` |
