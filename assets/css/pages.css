@@ -1,6 +1,6 @@
 /* ==========================================================================
    pages.css — Home, Portfolio, Resume, Contact, 404
-   (hero, pill row, section heads, card grids, filters, resume, contact)
+   (hero, section heads, card grids, filters, resume, contact)
    No colour literals: tokens.css only.
    ========================================================================== */
 
@@ -35,20 +35,6 @@
   color:var(--slate);transform:rotate(-6deg);line-height:1.05;
 }
 
-/* --- pill row ------------------------------------------------------------- */
-.pillrow{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
-  padding:22px 0;border-bottom:1px solid var(--line);
-}
-.pill{display:flex;gap:12px;align-items:center}
-.pill .ico{
-  width:42px;height:42px;border-radius:50%;
-  background:var(--blue-soft);color:var(--blue);
-  display:grid;place-items:center;flex-shrink:0;
-}
-.pill .ico svg{width:20px;height:20px}
-.pill b{display:block;font-family:var(--display);color:var(--navy);font-size:15px}
-.pill small{color:var(--slate);font-size:13px}
 
 /* --- sections ------------------------------------------------------------- */
 .section{padding:var(--section-top) 0 4px}
@@ -168,14 +154,14 @@ noscript .noscript-note{
   .hero,.grid2,.resume-grid{grid-template-columns:1fr}
   .hero{gap:26px;padding-top:36px}
   .visual{order:-1;min-height:220px}
-  .pillrow,.grid4,.grid3,.contact-cards{grid-template-columns:repeat(2,1fr)}
+  .grid4,.grid3,.contact-cards{grid-template-columns:repeat(2,1fr)}
   .card.wide{grid-template-columns:1fr}
   .card.wide .thumb{order:-1;margin-bottom:14px}
   .hero h1{font-size:42px}
   .contact-wrap{padding-top:36px}
 }
 @media (max-width:600px){
-  .grid2,.grid3,.grid4,.pillrow,.contact-cards{grid-template-columns:1fr}
+  .grid2,.grid3,.grid4,.contact-cards{grid-template-columns:1fr}
   .hero{padding-top:30px}
   .actions{flex-direction:column;align-items:stretch}
   .actions .btn{justify-content:center}

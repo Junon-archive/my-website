@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{페이지 제목} · Junheon Lee</title>
+  <title>{페이지 제목} · Junon Lee</title>
   <meta name="description" content="{영어 한 문장}">
   <meta property="og:title" content="…"> <meta property="og:description" content="…">
   <meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
@@ -41,11 +41,11 @@
 페이지 제목 규칙:
 | 파일 | `<title>` |
 |---|---|
-| index.html | Junheon Lee · Computer Architecture & Memory Systems |
-| portfolio.html | Portfolio · Junheon Lee |
-| resume.html | Resume · Junheon Lee |
-| contact.html | Contact · Junheon Lee |
-| project_*.html / research_*.html / app_*.html | {detail title} · Junheon Lee |
+| index.html | Junon Lee · Computer Architecture & Memory Systems |
+| portfolio.html | Portfolio · Junon Lee |
+| resume.html | Resume · Junon Lee |
+| contact.html | Contact · Junon Lee |
+| project_*.html / research_*.html / app_*.html | {detail title} · Junon Lee |
 
 ---
 
@@ -58,7 +58,7 @@
 .hero (grid 1.2fr .8fr)
 ├─ .hero-text
 │  ├─ .eyebrow            hero_eyebrow      "Computer Architecture & Memory Systems"
-│  ├─ h1                  hero_name_native "이준헌" + .bar "|" + .en hero_name_latin "Junheon Lee"
+│  ├─ h1                  hero_name_native "이준헌" + .bar "|" + .en hero_name_latin "Junon Lee"
 │  ├─ .subtitle           hero_role         (KR/EN/JP 번역)
 │  ├─ .areas (mono)       hero_areas        "Computer Architecture · Memory Systems · GPU Systems"
 │  ├─ .lead               hero_lead         (번역)
@@ -66,15 +66,15 @@
 │     ├─ a.btn.primary → portfolio.html?filter=research   hero_cta_research + 화살표 아이콘
 │     ├─ a.btn         → portfolio.html?filter=project    hero_cta_projects + 화살표
 │     ├─ a.btn         → portfolio.html?filter=app        hero_cta_apps + 화살표
-│     └─ a.btn         → assets/pdf/Junheon_Lee_CV.pdf    다운로드 아이콘 + hero_cta_cv  (download 속성)
+│     └─ a.btn         → assets/pdf/Junon_Lee_CV.pdf    다운로드 아이콘 + hero_cta_cv  (download 속성)
 └─ .visual (aria-hidden)
    ├─ svg#iso            figures.js가 생성하는 등각 메모리 계층 도식 (프리뷰 코드 이관)
    └─ .hand              "From Architecture / to Real Performance" (영어 고정, 번역 안 함)
 ```
 h1의 이름은 모든 언어에서 동일하다. `.visual`은 모바일(≤960px)에서 텍스트 위로 올라가고 높이 220px.
 
-### 1.2 Pill row
-4개 고정: Analyze / Implement / Measure / Optimize. 제목은 영어 고정, 설명(`pill_n_desc`)만 번역. 아이콘은 inline SVG(프리뷰 것 사용).
+### 1.2 Pill row (2026-09-14 삭제)
+Analyze / Implement / Measure / Optimize 가치 제안 줄은 사용자 요청으로 삭제. `pill_*` 키와 `.pillrow` CSS도 제거. 히어로 바로 아래 Featured Research가 온다.
 
 ### 1.3 Featured Research
 - 헤드: `home_research_title` "Featured Research", `home_research_sub`, 우측 `home_research_more` → portfolio.html?filter=research
@@ -132,14 +132,15 @@ Home과의 차이를 유지한다: Portfolio는 히어로 없음, 전체 목록 
 
 ```
 .resume-head (flex, space-between)
-├─ .eyebrow resume_eyebrow / h2.detail-title "이준헌 | Junheon Lee" / .detail-desc resume_areas
-└─ a.btn.primary → assets/pdf/Junheon_Lee_CV.pdf  (download)  resume_cv_cta + " · PDF"
+├─ .eyebrow resume_eyebrow / h2.detail-title "이준헌 | Junon Lee" / .detail-desc resume_areas
+└─ a.btn.primary → assets/pdf/Junon_Lee_CV.pdf  (download)  resume_cv_cta + " · PDF"
 
 .resume-grid (1.25fr .75fr)
 ├─ 왼쪽
-│  ├─ .rblock Experience      resume_exp1..3 (when / role / desc)  .item 2열(120px 날짜열, tabular-nums)
+│  ├─ .rblock Experience      resume_exp1..4 (when / role / desc), 날짜 내림차순  .item 2열(120px 날짜열, tabular-nums)
 │  ├─ .rblock Current research works.js: research 항목 → title(링크) + work_<id>_sub
-│  └─ .rblock Selected projects works.js: project 전부 5개 → date / title(링크) + work_<id>_sub
+│  ├─ .rblock Selected projects works.js: project 전부 5개 → date / title(링크) + work_<id>_sub
+│  └─ .rblock Web apps       works.js: app 전부 → date / title(링크) + work_<id>_sub
 └─ 오른쪽
    ├─ .rblock Education   resume_edu1..2
    ├─ .rblock Awards      resume_award1..3

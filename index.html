@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Junheon Lee · Computer Architecture &amp; Memory Systems</title>
-<meta name="description" content="Junheon Lee, M.S. student in computer architecture and memory systems at the University of Seoul. DRAM locality, eBPF latency tracing, GPU memory for LLM inference.">
-<meta property="og:title" content="Junheon Lee · Computer Architecture &amp; Memory Systems">
-<meta property="og:description" content="Junheon Lee, M.S. student in computer architecture and memory systems at the University of Seoul. DRAM locality, eBPF latency tracing, GPU memory for LLM inference.">
+<title>Junon Lee · Computer Architecture &amp; Memory Systems</title>
+<meta name="description" content="Junon Lee, M.S. student in computer architecture and memory systems at the University of Seoul. DRAM locality, eBPF latency tracing, GPU memory for LLM inference.">
+<meta property="og:title" content="Junon Lee · Computer Architecture &amp; Memory Systems">
+<meta property="og:description" content="Junon Lee, M.S. student in computer architecture and memory systems at the University of Seoul. DRAM locality, eBPF latency tracing, GPU memory for LLM inference.">
 <meta property="og:image" content="https://junon-lee.pages.dev/assets/img/og.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://junon-lee.pages.dev/">
@@ -38,7 +38,7 @@
 <script src="assets/js/layout.js" defer></script>
 <script src="assets/js/works.js" defer></script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Junheon Lee","alternateName":"이준헌","url":"https://junon-lee.pages.dev/","email":"mailto:wnsgjs34@uos.ac.kr","jobTitle":"M.S. student, Computer Architecture and Memory Systems","affiliation":{"@type":"CollegeOrUniversity","name":"University of Seoul"},"sameAs":["https://github.com/Junon-archive"],"knowsAbout":["Computer architecture","Memory systems","GPU systems","DRAM","eBPF","LLM inference"]}
+{"@context":"https://schema.org","@type":"Person","name":"Junon Lee","alternateName":["이준헌","Junheon Lee"],"url":"https://junon-lee.pages.dev/","email":"mailto:wnsgjs34@uos.ac.kr","jobTitle":"M.S. student, Computer Architecture and Memory Systems","affiliation":{"@type":"CollegeOrUniversity","name":"University of Seoul"},"sameAs":["https://github.com/Junon-archive"],"knowsAbout":["Computer architecture","Memory systems","GPU systems","DRAM","eBPF","LLM inference"]}
 </script>
 </head>
 <body class="page-home">
@@ -51,8 +51,8 @@
   <section class="hero">
     <div class="hero-text">
       <div class="eyebrow" data-lang="hero_eyebrow">Computer Architecture &amp; Memory Systems</div>
-      <h1><span data-lang="hero_name_native">이준헌</span><span class="bar">|</span><span class="en" data-lang="hero_name_latin">Junheon Lee</span></h1>
-      <p class="subtitle" data-lang="hero_role">M.S. student · Architecture &amp; Computer Systems Laboratory, University of Seoul</p>
+      <h1><span data-lang="hero_name_native">이준헌</span><span class="bar">|</span><span class="en" data-lang="hero_name_latin">Junon Lee</span></h1>
+      <p class="subtitle" data-lang="hero_role">M.S. student · Advanced Computer Architecture &amp; Systems Laboratory, University of Seoul</p>
       <p class="areas mono" data-lang="hero_areas">Computer Architecture · Memory Systems · GPU Systems</p>
       <p class="lead" data-lang="hero_lead">I work on the memory side of performance: where data sits, how far it has to move, and what that movement costs. Recent work covers DRAM row buffer locality, kernel latency tracing with eBPF, and GPU memory management for LLM inference.</p>
       <div class="actions">
@@ -68,7 +68,7 @@
           <span data-lang="hero_cta_apps">Apps</span>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
         </a>
-        <a class="btn" data-cv-button href="assets/pdf/Junheon_Lee_CV.pdf">
+        <a class="btn" data-cv-button href="assets/pdf/Junon_Lee_CV.pdf">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 2v8M4.5 7.5 8 11l3.5-3.5M3 13h10"/></svg>
           <span data-lang="hero_cta_cv">Download CV</span>
         </a>
@@ -78,25 +78,6 @@
       <div class="hand">From Architecture<br>to Real Performance</div>
     </div>
   </section>
-
-  <div class="pillrow">
-    <div class="pill">
-      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 15 8 9l3 3 6-8"/><path d="M3 17h14"/></svg></div>
-      <div><b>Analyze</b><small data-lang="pill_1_desc">Read the system before changing it: traces, counters, and data layout.</small></div>
-    </div>
-    <div class="pill">
-      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M7 9l2 2-2 2M11 13h3"/></svg></div>
-      <div><b>Implement</b><small data-lang="pill_2_desc">Build the smallest thing that can be measured, then build the measurement with it.</small></div>
-    </div>
-    <div class="pill">
-      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16V9M9 16V5M14 16v-6"/><path d="M2 17h16"/></svg></div>
-      <div><b>Measure</b><small data-lang="pill_3_desc">Fixed durations, repeated runs, distributions instead of averages.</small></div>
-    </div>
-    <div class="pill">
-      <div class="ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
-      <div><b>Optimize</b><small data-lang="pill_4_desc">Change one thing, keep the number that proves it, and report what it cost.</small></div>
-    </div>
-  </div>
 
   <section class="section">
     <div class="section-head">

@@ -77,7 +77,7 @@ cat > "$WORK/og.html" <<HTML
   <div class="og">
     <div class="og-text">
       <div class="og-eyebrow">Computer Architecture &amp; Memory Systems</div>
-      <h1 class="og-name">이준헌<span class="en">| Junheon Lee</span></h1>
+      <h1 class="og-name">이준헌<span class="en">| Junon Lee</span></h1>
       <p class="og-areas">Computer Architecture · Memory Systems · GPU Systems</p>
       <div class="og-domain">junon-lee.pages.dev</div>
     </div>

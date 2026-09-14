@@ -36,7 +36,7 @@ memory: project
 ### 2. 브랜드·SEO 자산
 - `assets/img/favicon.svg`: 01 §4.1 모노그램(`JH`, `--navy` 배경 사각, 라이트/다크 모두 보이는 단색). `<link rel="icon" type="image/svg+xml">` + PNG 폴백 32px.
 - `assets/img/og.png` 1200×630: 이름, 소속, 한 줄 소개. Pillow로 생성하되 폰트는 시스템에 있는 것만 (`fc-list | grep -i -e noto -e dejavu`).
-- 페이지별 `<title>`과 `meta description`은 06 문서 표를 따른다. 상세 페이지는 `works-data`의 title/sub에서 도출. 형식: `"<페이지 제목> · Junheon Lee"` (Q2 확정 표기).
+- 페이지별 `<title>`과 `meta description`은 06 문서 표를 따른다. 상세 페이지는 `works-data`의 title/sub에서 도출. 형식: `"<페이지 제목> · Junon Lee"` (Q2 확정 표기).
 - OG: `og:title`, `og:description`, `og:image`(절대 URL), `og:url`, `og:type`, `twitter:card=summary_large_image`.
 - `<link rel="canonical">` 절대 URL. `<html lang>`은 JS가 바꾸므로 기본 `en`.
 - Google Fonts: `<link rel="preconnect" href="https://fonts.googleapis.com">`와 `fonts.gstatic.com`(crossorigin) 두 줄을 폰트 링크 앞에.
@@ -45,7 +45,7 @@ memory: project
 - `_headers`: `/docs/*`와 `/temp/*`에 `X-Robots-Tag: noindex`, `/assets/*`에 장기 캐시, 전체에 `X-Content-Type-Options: nosniff`.
 - `robots.txt`: 전체 허용 + `Sitemap:` 줄. `sitemap.xml`: 02 §1 사이트 맵의 페이지만 (404 제외).
 - `.gitignore`: `temp/` 추가. 이미 커밋된 파일이 있으면 `git rm -r --cached temp`.
-- CV PDF: `assets/pdf/Junheon_Lee_CV.pdf` 경로 예약(Q7). 파일이 없으면 링크를 만들지 말고 보고.
+- CV PDF: `assets/pdf/Junon_Lee_CV.pdf` 경로 예약(Q7). 파일이 없으면 링크를 만들지 말고 보고.
 
 ### 4. 삭제
 삭제 전 반드시 참조 검색:

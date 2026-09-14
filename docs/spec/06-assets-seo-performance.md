@@ -31,7 +31,7 @@
 - 삭제: alien.png, nyancat.jpg, laiming.png, paper01/02_*.jpg, project01/02_*.jpg, profile.jpg, mono_profile.png, mono_profile_background.jpg, oran_5g.png, 그리고 위 판정에서 삭제로 결정된 파일.
 
 ### 신규 자산
-- `assets/img/favicon.svg`: 네이비 사각(radius 20%) 위 흰색 "JH", Manrope 800. 32px에서 읽히도록 글자 폭 확인. `favicon.ico`는 만들지 않는다(현대 브라우저는 SVG 지원. Safari 구버전 대응은 `apple-touch-icon.png` 180×180 하나 추가).
+- `assets/img/favicon.svg`: 네이비 사각(radius 20%) 위 흰색 "JL", Manrope 800. 32px에서 읽히도록 글자 폭 확인. `favicon.ico`는 만들지 않는다(현대 브라우저는 SVG 지원. Safari 구버전 대응은 `apple-touch-icon.png` 180×180 하나 추가).
 - `assets/img/og.png`: 1200×630. 왼쪽 이름과 eyebrow, 오른쪽 등각 도식(프리뷰 SVG를 래스터화). 배경 `--paper`, 하단 도메인. 생성은 headless Chrome 스크린샷으로(`scripts/make-og.sh`, 선택).
 
 ## 2. PDF
@@ -44,7 +44,7 @@
 | `assets/pdf/Android_OpenCL_GPU/마프실_Project_2019440100_이준헌.pdf` | `assets/pdf/opencl-report.pdf` | OpenCL 상세 |
 | `assets/pdf/Android_OpenCL_GPU/마프실_PPT_Project_2019440100_이준헌.pdf` | `assets/pdf/opencl-slides.pdf` | OpenCL 상세 |
 | `assets/pdf/Android_OpenCL_GPU/2023 마프응 프로젝트 안내.pdf`, `Ch12. OpenCL_JNI_template.pdf` | 삭제 (수업 자료, 본인 산출물 아님) | — |
-| (신규) | `assets/pdf/Junheon_Lee_CV.pdf` | Home CTA, Resume |
+| (신규) | `assets/pdf/Junon_Lee_CV.pdf` | Home CTA, Resume |
 
 한글/공백 파일명은 URL 인코딩 문제와 CDN 캐시 키 문제를 만들므로 전부 ASCII로 바꾼다. 개인정보(학번)가 파일명에 있는 것도 제거 사유.
 

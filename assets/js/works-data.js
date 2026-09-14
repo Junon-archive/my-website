@@ -5,12 +5,12 @@
    date descending, in-progress items first within their type. */
 
 window.SITE = {
-  name: "Junheon Lee",
+  name: "Junon Lee",
   email: "wnsgjs34@uos.ac.kr",
   github: "https://github.com/Junon-archive",
   domain: "https://junon-lee.pages.dev",
   cvUrl: null,
-  lab: "Architecture & Computer Systems Laboratory · University of Seoul"
+  lab: "Advanced Computer Architecture & Systems Laboratory · University of Seoul"
 };
 
 window.WORKS = [

@@ -29,7 +29,7 @@
 | `nav_` | 헤더 링크 | `nav_home` |
 | `brand_` | 브랜드 | `brand_name` |
 | `hero_` | Home 히어로 | `hero_eyebrow`, `hero_name_native`, `hero_name_latin`, `hero_role`, `hero_areas`, `hero_lead`, `hero_cta_research`, `hero_cta_projects`, `hero_cta_cv` |
-| `pill_` | 가치 제안 4개 | `pill_1_title`, `pill_1_desc` … `pill_4_desc` |
+| ~~`pill_`~~ | (2026-09-14 삭제) | — |
 | `home_` | Home 섹션 헤드 | `home_research_title`, `home_research_sub`, `home_research_more`, `home_projects_title`, `home_projects_sub`, `home_projects_more`, `home_apps_title`, `home_apps_sub`, `home_apps_more` |
 | `portfolio_` | Portfolio | `portfolio_eyebrow`, `portfolio_title`, `portfolio_sub`, `filter_all`, `filter_projects`, `filter_research`, `filter_apps` |
 | `work_<id>_` | 카드 문자열 | `work_ebpf_title`, `work_ebpf_sub` (date는 works-data로 이동, 키 삭제) |
@@ -38,7 +38,7 @@
 | `badge_` | 배지 텍스트 | `badge_project`, `badge_research`, `badge_app`, `badge_progress`, `badge_done`, `badge_maintained` |
 | `resume_` | 이력서 | 아래 4절 |
 | `contact_` | 연락처 | `contact_eyebrow`, `contact_title`, `contact_email_label`, `contact_email_note`, `contact_github_label`, `contact_github_note`, `contact_lab_label`, `contact_lab_name`, `contact_lab_addr`, `contact_open_label`, `contact_open_desc` |
-| `footer_` | 푸터 | `footer_affiliation`, `footer_copyright` (연도 제외 "Junheon Lee"). 인용구(`footer_quote`)는 2026-09-14 삭제 |
+| `footer_` | 푸터 | `footer_affiliation`, `footer_copyright` (연도 제외 "Junon Lee"). 인용구(`footer_quote`)는 2026-09-14 삭제 |
 | `meta_` | SEO | `meta_desc_home`, `meta_desc_portfolio`, `meta_desc_resume`, `meta_desc_contact` |
 
 삭제할 현행 키: `profile_*`(hero_로 대체), `sidebar_*` 전부(사이드바 제거), `intro_*`, `home_featured`, `home_intro_desc`, `portfolio_intro_*`, `portfolio_projects_*`, `portfolio_research_*`, `contact_card_*`, `contact_form_*`, `work_*_date`, `resume_pub*`, `resume_proj*`, `resume_intro_*`, 죽은 페이지의 `detail_*`와 `work_*`.
@@ -51,8 +51,9 @@ resume_areas              "Computer Architecture · Memory Systems · GPU System
 resume_cv_cta             "Download CV"
 resume_exp_title          "Experience"
 resume_exp1_when/role/desc     Graduate researcher · ACAS Lab (2025 – now)
-resume_exp2_when/role/desc     Teaching assistant · Systems programming (2025)
-resume_exp3_when/role/desc     Republic of Korea Air Force (2019.08 – 2021.05)
+resume_exp2_when/role/desc     TA · Systems programming (2025)
+resume_exp3_when/role          Research intern · ACAS Lab, University of Seoul (2025.01 – 2025.08, desc 없음)
+resume_exp4_when/role/desc     Republic of Korea Air Force (2019.08 – 2021.05)
 resume_research_title     "Current research"      (항목은 works-data research에서 렌더)
 resume_projects_title     "Selected projects"     (항목은 works-data project에서 렌더)
 resume_apps_title         "Web apps"              (항목은 works-data app에서 렌더)
@@ -61,7 +62,7 @@ resume_edu1_title/sub     University of Seoul · M.S. ECE / 2025 – present · 
 resume_edu2_title/sub     University of Seoul · B.S. ECE / 2019 – 2025
 resume_awards_title       "Awards"
 resume_award1_title/sub   NRF Graduate Research Scholarship / 2026.08   (Q10 확인)
-resume_award2_title/sub   Excellence Award · CAN Communication Project / KATECH winter internship · 2025.01
+resume_award2_title/sub   Excellence Award · Korea Automotive Technology Institute (KATECH) / CAN communication project · Next-generation communications winter internship · 2025.01
 resume_award3_title/sub   Grand Prize · Incheon Student Policy Presentation / 2019.08
 resume_skills_title       "Skills"
 resume_skills_lang_label  "Languages"      resume_skills_lang      "C / C++ · Python · CUDA · Go"
@@ -148,10 +149,10 @@ RowScope 키 29개는 현재 `lang-data.js`에만 있다. JSON으로 옮기는 �
 | 영역 | KR | EN | JP |
 |---|---|---|---|
 | 헤더, 푸터, 버튼, 섹션 제목/부제, 배지 | 번역 | 원문 | 번역 |
-| Hero(이름, 소속, lead) | 한국어 | 영어 | 일본어. 이름은 "이준헌 \| Junheon Lee" 모든 언어 공통 |
+| Hero(이름, 소속, lead) | 한국어 | 영어 | 일본어. 이름은 "이준헌 \| Junon Lee" 모든 언어 공통 |
 | 카드 title/sub | 영어 그대로 | 영어 | 영어 그대로 |
 | 상세 본문 | 영어 그대로 | 영어 | 영어 그대로 |
-| 이력서 항목 | 영어 그대로 (섹션 제목만 번역) | 영어 | 영어 그대로 |
+| 이력서 항목 | 번역 (연구·프로젝트·앱 이름과 부제는 영어 그대로, 2026-09-14) | 영어 | 번역 (같은 예외) |
 | Contact 안내문 | 번역 | 원문 | 번역 |
 
 kr.json과 jp.json은 en.json과 키 집합이 정확히 같아야 한다. 영어 그대로인 키도 값을 복사해 넣는다(누락 검사가 단순해진다).

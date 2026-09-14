@@ -116,7 +116,7 @@ Caveat:wght@500
 ## 4. 컴포넌트 (Components)
 
 ### 4.1 Header
-브랜드(모노그램 `JH` 사각 + "Junheon Lee") · navlinks 4개 · lang 버튼 3개. active 링크는 `--blue` 3px 밑줄과 700 무게. 상세 페이지에서는 Portfolio가 active.
+브랜드(모노그램 `JL` 사각 + "Junon Lee") · navlinks 4개 · lang 버튼 3개. active 링크는 `--blue` 3px 밑줄과 700 무게. 상세 페이지에서는 Portfolio가 active.
 
 ### 4.2 Button `.btn`
 높이 약 42px, `padding: 11px 16px`, 700, 14px, 아이콘 15px. 변형: `.primary`(navy 채움). hover 시 `translateY(-1px)`와 `--blue` 테두리. 다운로드 버튼은 항상 다운로드 아이콘 + "(PDF)" 표기.

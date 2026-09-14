@@ -7,7 +7,7 @@ metadata:
 
 Approved translations (reuse verbatim when the same English string reappears):
 
-- "Architecture & Computer Systems Laboratory, University of Seoul" → KR "서울시립대학교 컴퓨터구조 및 시스템 연구실" / JP "ソウル市立大学 コンピュータアーキテクチャ・システム研究室"
+- "Advanced Computer Architecture & Systems Laboratory, University of Seoul" → KR "서울시립대학교 컴퓨터구조 및 시스템 연구실" / JP "ソウル市立大学 コンピュータアーキテクチャ・システム研究室"
 - Name (Korean, per 00 spec §5 Q2): "이준헌". Name (Japanese, fixed by past commits — do not change): "イ・ジュノン" (full form with hanja seen in old jp.json: "イ・ジュノン (李 俊憲)"; short form "イ・ジュノン" is fine in flowing prose like meta descriptions).
 - nav_resume → KR "이력서" / JP "履歴書" (not "経歴" — 履歴書 is the standard JP word for résumé/CV; reused from the pre-redesign jp.json).
 - nav_contact → JP "連絡先" (old jp.json had bare "連絡" — superseded, "連絡先" is more complete and matches temp/preview_v2.html).

@@ -44,7 +44,7 @@
 - `assets/js/lang-data.js`(417 키)와 `lang/en.json`(385 키)이 어긋남. RowScope 관련 29개 키가 JSON에 없고 lang-data.js에만 존재. `work_can_date`는 두 곳의 값이 다름.
 - `kr.json`, `jp.json`에 ebpf, moh, pim 관련 117개 키가 없음.
 - 이력서의 `resume_pub*`, `resume_proj*`가 "To be added". `resume_exp3_*`(TA)는 JSON에 있으나 HTML에서 미사용.
-- 이름 표기 불일치: `brand_name` JUNON LEE, `profile_name` JUN-HEON LEE, 목업은 Junheon Lee.
+- 이름 표기 불일치: `brand_name` JUNON LEE, `profile_name` JUN-HEON LEE, 목업은 Junon Lee.
 - CAN 날짜 불일치: index.html 2025.01, en.json 2024.12. 5G 날짜: html 2024.12, `detail_5g_timeline` 2025.
 - `profile_title` 값 앞에 공백. footer 연도 2025.
 
@@ -79,12 +79,12 @@
 | # | 항목 | 확정 | 근거 / 되돌리는 방법 |
 |---|---|---|---|
 | Q1 | 공개 이메일 | `wnsgjs34@uos.ac.kr` | 사용자가 만든 목업의 값. gmail로 바꾸려면 `lang/*.json`의 `contact_email`과 `works`와 무관한 `layout.js` footer 링크만 수정 |
-| Q2 | 이름 표기 | 브랜드 "Junheon Lee", 한글 "이준헌". 도메인 junon-lee 유지 | 목업 기준 |
+| Q2 | 이름 표기 | 브랜드 "Junon Lee", 한글 "이준헌". 도메인 junon-lee 유지 | 목업 기준 |
 | Q3 | CAN 날짜 | 2025.01 | 수상(2025.01 동계 현장실습)과 일치 |
 | Q4 | 5G O-RAN 날짜 | 2024.12 | index.html 현행값 |
 | Q5 | MoH 연구 제목 | title "GPU Memory System Optimization for LLM Inference", subtitle에 MoH-guided head-wise offloading | 목업 기준 |
 | Q6 | 휴대폰 번호 | 비공개 | 스팸 위험 |
-| Q7 | CV PDF | 파일 없음 → CV 버튼은 `works-data`/`layout` 설정 `CV_URL = null`이면 렌더하지 않음 | 파일을 `assets/pdf/Junheon_Lee_CV.pdf`에 넣고 `CV_URL` 설정 시 자동 노출 |
+| Q7 | CV PDF | 파일 없음 → CV 버튼은 `works-data`/`layout` 설정 `CV_URL = null`이면 렌더하지 않음 | 파일을 `assets/pdf/Junon_Lee_CV.pdf`에 넣고 `CV_URL` 설정 시 자동 노출 |
 | Q8 | GitHub 저장소 링크 | 없음 → artifacts에 code 링크 미포함 | works-data.artifacts에 추가하면 자동 노출 |
 | Q9 | 썸네일 | 코드 생성 SVG (08 문서) | 사용자 결정 |
 | Q10 | NRF 연구장려금 | 포함 (2026.08) | 목업 기준. 사실과 다르면 `resume_award1_*` 삭제 |
@@ -101,4 +101,7 @@
 | Q16 | 앱 상태 배지 | `status: "maintained"` → "Maintained" / "운영 중" / "運用中" | 계속 운영 중이라는 의미. Completed로 바꾸려면 works-data의 status를 `completed`로 |
 | Q17 | 노출 | Home "Web Apps" 섹션, Resume "Web apps" 블록, Hero CTA "Apps" | 사용자 결정 |
 | Q18 | AI 도구 표기 | 사이트 문구에 개발 도구로서의 AI 에이전트 언급 금지. `check.mjs` 11번이 "Claude"/"Anthropic"을 검사 | 사용자 지시. 제품 기능으로서의 LLM은 "LLM"으로만 표기 |
+| Q20 | 영문 이름 | "Junheon Lee" → "Junon Lee" (브랜드, 제목, 메타, JSON-LD, OG 이미지, CV 파일명). 모노그램도 `JH` → `JL`. JSON-LD alternateName에 "Junheon Lee" 유지 | 사용자 지시. 모노그램은 새 이름 머리글자에 맞춘 판단 — `layout.js`, `favicon.svg`, `apple-touch-icon.png` |
+| Q21 | 연구실 영문명 | "Advanced Computer Architecture & Systems Laboratory". KR/JP는 "컴퓨터구조 및 시스템 연구실" / "コンピュータアーキテクチャ・システム研究室" (footer, contact도 번역) | 사용자 지시 |
+| Q22 | 이력서 번역, 홈 pill row | 이력서는 작업명 외 KR/JP 번역, TA 표기, Research intern(2025.01–2025.08) 추가, 우수상 수여기관 KATECH 표기. 홈 Analyze/Implement/Measure/Optimize 줄 삭제 | 사용자 지시 |
 | Q19 | 앱 스크린샷 | 라이브 사이트(또는 로컬 빌드 + 가짜 시드 데이터)를 headless Chrome CDP로 캡처. 개인 데이터 금지 | 06 문서 1절 |

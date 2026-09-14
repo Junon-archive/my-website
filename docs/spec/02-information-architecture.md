@@ -43,7 +43,7 @@ active 규칙:
 ```
 Home ──(Research →)──▶ portfolio.html?filter=research
 Home ──(Projects →)──▶ portfolio.html?filter=project
-Home ──(Download CV)──▶ assets/pdf/Junheon_Lee_CV.pdf
+Home ──(Download CV)──▶ assets/pdf/Junon_Lee_CV.pdf
 Home 카드 ─────────────▶ 상세 페이지
 Portfolio 카드 ────────▶ 상세 페이지
 상세 ──(breadcrumb)────▶ Home / Portfolio
@@ -108,7 +108,7 @@ Portfolio 노출: 전부. 필터 버튼에 개수 표기 ("All · 10").
 │  ├─ css/
 │  │  ├─ tokens.css        색/서체/간격 토큰, 다크 토큰
 │  │  ├─ base.css          reset, body, 셸, 헤더, 푸터, 버튼, 배지, 태그
-│  │  ├─ pages.css         hero, pillrow, 카드 그리드, 이력서, 연락처
+│  │  ├─ pages.css         hero, 카드 그리드, 이력서, 연락처
 │  │  └─ detail.css        TOC, 메타, 섹션, 도식, 차트, pager
 │  ├─ js/
 │  │  ├─ lang-data.js      (생성 파일) lang/*.json 번들

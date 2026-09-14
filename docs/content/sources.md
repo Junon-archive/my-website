@@ -25,11 +25,11 @@ Source files:
 
 | key / field | value | source |
 |---|---|---|
-| `brand_name`, `hero_name_latin`, `footer_copyright` | Junheon Lee | SPEC 00 Q2 |
+| `brand_name`, `hero_name_latin`, `footer_copyright` | Junon Lee | SPEC 00 Q2 |
 | `hero_name_native` | 이준헌 | SPEC 00 Q2 |
 | `contact_email`, `SITE.email` | wnsgjs34@uos.ac.kr | SPEC 00 Q1 |
 | `contact_github`, `SITE.github` | Junon-archive / github.com/Junon-archive | SPEC 00 Q8, task brief |
-| `contact_lab_name`, `footer_affiliation`, `SITE.lab` | Architecture & Computer Systems Laboratory · University of Seoul | SPEC 03/04, task brief |
+| `contact_lab_name`, `footer_affiliation`, `SITE.lab` | Advanced Computer Architecture & Systems Laboratory · University of Seoul | SPEC 03/04, task brief |
 | `contact_lab_addr` | Room 613, IT Building, University of Seoul | EN0 `contact_card_lab_desc` |
 | `SITE.cvUrl` | null | SPEC 00 Q7 — no CV PDF exists |
 | phone number | removed | SPEC 00 Q6 |

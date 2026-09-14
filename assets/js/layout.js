@@ -63,8 +63,8 @@
     return '' +
       '<nav class="nav" aria-label="Main">' +
         '<a class="brand" href="index.html">' +
-          '<i aria-hidden="true">JH</i>' +
-          '<span data-lang="brand_name">Junheon Lee</span>' +
+          '<i aria-hidden="true">JL</i>' +
+          '<span data-lang="brand_name">Junon Lee</span>' +
         '</a>' +
         '<div class="navlinks">' + navLinks(active) + '</div>' +
         '<div class="lang" role="group" aria-label="Language">' +
@@ -83,13 +83,13 @@
     return '' +
       '<div class="footer-inner">' +
         '<div class="aff" data-lang="footer_affiliation">' +
-          'Architecture &amp; Computer Systems Laboratory · University of Seoul' +
+          'Advanced Computer Architecture &amp; Systems Laboratory · University of Seoul' +
         '</div>' +
         '<div class="links">' +
           '<a href="' + githubUrl() + '" target="_blank" rel="noopener" data-no-lang>GitHub</a>' +
           (email ? '<a href="mailto:' + email + '" data-no-lang>Email</a>' : "") +
           '<span>© <span data-year>' + new Date().getFullYear() + '</span> ' +
-            '<span data-lang="footer_copyright">Junheon Lee</span></span>' +
+            '<span data-lang="footer_copyright">Junon Lee</span></span>' +
         '</div>' +
       '</div>';
   }
