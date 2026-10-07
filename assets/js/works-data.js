@@ -6,7 +6,7 @@
 
 window.SITE = {
   name: "Junon Lee",
-  email: "wnsgjs34@uos.ac.kr",
+  email: "junon.lee@uos.ac.kr",
   github: "https://github.com/Junon-archive",
   domain: "https://junon-lee.pages.dev",
   cvUrl: null,

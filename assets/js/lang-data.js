@@ -120,7 +120,7 @@ window.TRANSLATION_DATA = {
     "contact_eyebrow": "Contact",
     "contact_title": "Feel free to write about research, internships, and engineering roles.",
     "contact_email_label": "Email",
-    "contact_email": "wnsgjs34@uos.ac.kr",
+    "contact_email": "junon.lee@uos.ac.kr",
     "contact_email_note": "The fastest way to reach me.",
     "contact_github_label": "GitHub",
     "contact_github": "Junon-archive",

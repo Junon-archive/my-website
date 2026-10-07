@@ -78,7 +78,7 @@
 
 | # | 항목 | 확정 | 근거 / 되돌리는 방법 |
 |---|---|---|---|
-| Q1 | 공개 이메일 | `wnsgjs34@uos.ac.kr` | 사용자가 만든 목업의 값. gmail로 바꾸려면 `lang/*.json`의 `contact_email`과 `works`와 무관한 `layout.js` footer 링크만 수정 |
+| Q1 | 공개 이메일 | `junon.lee@uos.ac.kr` | 사용자가 만든 목업의 값. gmail로 바꾸려면 `lang/*.json`의 `contact_email`과 `works`와 무관한 `layout.js` footer 링크만 수정 |
 | Q2 | 이름 표기 | 브랜드 "Junon Lee", 한글 "이준헌". 도메인 junon-lee 유지 | 목업 기준 |
 | Q3 | CAN 날짜 | 2025.01 | 수상(2025.01 동계 현장실습)과 일치 |
 | Q4 | 5G O-RAN 날짜 | 2024.12 | index.html 현행값 |
